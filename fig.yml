@@ -1,0 +1,8 @@
+jenkins:
+  image: jenkins
+artifactory:
+  image: mattgruter/artifactory
+sonar:
+  image: tpires/sonar-server
+mysql:
+  image: tpires/sonar-mysql
