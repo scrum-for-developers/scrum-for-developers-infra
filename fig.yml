@@ -1,8 +1,30 @@
 jenkins:
-  image: jenkins
+  image: myjenkins
+  links:
+  - tomcat
+  - artifactory
+  - sonar
+  - sonarmysql
+  - mysql
+  - apachehttpd
+  environment:
+  - PSD_SERVER=artifactory:8080
 artifactory:
   image: mattgruter/artifactory
-sonar:
-  image: tpires/sonar-server
-mysql:
+sonarmysql:
   image: tpires/sonar-mysql
+  expose: 
+  - 3306
+sonar:
+  image: mysonar-server
+  links:
+  - sonarmysql:db
+mysql:
+  image: mysql
+tomcat:
+  image: mytomcat
+  links:
+  - mysql
+apachehttpd:
+  image: myhttpd
+  

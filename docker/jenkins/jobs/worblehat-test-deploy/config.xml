@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.plugins.batch__task.BatchTaskProperty plugin="batch-task@1.16">
+      <tasks>
+        <hudson.plugins.batch__task.BatchTask>
+          <name>liquibase:dropAll</name>
+          <script>/var/lib/jenkins/tools/Maven3/bin/mvn -f worblehat-domain/pom.xml liquibase:dropAll</script>
+        </hudson.plugins.batch__task.BatchTask>
+      </tasks>
+    </hudson.plugins.batch__task.BatchTaskProperty>
+  </properties>
+  <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.4">
+    <parentJobName>worblehat-quality</parentJobName>
+    <criteria>Successful</criteria>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers class="vector"/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cp ${WORKSPACE}/worblehat-web/target/*.war /tmp/worblehat-web.war
+curl --user manager:manager http://localhost:9080/manager/list
+curl --user manager:manager http://localhost:9080/manager/undeploy?path=/worblehat
+curl --user manager:manager http://localhost:9080/manager/list
+
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Maven>
+      <targets>liquibase:update</targets>
+      <mavenName>Maven3</mavenName>
+      <pom>worblehat-domain/pom.xml</pom>
+      <usePrivateRepository>false</usePrivateRepository>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Shell>
+      <command>ls ${WORKSPACE}/worblehat-web/target/*.war | xargs curl --user manager:manager http://localhost:9080/manager/deploy?path=/worblehat -T
+curl --user manager:manager http://localhost:9080/manager/list</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.4">
+      <workspaceGlob>**/*.*</workspaceGlob>
+      <criteria>Successful</criteria>
+      <archiveMethod>TAR</archiveMethod>
+    </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
+    <hudson.tasks.BuildTrigger>
+      <childProjects>worblehat-test-acceptance</childProjects>
+      <threshold>
+        <name>SUCCESS</name>
+        <ordinal>0</ordinal>
+        <color>BLUE</color>
+      </threshold>
+    </hudson.tasks.BuildTrigger>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.locksandlatches.LockWrapper plugin="locks-and-latches@0.6">
+      <locks>
+        <hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
+          <name>stage-test</name>
+        </hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
+      </locks>
+    </hudson.plugins.locksandlatches.LockWrapper>
+  </buildWrappers>
+</project>
