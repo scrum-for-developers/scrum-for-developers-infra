@@ -9,15 +9,17 @@ jenkins:
   - apachehttpd
   environment:
   - JENKINS_URL=http://jenkins:8080
-  - ARTIFACTORY_URL=http://artifactory:8080
+  - ARTIFACTORY_URL=http://artifactory:8080/artifactory
   - APACHE_URL=http://apachehttpd:80
   ports:
   - "8080:8080"
 artifactory:
   image: mattgruter/artifactory
+  ports:
+  - "8081:8080"
 sonarmysql:
   image: tpires/sonar-mysql
-  expose: 
+  expose:
   - 3306
 sonar:
   build: docker/sonar
