@@ -15,6 +15,7 @@ TODO
 - Modify tomcat config: Add worblehat datasource
 - Add nginx prox
 - Globale Jenkins Maven-Konfiguration
+- Url Property im pom.xml
 
 ### OPTIONAL
 
