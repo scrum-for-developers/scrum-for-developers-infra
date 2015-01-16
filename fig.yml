@@ -44,3 +44,5 @@ worblehattomcat:
   - worblehatdb
 apachehttpd:
   build: docker/apache-httpd
+  ports:
+  - "8000:80"
