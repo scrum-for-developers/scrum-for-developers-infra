@@ -1,18 +1,18 @@
 jenkins:
   build: docker/jenkins
   links:
-  - worblehat_tomcat
   - artifactory
   - sonar
   - sonarmysql
-  - worblehat_db
+  - worblehattomcat
+  - worblehatdb
   - apachehttpd
   environment:
   - JENKINS_URL=http://jenkins:8080
   - ARTIFACTORY_URL=http://artifactory:8080/artifactory
   - APACHE_URL=http://apachehttpd:80
-  - WORBLEHAT_DB_HOST=worblehat_db
-  - WORBLEHAT_TOMCAT_URL=http://worblehat_tomcat:8080
+  - WORBLEHAT_DB_HOST=worblehatdb
+  - WORBLEHAT_TOMCAT_URL=http://worblehattomcat:8080
   ports:
   - "8080:8080"
 artifactory:
@@ -27,16 +27,16 @@ sonar:
   build: docker/sonar
   links:
   - sonarmysql:db
-worblehat_db:
+worblehatdb:
   image: mysql
   environment:
   - MYSQL_ROOT_PASSWORD=root
   - MYSQL_USER=worblehat
   - MYSQL_PASSWORD=worblehat
   - MYSQL_DATABASE=worblehat
-worblehat_tomcat:
+worblehattomcat:
   build: docker/tomcat
   links:
-  - mysql
+  - worblehatdb
 apachehttpd:
   build: docker/apache-httpd
