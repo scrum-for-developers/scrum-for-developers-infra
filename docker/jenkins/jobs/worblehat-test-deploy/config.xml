@@ -26,9 +26,9 @@
   <builders>
     <hudson.tasks.Shell>
       <command>cp ${WORKSPACE}/worblehat-web/target/*.war /tmp/worblehat-web.war
-curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/list
-curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/undeploy?path=/worblehat
-curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/list
+curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list
+curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/undeploy?path=/worblehat
+curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list
 
 </command>
     </hudson.tasks.Shell>
@@ -39,8 +39,8 @@ curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/list
       <usePrivateRepository>false</usePrivateRepository>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>ls ${WORKSPACE}/worblehat-web/target/*.war | xargs curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/deploy?path=/worblehat -T
-curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/list</command>
+      <command>ls ${WORKSPACE}/worblehat-web/target/*.war | xargs curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/deploy?path=/worblehat -T
+curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
