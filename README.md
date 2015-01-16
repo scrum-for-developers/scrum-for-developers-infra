@@ -19,6 +19,7 @@ TODO
 ### OPTIONAL
 
 - DistributionManagemen in pom auf server-id setzen, damit in settings.xml auf jenkins-host die korrekte artifactory-ip gesetzt werden kan
+- Site publishing via github pages
 
 ### DONE
 
