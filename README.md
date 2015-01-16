@@ -4,6 +4,29 @@
 
 TODO
 
+## Tasks
+
+### TODO
+
+- Overview ;-)
+- Sonar-URLS (sonar.url, sonar.jdbc.url, sonar.jdbc.user, sonar.jdbc.password) zu sonar-jobs hinzufügen
+- Add database to mysql
+- Modify liquibase job to connect to correct database
+- Modify tomcat config: Add worblehat datasource
+- Add nginx prox
+- Globale Jenkins Maven-Konfiguration
+
+### OPTIONAL
+
+- DistributionManagemen in pom auf server-id setzen, damit in settings.xml auf jenkins-host die korrekte artifactory-ip gesetzt werden kan
+
+### DONE
+
+- Add apache (with webdav) for site
+- Fix deploy-urls in deploy job (/manager/text/list instead of manager/list)
+- Plugins (insbes web-plugin) in sonar installieren
+- Tomcat manager user freischalten
+
 ## Testing with vargant
 
 TODO: I've not figured out how to pre define SSH ports for vagrant machines, so
