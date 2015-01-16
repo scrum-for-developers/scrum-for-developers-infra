@@ -1,5 +1,5 @@
 jenkins:
-  image: myjenkins
+  build: docker/jenkins
   links:
   - tomcat
   - artifactory
@@ -16,15 +16,15 @@ sonarmysql:
   expose: 
   - 3306
 sonar:
-  image: mysonar-server
+  build: docker/sonar
   links:
   - sonarmysql:db
 mysql:
   image: mysql
 tomcat:
-  image: mytomcat
+  build: docker/tomcat
   links:
   - mysql
 apachehttpd:
-  image: myhttpd
+  build: docker/apache-httpd
   
