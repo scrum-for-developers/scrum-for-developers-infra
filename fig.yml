@@ -15,8 +15,6 @@ jenkins:
   - WORBLEHAT_TOMCAT_URL=http://worblehatweb:8080
   - SONAR_URL=http://sonar:9000
   - SONAR_DB_HOST=sonarmysql
-  ports:
-  - "8080:8080"
 artifactory:
   image: mattgruter/artifactory:3.4.2
   ports:
