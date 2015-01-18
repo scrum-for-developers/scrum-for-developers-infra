@@ -46,3 +46,11 @@ apachehttpd:
   build: docker/apache-httpd
   ports:
   - "8000:80"
+nginx:
+  build: docker/nginx
+  ports:
+  - "80:80"
+  links:
+  - jenkins
+  volumes:
+  - docker/nginx/html:/usr/share/nginx/html:ro
