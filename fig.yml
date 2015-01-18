@@ -17,8 +17,6 @@ jenkins:
   - SONAR_DB_HOST=sonarmysql
 artifactory:
   image: mattgruter/artifactory:3.4.2
-  ports:
-  - "8081:8080"
 sonarmysql:
   image: tpires/sonar-mysql
   expose:
@@ -50,5 +48,6 @@ nginx:
   - "80:80"
   links:
   - jenkins
+  - artifactory
   volumes:
   - docker/nginx/html:/usr/share/nginx/html:ro
