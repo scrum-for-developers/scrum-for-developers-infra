@@ -13,7 +13,7 @@ jenkins:
   - APACHE_URL=http://apachehttpd:80
   - WORBLEHAT_DB_HOST=worblehatdb
   - WORBLEHAT_TOMCAT_URL=http://worblehatweb:8080
-  - SONAR_URL=http://sonar:9000
+  - SONAR_URL=http://sonar:9000/sonar
   - SONAR_DB_HOST=sonarmysql
 artifactory:
   image: mattgruter/artifactory:3.4.2
