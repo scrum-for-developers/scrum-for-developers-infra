@@ -10,4 +10,6 @@ RUN plugins.sh /usr/share/jenkins/ref/plugins.txt
 
 ADD jobs.tar.gz /usr/share/jenkins/ref/
 
+ENV JENKINS_OPTS --prefix=/jenkins
+
 USER jenkins

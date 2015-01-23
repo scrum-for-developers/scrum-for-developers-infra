@@ -15,12 +15,8 @@ jenkins:
   - WORBLEHAT_TOMCAT_URL=http://worblehatweb:8080
   - SONAR_URL=http://sonar:9000
   - SONAR_DB_HOST=sonarmysql
-  ports:
-  - "8080:8080"
 artifactory:
   image: mattgruter/artifactory:3.4.2
-  ports:
-  - "8081:8080"
 sonarmysql:
   image: tpires/sonar-mysql
   expose:
@@ -29,8 +25,6 @@ sonar:
   build: docker/sonar
   links:
   - sonarmysql:db
-  ports:
-  - "9000:9000"
 worblehatdb:
   image: mysql:5.6.22
   environment:
@@ -46,3 +40,13 @@ apachehttpd:
   build: docker/apache-httpd
   ports:
   - "8000:80"
+nginx:
+  build: docker/nginx
+  ports:
+  - "80:80"
+  links:
+  - jenkins
+  - artifactory
+  - sonar
+  volumes:
+  - docker/nginx/html:/usr/share/nginx/html:ro
