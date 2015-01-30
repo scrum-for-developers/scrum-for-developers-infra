@@ -45,5 +45,6 @@ nginx:
   - jenkins
   - artifactory
   - sonar
+  - worblehatweb
   volumes:
   - site-deploy/site:/usr/share/nginx/html/worblehat-site
