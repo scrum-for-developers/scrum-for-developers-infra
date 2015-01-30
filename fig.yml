@@ -6,15 +6,16 @@ jenkins:
   - sonarmysql
   - worblehatweb
   - worblehatdb
-  - apachehttpd
   environment:
   - JENKINS_URL=http://jenkins:8080
   - ARTIFACTORY_URL=http://artifactory:8080/artifactory
-  - APACHE_URL=http://apachehttpd:80
+  - SITE_DEPLOY_PATH=/home/jenkins/site-deploy/
   - WORBLEHAT_DB_HOST=worblehatdb
   - WORBLEHAT_TOMCAT_URL=http://worblehatweb:8080
   - SONAR_URL=http://sonar:9000/sonar
   - SONAR_DB_HOST=sonarmysql
+  volumes:
+  - site-deploy:/home/jenkins/site-deploy/
 artifactory:
   image: mattgruter/artifactory:3.4.2
 sonarmysql:
@@ -36,10 +37,6 @@ worblehatweb:
   build: docker/tomcat
   links:
   - worblehatdb
-apachehttpd:
-  build: docker/apache-httpd
-  ports:
-  - "8000:80"
 nginx:
   build: docker/nginx
   ports:
@@ -49,4 +46,5 @@ nginx:
   - artifactory
   - sonar
   volumes:
-  - docker/nginx/html:/usr/share/nginx/html:ro
+  - docker/nginx/html/index.html:/usr/share/nginx/html/index.html:ro
+  - site-deploy/site:/usr/share/nginx/html/worblehat-site
