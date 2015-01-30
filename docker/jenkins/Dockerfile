@@ -8,7 +8,7 @@ COPY settings.xml /usr/share/jenkins/ref/.m2/settings.xml
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN plugins.sh /usr/share/jenkins/ref/plugins.txt
 
-ADD jobs.tar.gz /usr/share/jenkins/ref/
+ADD jobs /usr/share/jenkins/ref/jobs
 
 ENV JENKINS_OPTS --prefix=/jenkins
 
