@@ -18,19 +18,19 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Maven>
-      <targets>sonar:sonar -Pjenkins</targets>
+      <targets>sonar:sonar -Pjenkins,coverage</targets>
       <mavenName>Maven3</mavenName>
       <pom>worblehat-build/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
-      <targets>sonar:sonar -Pjenkins -Dsonar.language=web -Dsonar.dynamicAnalysis=false -Dsonar.web.sourceDirectory=src/main/webapp -Dsonar.branch=Web</targets>
+      <targets>sonar:sonar -Pjenkins,coverage -Dsonar.language=web -Dsonar.dynamicAnalysis=false -Dsonar.web.sourceDirectory=src/main/webapp -Dsonar.branch=Web</targets>
       <mavenName>Maven3</mavenName>
       <pom>worblehat-web/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
-      <targets>sonar:sonar -Pjenkins -Dsonar.language=js -Dsonar.dynamicAnalysis=reuseReports -Dsonar.sonar.javascript.jstestdriverfolder=jstestdriver -Dsonar.branch=JS</targets>
+      <targets>sonar:sonar -Pjenkins,coverage -Dsonar.language=js -Dsonar.dynamicAnalysis=reuseReports -Dsonar.sonar.javascript.jstestdriverfolder=jstestdriver -Dsonar.branch=JS</targets>
       <mavenName>Maven3</mavenName>
       <pom>worblehat-web/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
