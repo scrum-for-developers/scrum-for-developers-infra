@@ -47,7 +47,8 @@
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>clean
-deploy</targets>
+deploy
+-Pcoverage</targets>
       <mavenName>Maven3</mavenName>
       <pom>worblehat-build/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
