@@ -46,5 +46,4 @@ nginx:
   - artifactory
   - sonar
   volumes:
-  - docker/nginx/html/index.html:/usr/share/nginx/html/index.html:ro
   - site-deploy/site:/usr/share/nginx/html/worblehat-site
