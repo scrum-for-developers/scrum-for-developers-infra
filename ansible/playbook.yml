@@ -7,16 +7,19 @@
   tasks:
   - name: Install Docker
     sudo: True
-    apt: name=docker.io state=latest update_cache=yes cache_valid_time=3600 force=yes
+    yum: name=docker state=latest
+  - name: Install Git
+    sudo: True
+    yum: name=git state=latest
   - name: Install fig
     sudo: True
     action: shell curl -L https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m` > /usr/local/bin/fig; chmod +x /usr/local/bin/fig
   - name: Add provisioning user to docker group
     sudo: True
     action: shell usermod -a -G docker `whoami`
-  - name: Create config directory
-    file: path={{ config_dir }} state=directory
-  - name: Copy fig script
-    copy: src=../fig.yml dest={{ config_dir }}/fig.yml
-  - name: Start Docker containers
-    action: shell fig -f {{ config_dir }}/fig.yml up
+  - name: Clone scrum-developers-infra-repo
+    git: repo=https://github.com/scrum-for-developers/scrum-for-developers-infra dest={{ config_dir }} update=yes force=yes
+  - name: Create site-deploy directory
+    file: path={{ config_dir }}/site-deploy state=directory
+  - name: Start docker service
+    service: name=docker state=started
