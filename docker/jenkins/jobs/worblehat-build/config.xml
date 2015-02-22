@@ -5,7 +5,7 @@
   <keepDependencies>false</keepDependencies>
   <properties>
     <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.8">
-      <projectUrl>https://github.com/scrum-for-developers/worblehat/</projectUrl>
+      <projectUrl>$PROJECT_URL</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.16"/>
   </properties>
@@ -13,7 +13,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/scrum-for-developers/worblehat</url>
+        <url>$PROJECT_URL</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -23,7 +23,7 @@
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
     <browser class="hudson.plugins.git.browser.GithubWeb">
-      <url>https://github.com/scrum-for-developers/worblehat/</url>
+      <url>$PROJECT_URL</url>
     </browser>
     <submoduleCfg class="list"/>
     <extensions>

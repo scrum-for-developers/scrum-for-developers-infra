@@ -14,6 +14,7 @@ jenkins:
   - WORBLEHAT_TOMCAT_URL=http://worblehatweb:8080
   - SONAR_URL=http://sonar:9000/sonar
   - SONAR_DB_HOST=sonarmysql
+  - PROJECT_URL=https://github.com/scrum-for-developers/worblehat
   volumes:
   - site-deploy:/home/jenkins/site-deploy/
 artifactory:
@@ -46,5 +47,7 @@ nginx:
   - artifactory
   - sonar
   - worblehatweb
+  environment:
+  - PROJECT_URL=https://github.com/scrum-for-developers/worblehat
   volumes:
   - site-deploy/site:/usr/share/nginx/html/worblehat-site
