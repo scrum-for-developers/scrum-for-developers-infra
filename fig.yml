@@ -47,5 +47,7 @@ nginx:
   - artifactory
   - sonar
   - worblehatweb
+  environment:
+  - PROJECT_URL=https://github.com/scrum-for-developers/worblehat
   volumes:
   - site-deploy/site:/usr/share/nginx/html/worblehat-site
