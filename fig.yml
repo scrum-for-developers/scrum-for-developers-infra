@@ -16,7 +16,7 @@ jenkins:
   - SONAR_DB_HOST=sonarmysql
   - PROJECT_URL=https://github.com/scrum-for-developers/worblehat
   volumes:
-  - site-deploy:/home/jenkins/site-deploy/
+  - site-deploy:/home/jenkins/site-deploy:rw
 artifactory:
   image: mattgruter/artifactory:3.4.2
 sonarmysql:

@@ -20,6 +20,6 @@
   - name: Clone scrum-developers-infra-repo
     git: repo=https://github.com/scrum-for-developers/scrum-for-developers-infra dest={{ config_dir }} update=yes force=yes
   - name: Create site-deploy directory
-    file: path={{ config_dir }}/site-deploy state=directory
+    file: path={{ config_dir }}/site-deploy/site state=directory
   - name: Start docker service
     service: name=docker state=started
