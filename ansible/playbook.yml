@@ -22,4 +22,5 @@
   - name: Create site-deploy directory
     file: path={{ config_dir }}/site-deploy/site state=directory mode=777
   - name: Start docker service
+    sudo: True
     service: name=docker state=started
