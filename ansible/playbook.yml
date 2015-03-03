@@ -16,7 +16,7 @@
     action: shell curl -L https://github.com/docker/fig/releases/download/1.0.1/fig-`uname -s`-`uname -m` > /usr/local/bin/fig; chmod +x /usr/local/bin/fig
   - name: Add provisioning user to docker group
     sudo: True
-    action: shell usermod -a -G docker `whoami`
+    user: name=ec2-user groups=docker append=yes
   - name: Clone scrum-developers-infra-repo
     git: repo=https://github.com/scrum-for-developers/scrum-for-developers-infra dest={{ config_dir }} update=yes force=yes
   - name: Create site-deploy directory
