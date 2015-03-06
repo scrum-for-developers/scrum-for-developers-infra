@@ -7,8 +7,8 @@
     <hudson.plugins.batch__task.BatchTaskProperty plugin="batch-task@1.16">
       <tasks>
         <hudson.plugins.batch__task.BatchTask>
-          <name>liquibase:dropAll</name>
-          <script>/var/lib/jenkins/tools/Maven3/bin/mvn -f worblehat-domain/pom.xml liquibase:dropAll</script>
+          <name>liquibase-dropAll</name>
+          <script>mvn -f worblehat-domain/pom.xml liquibase:dropAll</script>
         </hudson.plugins.batch__task.BatchTask>
       </tasks>
     </hudson.plugins.batch__task.BatchTaskProperty>
