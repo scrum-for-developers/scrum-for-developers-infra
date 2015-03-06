@@ -8,7 +8,7 @@
       <tasks>
         <hudson.plugins.batch__task.BatchTask>
           <name>liquibase-dropAll</name>
-          <script>mvn -f worblehat-domain/pom.xml liquibase:dropAll -Dpsd.dbserver.url=jdbc:mysql://${env.WORBLEHAT_PRODUCTION_DB_HOST}/worblehat -Dpsd.dbserver.username=worblehat -Dpsd.dbserver.password=worblehat</script>
+          <script>mvn -f worblehat-domain/pom.xml liquibase:dropAll -Dpsd.dbserver.url=jdbc:mysql://${WORBLEHAT_PRODUCTION_DB_HOST}/worblehat -Dpsd.dbserver.username=worblehat -Dpsd.dbserver.password=worblehat</script>
         </hudson.plugins.batch__task.BatchTask>
       </tasks>
     </hudson.plugins.batch__task.BatchTaskProperty>
