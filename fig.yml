@@ -52,7 +52,7 @@ prodworblehatdb:
 prodworblehatweb:
   build: docker/tomcat
   links:
-  - prodworblehatdb
+  - prodworblehatdb:worblehatdb
 nginx:
   build: docker/nginx
   ports:
