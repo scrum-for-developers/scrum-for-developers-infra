@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.27"/>
+  </properties>
+  <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.6">
+    <parentJobName>worblehat-010-build</parentJobName>
+    <criteria>Successful</criteria>
+  </scm>
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>cp ${WORKSPACE}/worblehat-web/target/*.war /tmp/worblehat-web.war
+curl --user manager:manager ${WORBLEHAT_PRODUCTION_TOMCAT_URL}/manager/text/list
+curl --user manager:manager ${WORBLEHAT_PRODUCTION_TOMCAT_URL}/manager/text/undeploy?path=/worblehat
+curl --user manager:manager ${WORBLEHAT_PRODUCTION_TOMCAT_URL}/manager/text/list
+
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Maven>
+      <targets>liquibase:update </targets>
+      <pom>worblehat-domain/pom.xml</pom>
+      <properties>psd.dbserver.url=jdbc:mysql://${env.WORBLEHAT_PRODUCTION_DB_HOST}/worblehat
+psd.dbserver.username=worblehat
+psd.dbserver.password=worblehat</properties>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Shell>
+      <command>ls ${WORKSPACE}/worblehat-web/target/*.war | xargs curl --user manager:manager ${WORBLEHAT_PRODUCTION_TOMCAT_URL}/manager/text/deploy?path=/worblehat -T
+curl --user manager:manager ${WORBLEHAT_PRODUCTION_TOMCAT_URL}/manager/text/list</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.6">
+      <workspaceGlob>**/*.*</workspaceGlob>
+      <criteria>Successful</criteria>
+      <archiveMethod>TAR</archiveMethod>
+      <overrideDefaultExcludes>false</overrideDefaultExcludes>
+    </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.locksandlatches.LockWrapper plugin="locks-and-latches@0.6">
+      <locks>
+        <hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
+          <name>(default)</name>
+        </hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
+      </locks>
+    </hudson.plugins.locksandlatches.LockWrapper>
+  </buildWrappers>
+</project>

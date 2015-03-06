@@ -5,35 +5,40 @@
 &lt;iframe name=&quot;xyz&quot; src=&quot;/sonar/dashboard/index/1&quot; frameborder=&quot;1&quot; width=&quot;1050&quot; height=&quot;500&quot;&gt;&lt;/iframe&gt;&#xd;
 </description>
   <keepDependencies>false</keepDependencies>
-  <properties/>
-  <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.4">
-    <parentJobName>worblehat-build</parentJobName>
+  <properties>
+    <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.27"/>
+  </properties>
+  <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.6">
+    <parentJobName>worblehat-010-build</parentJobName>
     <criteria>Successful</criteria>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Maven>
       <targets>sonar:sonar -Pjenkins</targets>
-      <mavenName>Maven3</mavenName>
       <pom>worblehat-build/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
       <targets>sonar:sonar -Pjenkins -Dsonar.language=web -Dsonar.dynamicAnalysis=false -Dsonar.web.sourceDirectory=src/main/webapp -Dsonar.branch=Web</targets>
-      <mavenName>Maven3</mavenName>
       <pom>worblehat-web/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
       <targets>sonar:sonar -Pjenkins -Dsonar.language=js -Dsonar.dynamicAnalysis=reuseReports -Dsonar.sonar.javascript.jstestdriverfolder=jstestdriver -Dsonar.branch=JS</targets>
-      <mavenName>Maven3</mavenName>
       <pom>worblehat-web/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
       <targets>site</targets>
@@ -47,17 +52,19 @@
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.4">
+    <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.6">
       <workspaceGlob>**/*.*</workspaceGlob>
       <criteria>Any</criteria>
       <archiveMethod>TAR</archiveMethod>
+      <overrideDefaultExcludes>false</overrideDefaultExcludes>
     </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
     <hudson.tasks.BuildTrigger>
-      <childProjects>worblehat-test-deploy</childProjects>
+      <childProjects>worblehat-030-deploy-to-test</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
         <color>BLUE</color>
+        <completeBuild>true</completeBuild>
       </threshold>
     </hudson.tasks.BuildTrigger>
   </publishers>

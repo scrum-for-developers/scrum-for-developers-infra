@@ -4,7 +4,7 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <hudson.plugins.batch__task.BatchTaskProperty plugin="batch-task@1.16">
+    <hudson.plugins.batch__task.BatchTaskProperty plugin="batch-task@1.17">
       <tasks>
         <hudson.plugins.batch__task.BatchTask>
           <name>liquibase-dropAll</name>
@@ -12,16 +12,17 @@
         </hudson.plugins.batch__task.BatchTask>
       </tasks>
     </hudson.plugins.batch__task.BatchTaskProperty>
+    <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.27"/>
   </properties>
-  <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.4">
-    <parentJobName>worblehat-quality</parentJobName>
+  <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.6">
+    <parentJobName>worblehat-010-build</parentJobName>
     <criteria>Successful</criteria>
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
   <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
-  <triggers class="vector"/>
+  <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
@@ -34,9 +35,10 @@ curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>liquibase:update -Pjenkins</targets>
-      <mavenName>Maven3</mavenName>
       <pom>worblehat-domain/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
       <command>ls ${WORKSPACE}/worblehat-web/target/*.war | xargs curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/deploy?path=/worblehat -T
@@ -44,17 +46,19 @@ curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
-    <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.4">
+    <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.6">
       <workspaceGlob>**/*.*</workspaceGlob>
       <criteria>Successful</criteria>
       <archiveMethod>TAR</archiveMethod>
+      <overrideDefaultExcludes>false</overrideDefaultExcludes>
     </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
     <hudson.tasks.BuildTrigger>
-      <childProjects>worblehat-test-acceptance</childProjects>
+      <childProjects>worblehat-040-acceptance-test</childProjects>
       <threshold>
         <name>SUCCESS</name>
         <ordinal>0</ordinal>
         <color>BLUE</color>
+        <completeBuild>true</completeBuild>
       </threshold>
     </hudson.tasks.BuildTrigger>
   </publishers>
@@ -62,7 +66,7 @@ curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list</command>
     <hudson.plugins.locksandlatches.LockWrapper plugin="locks-and-latches@0.6">
       <locks>
         <hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
-          <name>stage-test</name>
+          <name>(default)</name>
         </hudson.plugins.locksandlatches.LockWrapper_-LockWaitConfig>
       </locks>
     </hudson.plugins.locksandlatches.LockWrapper>

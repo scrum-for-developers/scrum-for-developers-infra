@@ -41,12 +41,14 @@ ENTRYPOINT ["/usr/local/bin/jenkins.sh"]
 # from a derived Dockerfile, can use `RUN plugin.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.sh /usr/local/bin/plugins.sh
 
-RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
-COPY settings.xml /usr/share/jenkins/ref/.m2/settings.xml
-
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN plugins.sh /usr/share/jenkins/ref/plugins.txt
 
+RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
+
+# Here comes our special scrum-for-developers-training configuration
+COPY settings.xml /usr/share/jenkins/ref/.m2/settings.xml
+COPY config.xml /usr/share/jenkins/ref/config.xml
 ADD jobs /usr/share/jenkins/ref/jobs
 
 ENV JENKINS_OPTS --prefix=/jenkins
