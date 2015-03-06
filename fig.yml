@@ -12,6 +12,8 @@ jenkins:
   - SITE_DEPLOY_PATH=/home/jenkins/site-deploy/
   - WORBLEHAT_DB_HOST=worblehatdb
   - WORBLEHAT_TOMCAT_URL=http://worblehatweb:8080
+  - WORBLEHAT_PRODUCTION_DB_HOST=prodworblehatdb
+  - WORBLEHAT_PRODUCTION_TOMCAT_URL=http://prodworblehatweb:8080
   - SONAR_URL=http://sonar:9000/sonar
   - SONAR_DB_HOST=sonarmysql
   - PROJECT_URL=https://github.com/scrum-for-developers/worblehat
@@ -38,6 +40,17 @@ worblehatweb:
   build: docker/tomcat
   links:
   - worblehatdb
+prodworblehatdb:
+  image: mysql:5.6.22
+  environment:
+  - MYSQL_ROOT_PASSWORD=root
+  - MYSQL_USER=worblehat
+  - MYSQL_PASSWORD=worblehat
+  - MYSQL_DATABASE=worblehat
+prodworblehatweb:
+  build: docker/tomcat
+  links:
+  - prodworblehatdb
 nginx:
   build: docker/nginx
   ports:
@@ -47,6 +60,7 @@ nginx:
   - artifactory
   - sonar
   - worblehatweb
+  - prodworblehatweb
   environment:
   - PROJECT_URL=https://github.com/scrum-for-developers/worblehat
   volumes:
