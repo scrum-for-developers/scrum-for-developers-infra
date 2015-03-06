@@ -22,3 +22,4 @@ scm-api:0.2
 token-macro:1.10
 parameterized-trigger:2.25
 jquery:1.7.2-1
+artifactory:2.2.7

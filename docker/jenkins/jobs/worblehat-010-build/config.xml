@@ -4,7 +4,7 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.10">
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
       <projectUrl>$PROJECT_URL/</projectUrl>
     </com.coravy.hudson.plugins.github.GithubProjectProperty>
     <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.27"/>
@@ -44,7 +44,7 @@
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>clean
-deploy
+install
 -Pcoverage</targets>
       <pom>worblehat-build/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
@@ -82,5 +82,58 @@ deploy
       </threshold>
     </hudson.tasks.BuildTrigger>
   </publishers>
-  <buildWrappers/>
+  <buildWrappers>
+    <org.jfrog.hudson.maven3.ArtifactoryMaven3Configurator plugin="artifactory@2.2.7">
+      <details>
+        <artifactoryName>1213362221@1425654692567</artifactoryName>
+        <repositoryKey>libs-release-local</repositoryKey>
+        <snapshotsRepositoryKey>libs-snapshot-local</snapshotsRepositoryKey>
+        <artifactoryUrl>http://artifactory:8080/artifactory</artifactoryUrl>
+        <stagingPlugin/>
+      </details>
+      <resolverDetails>
+        <artifactoryName>1213362221@1425654692567</artifactoryName>
+        <downloadSnapshotRepositoryKey></downloadSnapshotRepositoryKey>
+        <downloadReleaseRepositoryKey></downloadReleaseRepositoryKey>
+        <downloadSnapshotRepositoryDisplayName></downloadSnapshotRepositoryDisplayName>
+        <downloadReleaseRepositoryDisplayName></downloadReleaseRepositoryDisplayName>
+        <artifactoryUrl>http://artifactory:8080/artifactory</artifactoryUrl>
+        <stagingPlugin/>
+      </resolverDetails>
+      <deployArtifacts>true</deployArtifacts>
+      <artifactDeploymentPatterns>
+        <includePatterns>**/*.war, **/*.jar</includePatterns>
+        <excludePatterns></excludePatterns>
+      </artifactDeploymentPatterns>
+      <includeEnvVars>false</includeEnvVars>
+      <deployBuildInfo>true</deployBuildInfo>
+      <runChecks>false</runChecks>
+      <violationRecipients></violationRecipients>
+      <includePublishArtifacts>false</includePublishArtifacts>
+      <scopes></scopes>
+      <discardOldBuilds>false</discardOldBuilds>
+      <discardBuildArtifacts>true</discardBuildArtifacts>
+      <matrixParams></matrixParams>
+      <enableIssueTrackerIntegration>false</enableIssueTrackerIntegration>
+      <filterExcludedArtifactsFromBuild>true</filterExcludedArtifactsFromBuild>
+      <enableResolveArtifacts>false</enableResolveArtifacts>
+      <envVarsPatterns>
+        <includePatterns></includePatterns>
+        <excludePatterns>*password*,*secret*</excludePatterns>
+      </envVarsPatterns>
+      <licenseAutoDiscovery>true</licenseAutoDiscovery>
+      <disableLicenseAutoDiscovery>false</disableLicenseAutoDiscovery>
+      <aggregateBuildIssues>false</aggregateBuildIssues>
+      <recordAllDependencies>false</recordAllDependencies>
+      <blackDuckRunChecks>false</blackDuckRunChecks>
+      <blackDuckAppName></blackDuckAppName>
+      <blackDuckAppVersion></blackDuckAppVersion>
+      <blackDuckReportRecipients></blackDuckReportRecipients>
+      <blackDuckScopes></blackDuckScopes>
+      <blackDuckIncludePublishedArtifacts>false</blackDuckIncludePublishedArtifacts>
+      <autoCreateMissingComponentRequests>true</autoCreateMissingComponentRequests>
+      <autoDiscardStaleComponentRequests>true</autoDiscardStaleComponentRequests>
+      <multiConfProject>false</multiConfProject>
+    </org.jfrog.hudson.maven3.ArtifactoryMaven3Configurator>
+  </buildWrappers>
 </project>

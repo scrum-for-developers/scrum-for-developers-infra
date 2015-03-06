@@ -18,7 +18,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Maven>
-      <targets>clean</targets>
+      <targets>integration-test -Pjenkins</targets>
       <pom>worblehat-acceptancetests/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>

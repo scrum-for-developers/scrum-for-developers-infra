@@ -6,6 +6,8 @@ jenkins:
   - sonarmysql
   - worblehatweb
   - worblehatdb
+  - prodworblehatweb
+  - prodworblehatdb
   environment:
   - JENKINS_URL=http://jenkins:8080
   - ARTIFACTORY_URL=http://artifactory:8080/artifactory

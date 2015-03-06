@@ -8,17 +8,8 @@
   <offline/>
 
   <servers>
-    <server>
-      <id>psd-teamserver-releases</id>
-      <username>admin</username>
-      <password>password</password>
-    </server>
-    <server>
-      <id>psd-teamserver-snapshots</id>
-      <username>admin</username>
-      <password>password</password>
-    </server>
   </servers>
+
   <proxies>
   </proxies>
 

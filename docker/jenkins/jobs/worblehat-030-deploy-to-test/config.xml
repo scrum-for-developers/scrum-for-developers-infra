@@ -28,7 +28,7 @@
     <hudson.tasks.Shell>
       <command>cp ${WORKSPACE}/worblehat-web/target/*.war /tmp/worblehat-web.war
 curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list
-curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/undeploy?path=/worblehat
+curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/undeploy?path=/worblehat-test
 curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list
 
 </command>
@@ -41,7 +41,7 @@ curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>ls ${WORKSPACE}/worblehat-web/target/*.war | xargs curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/deploy?path=/worblehat -T
+      <command>ls ${WORKSPACE}/worblehat-web/target/*.war | xargs curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/deploy?path=/worblehat-test -T
 curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list</command>
     </hudson.tasks.Shell>
   </builders>

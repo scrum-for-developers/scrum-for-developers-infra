@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>1.0</version>
+  <version>1.601</version>
   <numExecutors>2</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
@@ -16,6 +16,7 @@
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds/>
   <slaves/>
+  <quietPeriod>5</quietPeriod>
   <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
   <views>
     <hudson.model.AllView>
@@ -24,7 +25,7 @@
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
-    </hudson.model.AllView>
+      </hudson.model.AllView>
     <au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView plugin="build-pipeline-plugin@1.4.5">
       <owner class="hudson" reference="../../.."/>
       <name>Pipeline</name>
@@ -33,8 +34,8 @@
       <properties class="hudson.model.View$PropertyList"/>
       <gridBuilder class="au.com.centrumsystems.hudson.plugin.buildpipeline.DownstreamProjectGridBuilder">
         <firstJob>worblehat-010-build</firstJob>
-        <firstJobLink>job/worblehat-build/</firstJobLink>
-      </gridBuilder>
+        <firstJobLink>job/worblehat-010-build/</firstJobLink>
+        </gridBuilder>
       <noOfDisplayedBuilds>10</noOfDisplayedBuilds>
       <buildViewTitle></buildViewTitle>
       <consoleOutputLinkStyle>Lightbox</consoleOutputLinkStyle>
@@ -46,8 +47,8 @@
       <startsWithParameters>false</startsWithParameters>
       <refreshFrequency>3</refreshFrequency>
       <showPipelineDefinitionHeader>false</showPipelineDefinitionHeader>
-    </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
-  </views>
+      </au.com.centrumsystems.hudson.plugin.buildpipeline.BuildPipelineView>
+      </views>
   <primaryView>All</primaryView>
   <slaveAgentPort>50000</slaveAgentPort>
   <label></label>
