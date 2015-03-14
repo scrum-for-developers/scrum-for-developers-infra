@@ -1,8 +1,8 @@
 # Setup of development environments for the scrum developer training
 
 Development envrionment for the scrum for developers training told at
-[codecentric](http://www.codecentric.de). The environment is based on [docker](http://www.docker.com)
-containers, which are orchestrated via [fig](http://www.fig.sh). The demo project
+[codecentric](http://www.codecentric.de). The environment is based on [docker containers](http://www.docker.com)
+containers, which are orchestrated via [docker-compose](https://docs.docker.com/compose/). The demo project
 build by this environment is the [worblehat library application](https://github.com/scrum-for-developers/worblehat)
 The environment consists of:
 
@@ -16,8 +16,7 @@ The environment consists of:
 ## Run locally
 
  * [Install docker](https://docs.docker.com/installation/)
- * [Install fig.sh](http://www.fig.sh/install.html)
- * Run ```fig up```
+ * Run ```docker-compose up```
  * Point your browser to ht<span>tp://</span>*DOCKER_HOST_IP*
 
 ## Provisioning via Ansible
