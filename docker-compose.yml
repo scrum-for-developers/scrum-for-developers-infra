@@ -23,8 +23,8 @@ jenkins:
   # Insert the Public IP here for acceptance-tests via saucelabs
   - PSD_SERVER=127.0.0.1 
   volumes:
-  - jenkins:/var/jenkins_home:rw
-  - site-deploy:/home/jenkins/site-deploy:rw
+  - mounted_directories/jenkins_home:/var/jenkins_home:rw
+  - mounted_directories/site_deploy:/home/jenkins/site-deploy:rw
 artifactory:
   image: mattgruter/artifactory:3.4.2
 sonarmysql:
@@ -70,4 +70,4 @@ nginx:
   environment:
   - PROJECT_URL=https://github.com/scrum-for-developers/worblehat
   volumes:
-  - site-deploy/site:/usr/share/nginx/html/worblehat-site
+  - mounted_directories/site_deploy/site:/usr/share/nginx/html/worblehat-site

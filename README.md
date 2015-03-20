@@ -16,8 +16,30 @@ The environment consists of:
 ## Run locally
 
  * [Install docker](https://docs.docker.com/installation/)
+ * [Install docker-compose](ttps://docs.docker.com/compose/install/)
  * Run ```docker-compose up```
  * Point your browser to ht<span>tp://</span>*DOCKER_HOST_IP*
+ 
+## Troubleshooting
+
+### Docker container can't access mounted volumes
+*Symptoms:* The jenkins container doesn't start up correctly, the log contains sth. like
+```
+mkdir: cannot create directory '/var/jenkins_home/plugins': Permission denied
+```
+or the *worblehat-020-quality* job fails with the error message
+```
+cp: cannot create regular file '/home/jenkins/site-deploy/site/integration.html': Permission denied
+```
+
+*Explanation:* The jenkins home directory and the site-deploy directory (which is used by the quality-job) are
+mounted as a [docker volume](https://docs.docker.com/userguide/dockervolumes/#volume). The required 
+directories under `mounted_directories` must be readable/writable by the docker user.
+
+*Solution:* The simplest solution is to grant write access to anybody for the `mounted_directories`
+```
+chmod -R a+w mounted_directories
+```
 
 ## Provisioning via Ansible
 
