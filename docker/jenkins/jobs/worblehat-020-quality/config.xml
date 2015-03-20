@@ -1,11 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description>&lt;p&gt;&lt;b&gt;Sonar-Results (&lt;a href=&quot;/sonar/dashboard/index/1&quot; target=&quot;_new&quot;&gt;open in new window&lt;/a&gt;):&lt;/b&gt;&lt;/p&gt;&#xd;
-&lt;iframe name=&quot;xyz&quot; src=&quot;/sonar/dashboard/index/1&quot; frameborder=&quot;1&quot; width=&quot;1050&quot; height=&quot;500&quot;&gt;&lt;/iframe&gt;&#xd;
+  <description>&lt;p&gt;&lt;b&gt;Sonar-Results (&lt;a href=&quot;/sonar/dashboard/index/1&quot; target=&quot;_new&quot;&gt;open in new window&lt;/a&gt;)&lt;/b&gt;&lt;/p&gt;&#xd;
 </description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.8.9">
+      <stageName>BUILD</stageName>
+    </se.diabol.jenkins.pipeline.PipelineProperty>
     <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.27"/>
   </properties>
   <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.6">
@@ -21,6 +23,7 @@
   <builders>
     <hudson.tasks.Maven>
       <targets>sonar:sonar -Pjenkins</targets>
+      <mavenName>(Default)</mavenName>
       <pom>worblehat-build/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
@@ -28,6 +31,7 @@
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
       <targets>sonar:sonar -Pjenkins -Dsonar.language=web -Dsonar.dynamicAnalysis=false -Dsonar.web.sourceDirectory=src/main/webapp -Dsonar.branch=Web</targets>
+      <mavenName>(Default)</mavenName>
       <pom>worblehat-web/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
@@ -35,6 +39,7 @@
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
       <targets>sonar:sonar -Pjenkins -Dsonar.language=js -Dsonar.dynamicAnalysis=reuseReports -Dsonar.sonar.javascript.jstestdriverfolder=jstestdriver -Dsonar.branch=JS</targets>
+      <mavenName>(Default)</mavenName>
       <pom>worblehat-web/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
@@ -42,6 +47,7 @@
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
       <targets>site</targets>
+      <mavenName>(Default)</mavenName>
       <pom>worblehat-build/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>

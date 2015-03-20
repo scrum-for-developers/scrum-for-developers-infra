@@ -12,10 +12,13 @@
         </hudson.plugins.batch__task.BatchTask>
       </tasks>
     </hudson.plugins.batch__task.BatchTaskProperty>
+    <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.8.9">
+      <stageName>DEPLOY</stageName>
+    </se.diabol.jenkins.pipeline.PipelineProperty>
     <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.27"/>
   </properties>
   <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.6">
-    <parentJobName>worblehat-010-build</parentJobName>
+    <parentJobName>worblehat-040-acceptance-test</parentJobName>
     <criteria>Successful</criteria>
   </scm>
   <canRoam>true</canRoam>
@@ -35,6 +38,7 @@ curl --user manager:manager ${WORBLEHAT_PRODUCTION_TOMCAT_URL}/manager/text/list
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>liquibase:update </targets>
+      <mavenName>(Default)</mavenName>
       <pom>worblehat-domain/pom.xml</pom>
       <properties>psd.dbserver.url=jdbc:mysql://${env.WORBLEHAT_PRODUCTION_DB_HOST}/worblehat
 psd.dbserver.username=worblehat

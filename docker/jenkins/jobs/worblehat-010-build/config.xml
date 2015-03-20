@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<project>
+<maven2-moduleset plugin="maven-plugin@2.7.1">
   <actions/>
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.11">
-      <projectUrl>$PROJECT_URL/</projectUrl>
-    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.8.9">
+      <stageName>BUILD</stageName>
+    </se.diabol.jenkins.pipeline.PipelineProperty>
     <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.27"/>
   </properties>
   <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.4">
@@ -29,7 +29,7 @@
   </scm>
   <canRoam>true</canRoam>
   <disabled>false</disabled>
-  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenDownstreamBuilding>true</blockBuildWhenDownstreamBuilding>
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers>
     <hudson.triggers.SCMTrigger>
@@ -38,24 +38,31 @@
     </hudson.triggers.SCMTrigger>
   </triggers>
   <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <hudson.tasks.Shell>
-      <command>env</command>
-    </hudson.tasks.Shell>
-    <hudson.tasks.Maven>
-      <targets>clean
-install
--Pcoverage</targets>
-      <pom>worblehat-build/pom.xml</pom>
-      <usePrivateRepository>false</usePrivateRepository>
-      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
-      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
-    </hudson.tasks.Maven>
-  </builders>
+  <rootModule>
+    <groupId>de.codecentric.psd</groupId>
+    <artifactId>worblehat-build</artifactId>
+  </rootModule>
+  <rootPOM>worblehat-build/pom.xml</rootPOM>
+  <goals>clean install -Pcoverage</goals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <ignoreUpstremChanges>true</ignoreUpstremChanges>
+  <archivingDisabled>false</archivingDisabled>
+  <siteArchivingDisabled>false</siteArchivingDisabled>
+  <fingerprintingDisabled>false</fingerprintingDisabled>
+  <resolveDependencies>false</resolveDependencies>
+  <processPlugins>false</processPlugins>
+  <mavenValidationLevel>-1</mavenValidationLevel>
+  <runHeadless>false</runHeadless>
+  <disableTriggerDownstreamProjects>false</disableTriggerDownstreamProjects>
+  <blockTriggerWhenBuilding>true</blockTriggerWhenBuilding>
+  <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+  <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+  <reporters/>
   <publishers>
     <hudson.plugins.cloneworkspace.CloneWorkspacePublisher plugin="clone-workspace-scm@0.6">
-      <workspaceGlob>**/*.*</workspaceGlob>
-      <criteria>Successful</criteria>
+      <workspaceGlob>**/*</workspaceGlob>
+      <criteria>Any</criteria>
       <archiveMethod>TAR</archiveMethod>
       <overrideDefaultExcludes>false</overrideDefaultExcludes>
     </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
@@ -66,12 +73,53 @@ install
       <fingerprint>false</fingerprint>
       <defaultExcludes>true</defaultExcludes>
     </hudson.tasks.ArtifactArchiver>
-    <hudson.tasks.junit.JUnitResultArchiver plugin="junit@1.2-beta-4">
-      <testResults>**/surefire-reports/*.xml</testResults>
-      <keepLongStdio>false</keepLongStdio>
-      <testDataPublishers/>
-      <healthScaleFactor>1.0</healthScaleFactor>
-    </hudson.tasks.junit.JUnitResultArchiver>
+    <org.jfrog.hudson.ArtifactoryRedeployPublisher plugin="artifactory@2.2.7">
+      <evenIfUnstable>false</evenIfUnstable>
+      <details>
+        <artifactoryName>1213362221@1425654692567</artifactoryName>
+        <repositoryKey>libs-release-local</repositoryKey>
+        <snapshotsRepositoryKey>libs-snapshot-local</snapshotsRepositoryKey>
+        <artifactoryUrl>http://artifactory:8080/artifactory</artifactoryUrl>
+        <stagingPlugin>
+          <pluginName>None</pluginName>
+        </stagingPlugin>
+        <userPluginKey>None</userPluginKey>
+      </details>
+      <deployArtifacts>true</deployArtifacts>
+      <artifactDeploymentPatterns>
+        <includePatterns></includePatterns>
+        <excludePatterns></excludePatterns>
+      </artifactDeploymentPatterns>
+      <includeEnvVars>false</includeEnvVars>
+      <envVarsPatterns>
+        <includePatterns></includePatterns>
+        <excludePatterns>*password*,*secret*</excludePatterns>
+      </envVarsPatterns>
+      <runChecks>false</runChecks>
+      <violationRecipients></violationRecipients>
+      <includePublishArtifacts>false</includePublishArtifacts>
+      <passIdentifiedDownstream>false</passIdentifiedDownstream>
+      <scopes></scopes>
+      <licenseAutoDiscovery>true</licenseAutoDiscovery>
+      <disableLicenseAutoDiscovery>false</disableLicenseAutoDiscovery>
+      <discardOldBuilds>false</discardOldBuilds>
+      <discardBuildArtifacts>true</discardBuildArtifacts>
+      <matrixParams></matrixParams>
+      <enableIssueTrackerIntegration>false</enableIssueTrackerIntegration>
+      <allowPromotionOfNonStagedBuilds>false</allowPromotionOfNonStagedBuilds>
+      <filterExcludedArtifactsFromBuild>true</filterExcludedArtifactsFromBuild>
+      <recordAllDependencies>false</recordAllDependencies>
+      <deployBuildInfo>true</deployBuildInfo>
+      <aggregateBuildIssues>false</aggregateBuildIssues>
+      <blackDuckRunChecks>false</blackDuckRunChecks>
+      <blackDuckAppName></blackDuckAppName>
+      <blackDuckAppVersion></blackDuckAppVersion>
+      <blackDuckReportRecipients></blackDuckReportRecipients>
+      <blackDuckScopes></blackDuckScopes>
+      <blackDuckIncludePublishedArtifacts>false</blackDuckIncludePublishedArtifacts>
+      <autoCreateMissingComponentRequests>true</autoCreateMissingComponentRequests>
+      <autoDiscardStaleComponentRequests>true</autoDiscardStaleComponentRequests>
+    </org.jfrog.hudson.ArtifactoryRedeployPublisher>
     <hudson.tasks.BuildTrigger>
       <childProjects>worblehat-020-quality</childProjects>
       <threshold>
@@ -83,57 +131,20 @@ install
     </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers>
-    <org.jfrog.hudson.maven3.ArtifactoryMaven3Configurator plugin="artifactory@2.2.7">
-      <details>
-        <artifactoryName>1213362221@1425654692567</artifactoryName>
-        <repositoryKey>libs-release-local</repositoryKey>
-        <snapshotsRepositoryKey>libs-snapshot-local</snapshotsRepositoryKey>
-        <artifactoryUrl>http://artifactory:8080/artifactory</artifactoryUrl>
-        <stagingPlugin/>
-      </details>
-      <resolverDetails>
-        <artifactoryName>1213362221@1425654692567</artifactoryName>
-        <downloadSnapshotRepositoryKey></downloadSnapshotRepositoryKey>
-        <downloadReleaseRepositoryKey></downloadReleaseRepositoryKey>
-        <downloadSnapshotRepositoryDisplayName></downloadSnapshotRepositoryDisplayName>
-        <downloadReleaseRepositoryDisplayName></downloadReleaseRepositoryDisplayName>
-        <artifactoryUrl>http://artifactory:8080/artifactory</artifactoryUrl>
-        <stagingPlugin/>
-      </resolverDetails>
-      <deployArtifacts>true</deployArtifacts>
-      <artifactDeploymentPatterns>
-        <includePatterns>**/*.war, **/*.jar</includePatterns>
-        <excludePatterns></excludePatterns>
-      </artifactDeploymentPatterns>
-      <includeEnvVars>false</includeEnvVars>
-      <deployBuildInfo>true</deployBuildInfo>
-      <runChecks>false</runChecks>
-      <violationRecipients></violationRecipients>
-      <includePublishArtifacts>false</includePublishArtifacts>
-      <scopes></scopes>
-      <discardOldBuilds>false</discardOldBuilds>
-      <discardBuildArtifacts>true</discardBuildArtifacts>
-      <matrixParams></matrixParams>
-      <enableIssueTrackerIntegration>false</enableIssueTrackerIntegration>
-      <filterExcludedArtifactsFromBuild>true</filterExcludedArtifactsFromBuild>
-      <enableResolveArtifacts>false</enableResolveArtifacts>
-      <envVarsPatterns>
-        <includePatterns></includePatterns>
-        <excludePatterns>*password*,*secret*</excludePatterns>
-      </envVarsPatterns>
-      <licenseAutoDiscovery>true</licenseAutoDiscovery>
-      <disableLicenseAutoDiscovery>false</disableLicenseAutoDiscovery>
-      <aggregateBuildIssues>false</aggregateBuildIssues>
-      <recordAllDependencies>false</recordAllDependencies>
-      <blackDuckRunChecks>false</blackDuckRunChecks>
-      <blackDuckAppName></blackDuckAppName>
-      <blackDuckAppVersion></blackDuckAppVersion>
-      <blackDuckReportRecipients></blackDuckReportRecipients>
-      <blackDuckScopes></blackDuckScopes>
-      <blackDuckIncludePublishedArtifacts>false</blackDuckIncludePublishedArtifacts>
-      <autoCreateMissingComponentRequests>true</autoCreateMissingComponentRequests>
-      <autoDiscardStaleComponentRequests>true</autoDiscardStaleComponentRequests>
-      <multiConfProject>false</multiConfProject>
-    </org.jfrog.hudson.maven3.ArtifactoryMaven3Configurator>
+    <org.jenkinsci.plugins.buildnamesetter.BuildNameSetter plugin="build-name-setter@1.3">
+      <template>${ENV,var=&quot;POM_VERSION&quot;}-${GIT_BRANCH}-#${BUILD_NUMBER}</template>
+    </org.jenkinsci.plugins.buildnamesetter.BuildNameSetter>
   </buildWrappers>
-</project>
+  <prebuilders>
+    <hudson.tasks.Shell>
+      <command>env</command>
+    </hudson.tasks.Shell>
+  </prebuilders>
+  <postbuilders/>
+  <runPostStepsIfResult>
+    <name>SUCCESS</name>
+    <ordinal>0</ordinal>
+    <color>BLUE</color>
+    <completeBuild>true</completeBuild>
+  </runPostStepsIfResult>
+</maven2-moduleset>

@@ -1,13 +1,17 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <project>
   <actions/>
-  <description></description>
+  <description>&lt;p&gt;&lt;b&gt;JBehave-Results (&lt;a href=&quot;/jenkins/job/worblehat-040-acceptance-test/ws/worblehat-acceptancetests/target/jbehave/view/reports.html&quot; target=&quot;_new&quot;&gt;open in new window&lt;/a&gt;)&lt;/b&gt;&lt;/p&gt;&#xd;
+</description>
   <keepDependencies>false</keepDependencies>
   <properties>
+    <se.diabol.jenkins.pipeline.PipelineProperty plugin="delivery-pipeline-plugin@0.8.9">
+      <stageName>TEST</stageName>
+    </se.diabol.jenkins.pipeline.PipelineProperty>
     <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.27"/>
   </properties>
   <scm class="hudson.plugins.cloneworkspace.CloneWorkspaceSCM" plugin="clone-workspace-scm@0.6">
-    <parentJobName>worblehat-010-build</parentJobName>
+    <parentJobName>worblehat-030-deploy-to-test</parentJobName>
     <criteria>Successful</criteria>
   </scm>
   <canRoam>true</canRoam>
@@ -18,7 +22,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Maven>
-      <targets>integration-test -Pjenkins</targets>
+      <targets>verify -Pjenkins</targets>
+      <mavenName>(Default)</mavenName>
       <pom>worblehat-acceptancetests/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>

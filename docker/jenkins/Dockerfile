@@ -1,6 +1,6 @@
 FROM java:8-jdk
 
-RUN apt-get update && apt-get install -y wget git curl zip && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wget git curl maven zip && rm -rf /var/lib/apt/lists/*
 
 ENV JENKINS_HOME /var/jenkins_home
 
@@ -36,20 +36,19 @@ EXPOSE 8080
 EXPOSE 50000
 
 COPY jenkins.sh /usr/local/bin/jenkins.sh
+
 ENTRYPOINT ["/usr/local/bin/jenkins.sh"]
 
 # from a derived Dockerfile, can use `RUN plugin.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.sh /usr/local/bin/plugins.sh
-
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN plugins.sh /usr/share/jenkins/ref/plugins.txt
-
-RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
 
 # Here comes our special scrum-for-developers-training configuration
 COPY settings.xml /usr/share/jenkins/ref/.m2/settings.xml
 COPY config.xml /usr/share/jenkins/ref/config.xml
 COPY org.jfrog.hudson.ArtifactoryBuilder.xml /usr/share/jenkins/ref/org.jfrog.hudson.ArtifactoryBuilder.xml
+COPY hudson.tasks.Maven.xml /usr/share/jenkins/ref/hudson.tasks.Maven.xml
 ADD jobs /usr/share/jenkins/ref/jobs
 
 ENV JENKINS_OPTS --prefix=/jenkins
