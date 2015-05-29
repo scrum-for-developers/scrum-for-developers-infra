@@ -16,7 +16,7 @@ The environment consists of:
 ## Run locally
 
  * [Install docker](https://docs.docker.com/installation/)
- * [Install docker-compose](ttps://docs.docker.com/compose/install/)
+ * [Install docker-compose](https://docs.docker.com/compose/install/)
  * Run ```docker-compose up```
  * Point your browser to ht<span>tp://</span>*DOCKER_HOST_IP*
  
