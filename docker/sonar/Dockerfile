@@ -1,6 +1,6 @@
-from dockerfile/java
+FROM java:8-jdk
 
-RUN curl -O http://dist.sonar.codehaus.org/sonarqube-4.5.2.zip && \
+RUN curl -L -O http://dist.sonar.codehaus.org/sonarqube-4.5.2.zip && \
     unzip sonarqube-4.5.2.zip -d /opt && \
     rm sonarqube-4.5.2.zip
 
