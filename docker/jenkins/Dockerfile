@@ -2,7 +2,7 @@ FROM java:8-jdk
 
 RUN apt-get update && apt-get install -y wget git curl maven zip && rm -rf /var/lib/apt/lists/*
 
-ENV JENKINS_HOME /var/jenkins_home
+ENV JENKINS_HOME /~/dev_env/jenkins_home
 
 # Jenkins is ran with user `jenkins`, uid = 1000
 # If you bind mount a volume from host/vloume from a data container,
@@ -11,7 +11,7 @@ RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
 
 # Jenkins home directoy is a volume, so configuration and build history
 # can be persisted and survive image upgrades
-VOLUME /var/jenkins_home
+VOLUME /~/dev_env/jenkins_home
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want
 # to set on a fresh new installation. Use it to bundle additional plugins
