@@ -42,7 +42,6 @@
     <groupId>de.codecentric.psd</groupId>
     <artifactId>worblehat-build</artifactId>
   </rootModule>
-  <rootPOM>worblehat-build/pom.xml</rootPOM>
   <goals>clean install -Pcoverage</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
