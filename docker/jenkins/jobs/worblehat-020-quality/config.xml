@@ -24,7 +24,6 @@
     <hudson.tasks.Maven>
       <targets>sonar:sonar -Pjenkins</targets>
       <mavenName>(Default)</mavenName>
-      <pom>worblehat-build/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
@@ -46,15 +45,14 @@
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Maven>
-      <targets>site</targets>
+      <targets>site:site site:stage</targets>
       <mavenName>(Default)</mavenName>
-      <pom>worblehat-build/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
       <settings class="jenkins.mvn.DefaultSettingsProvider"/>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>cp -r worblehat-build/target/site ${SITE_DEPLOY_PATH}</command>
+      <command>cp -r target/staging/. ${SITE_DEPLOY_PATH}/site</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
