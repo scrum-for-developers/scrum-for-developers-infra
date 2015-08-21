@@ -54,7 +54,7 @@ prodworblehatdb:
   - MYSQL_PASSWORD=worblehat
   - MYSQL_DATABASE=worblehat
 prodworblehatweb:
-  build: docker/tomcat
+  build: docker/worblehat-host
   links:
   - prodworblehatdb:worblehatdb
 nginx:
