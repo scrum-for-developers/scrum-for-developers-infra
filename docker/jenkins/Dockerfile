@@ -8,8 +8,10 @@ RUN wget http://mirror.catn.com/pub/apache/maven/maven-3/3.3.3/binaries/apache-m
     && tar -zxf apache-maven-3.3.3-bin.tar.gz \
     && cp -R apache-maven-3.3.3 /usr/local \
     && ln -s /usr/local/apache-maven-3.3.3/bin/mvn /usr/bin/mvn \
-    && ln -s /usr/local/apache-maven-3.3.3/bin/mvnDebug /usr/bin/mvnDebug
+    && ln -s /usr/local/apache-maven-3.3.3/bin/mvnDebug /usr/bin/mvnDebug \
+    && ln -s /usr/local/apache-maven-3.3.3 /usr/share/maven
 
+ENV MAVEN_HOME /usr/share/maven
 ENV JENKINS_HOME /var/jenkins_home
 
 # Jenkins is ran with user `jenkins`, uid = 1000
