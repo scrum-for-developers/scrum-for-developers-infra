@@ -2,6 +2,7 @@ FROM java:8-jre
 
 # worblehat stuff
 COPY application.properties /opt/worblehat/
+COPY init_env.sh /opt/worblehat/
 RUN touch /opt/worblehat/worblehat.jar && chmod 755 /opt/worblehat/worblehat.jar && ln -s /opt/worblehat/worblehat.jar /etc/init.d/worblehat
 
 # Create sshd image, see https://docs.docker.com/examples/running_ssh_service/
@@ -18,4 +19,4 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 
 EXPOSE 22
 
-CMD ["/usr/sbin/sshd", "-D"]
+CMD ["/opt/worblehat/init_env.sh"]

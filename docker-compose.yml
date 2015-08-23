@@ -57,6 +57,8 @@ prodworblehatweb:
   build: docker/worblehat-host
   links:
   - prodworblehatdb:worblehatdb
+  environment:
+  - SPRING_PROFILES_ACTIVE=prod
 nginx:
   build: docker/nginx
   ports:
