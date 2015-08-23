@@ -1,6 +1,14 @@
 FROM java:8-jdk
 
-RUN apt-get update && apt-get install -y wget git curl maven zip && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wget git curl zip && rm -rf /var/lib/apt/lists/*
+
+# apt-get install maven will install maven 3.0.5 which does not work with maven-site-plugin 3.4
+# -> install maven 3.3.3 by hand
+RUN wget http://mirror.catn.com/pub/apache/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.tar.gz \
+    && tar -zxf apache-maven-3.3.3-bin.tar.gz \
+    && cp -R apache-maven-3.3.3 /usr/local \
+    && ln -s /usr/local/apache-maven-3.3.3/bin/mvn /usr/bin/mvn \
+    && ln -s /usr/local/apache-maven-3.3.3/bin/mvnDebug /usr/bin/mvnDebug
 
 ENV JENKINS_HOME /var/jenkins_home
 
