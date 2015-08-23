@@ -1,7 +1,8 @@
-FROM ubuntu:14.04
+FROM java:8-jre
 
 # worblehat stuff
 COPY application.properties /opt/worblehat/
+RUN touch /opt/worblehat/worblehat.jar && chmod 755 /opt/worblehat/worblehat.jar && ln -s /opt/worblehat/worblehat.jar /etc/init.d/worblehat
 
 # Create sshd image, see https://docs.docker.com/examples/running_ssh_service/
 RUN apt-get update && apt-get install -y openssh-server
