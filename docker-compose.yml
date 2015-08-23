@@ -43,9 +43,11 @@ worblehatdb:
   - MYSQL_PASSWORD=worblehat
   - MYSQL_DATABASE=worblehat
 worblehatweb:
-  build: docker/tomcat
+  build: docker/worblehat-host
   links:
   - worblehatdb
+  environment:
+  - SPRING_PROFILES_ACTIVE=test
 prodworblehatdb:
   image: mysql:5.6.22
   environment:
