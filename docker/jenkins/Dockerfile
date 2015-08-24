@@ -1,6 +1,6 @@
 FROM java:8-jdk
 
-RUN apt-get update && apt-get install -y wget git curl zip && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y wget git curl zip sshpass && rm -rf /var/lib/apt/lists/*
 
 # apt-get install maven will install maven 3.0.5 which does not work with maven-site-plugin 3.4
 # -> install maven 3.3.3 by hand

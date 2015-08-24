@@ -22,6 +22,7 @@ jenkins:
   - PROJECT_URL=https://github.com/scrum-for-developers/worblehat
   # Insert the Public IP here for acceptance-tests via saucelabs
   - PSD_SERVER=127.0.0.1
+  - SSHPASS=screencast
   volumes:
   - mounted_directories/jenkins_home:/var/jenkins_home:rw
   - mounted_directories/site_deploy:/home/jenkins/site-deploy:rw
