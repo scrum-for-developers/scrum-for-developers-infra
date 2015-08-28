@@ -1,5 +1,6 @@
 #! /bin/bash
 
+docker-compose stop
 docker rm $(docker ps -aq)
 rm -rf mounted_directories/jenkins_home/*
 rm -rf mounted_directories/jenkins_home/.jenkins
