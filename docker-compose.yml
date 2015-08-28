@@ -14,7 +14,6 @@ jenkins:
   - SITE_DEPLOY_PATH=/home/jenkins/site-deploy/
   - WORBLEHAT_DB_HOST=worblehatdb
   - WORBLEHAT_PRODUCTION_DB_HOST=prodworblehatdb
-  - WORBLEHAT_PRODUCTION_TOMCAT_URL=http://prodworblehatweb:8080
   - SONAR_URL=http://sonar:9000/sonar
   - SONAR_DB_HOST=sonarmysql
   # Insert the correct worblehat git url
