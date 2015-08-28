@@ -16,7 +16,7 @@ ENV JENKINS_HOME /var/jenkins_home
 
 # Add avoid host checking against known hosts. Otherwise you have to log in to
 # the container and add the worblehat hosts to known_hosts by hand
-echo 'StrictHostKeyChecking=no' >> /etc/ssh/sshd_config
+RUN echo 'StrictHostKeyChecking=no' >> /etc/ssh/sshd_config
 
 # Jenkins is ran with user `jenkins`, uid = 1000
 # If you bind mount a volume from host/vloume from a data container,
