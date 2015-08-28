@@ -21,3 +21,9 @@
   - name: Start docker service
     sudo: True
     service: name=docker state=started
+  - name: Install docker-compose
+    sudo: True
+    pip: name=docker-compose
+  - name: Make docker-compose executable
+    sudo: True
+    file: path=/usr/local/bin/docker-compose mode=755
