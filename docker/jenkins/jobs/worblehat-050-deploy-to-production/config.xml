@@ -46,7 +46,7 @@ psd.dbserver.password=worblehat</properties>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
       <command>sshpass -e scp /tmp/worblehat.jar root@prodworblehatweb:/opt/worblehat/worblehat.jar
-sshpass -e ssh prodworblehatweb /etc/init.d/worblehat start</command>
+sshpass -e ssh root@prodworblehatweb /etc/init.d/worblehat start</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
