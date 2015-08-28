@@ -13,15 +13,14 @@ jenkins:
   - ARTIFACTORY_URL=http://artifactory:8080/artifactory
   - SITE_DEPLOY_PATH=/home/jenkins/site-deploy/
   - WORBLEHAT_DB_HOST=worblehatdb
-  - WORBLEHAT_TOMCAT_URL=http://worblehatweb:8080
   - WORBLEHAT_PRODUCTION_DB_HOST=prodworblehatdb
-  - WORBLEHAT_PRODUCTION_TOMCAT_URL=http://prodworblehatweb:8080
   - SONAR_URL=http://sonar:9000/sonar
   - SONAR_DB_HOST=sonarmysql
   # Insert the correct worblehat git url
   - PROJECT_URL=https://github.com/scrum-for-developers/worblehat
   # Insert the Public IP here for acceptance-tests via saucelabs
-  - PSD_SERVER=127.0.0.1 
+  - PSD_SERVER=127.0.0.1
+  - SSHPASS=screencast
   volumes:
   - mounted_directories/jenkins_home:/var/jenkins_home:rw
   - mounted_directories/site_deploy:/home/jenkins/site-deploy:rw
@@ -43,9 +42,13 @@ worblehatdb:
   - MYSQL_PASSWORD=worblehat
   - MYSQL_DATABASE=worblehat
 worblehatweb:
-  build: docker/tomcat
+  build: docker/worblehat-host
   links:
   - worblehatdb
+  environment:
+  - SPRING_PROFILES_ACTIVE=test
+  expose:
+  - 22
 prodworblehatdb:
   image: mysql:5.6.22
   environment:
@@ -54,9 +57,13 @@ prodworblehatdb:
   - MYSQL_PASSWORD=worblehat
   - MYSQL_DATABASE=worblehat
 prodworblehatweb:
-  build: docker/tomcat
+  build: docker/worblehat-host
   links:
   - prodworblehatdb:worblehatdb
+  environment:
+  - SPRING_PROFILES_ACTIVE=prod
+  expose:
+  - 22
 nginx:
   build: docker/nginx
   ports:

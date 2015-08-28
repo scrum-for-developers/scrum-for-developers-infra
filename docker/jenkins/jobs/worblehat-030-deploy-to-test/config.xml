@@ -29,11 +29,8 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cp ${WORKSPACE}/worblehat-web/target/*.war /tmp/worblehat-web.war
-curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list
-curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/undeploy?path=/worblehat-test
-curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list
-
+      <command>cp ${WORKSPACE}/worblehat-web/target/*.jar /tmp/worblehat.jar
+sshpass -e ssh root@worblehatweb /etc/init.d/worblehat stop
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
@@ -45,8 +42,9 @@ curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>ls ${WORKSPACE}/worblehat-web/target/*.war | xargs curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/deploy?path=/worblehat-test -T
-curl --user manager:manager ${WORBLEHAT_TOMCAT_URL}/manager/text/list</command>
+      <command>sshpass -e scp /tmp/worblehat.jar root@worblehatweb:/opt/worblehat/worblehat.jar
+sshpass -e ssh worblehatweb /etc/init.d/worblehat start
+</command>
     </hudson.tasks.Shell>
   </builders>
   <publishers>
