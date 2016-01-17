@@ -5,29 +5,16 @@
     region: "eu-west-1"
     rules:
         - proto: tcp
-          type: ssh
           from_port: 22
           to_port: 22
           cidr_ip: 0.0.0.0/0
     rules_egress:
         - proto: all
-          type: all
           cidr_ip: 0.0.0.0/0
-- name: Create EC2 instances
-  ec2:
-    instance_type: t2.micro
-    key_name: datalab
-    region: eu-west-1
-    exact_count: 1
-    count_tag:
-      Name: "sfd-{{ item.name }}"
-    instance_tags:
-      Name: "sfd-{{ item.name }}"
-      ScrumForDevelopers: "ScrumForDevelopers"
-      SfdTeamTitle: "{{ item.team_title }}"
-      SfdGitUrl: "{{ item.git_url }}"
-      SfdGitWebUrl: "{{ item.git_web_url }}"
-    image: ami-bff32ccc
-    group: "{{ security_group }}"
-    wait: yes
+- include: create_instance.yml
+  vars:
+    instance_name: "{{ item.name }}"
+    team_title: "{{ item.team_title }}"
+    git_url: "{{ item.git_url }}"
+    git_web_url: "{{ item.git_web_url }}"
   with_items: "{{ instances }}"

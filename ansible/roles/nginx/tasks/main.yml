@@ -1,4 +1,5 @@
 - name: Create nginx root directory
+  become: true
   file: path="{{ nginx_root }}" state=directory owner=root group=root mode=0777
 - name: Copy site html
   copy: src=html/ dest="{{ nginx_root }}"

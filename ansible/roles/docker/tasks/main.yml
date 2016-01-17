@@ -9,3 +9,10 @@
 - name: Add provisioning user to docker group
   become: true
   user: name="{{ docker_user }}" groups=docker append=yes
+- name: Disable hostkey checking for ssh
+  # to make deployment via ssh to docker container possible
+  become: true
+  lineinfile:
+    dest: /etc/ssh/ssh_config
+    regexp: "^#( *)StrictHostKeyChecking"
+    line: "StrictHostKeyChecking=no"

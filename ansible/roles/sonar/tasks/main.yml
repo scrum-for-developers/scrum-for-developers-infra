@@ -4,9 +4,8 @@
     dest: /usr/local/sonar/conf/sonar.properties
     regexp: "^#sonar.web.context"
     line: "sonar.web.context=/sonar"
+  notify: restart sonar
 - name: Copy sonar plugins
   become: true
   copy: src=plugins/ dest=/usr/local/sonar/extensions/downloads/
-- name: Restart sonar
-  service: name=sonar state=restarted
-  become: true
+  notify: restart sonar

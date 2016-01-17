@@ -5,6 +5,7 @@
   gather_facts: no
   roles:
     - role: ec2_create
+      ec2_key_name: "scrumfordevelopers"
       instances:
         - name: infra-test
           team_title: Test-Team

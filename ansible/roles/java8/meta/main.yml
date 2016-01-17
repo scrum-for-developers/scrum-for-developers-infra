@@ -2,5 +2,6 @@
 dependencies:
   - role: java8_repo
   - role: geerlingguy.java
+    become: true
     java_packages:
     - openjdk-8-jdk
