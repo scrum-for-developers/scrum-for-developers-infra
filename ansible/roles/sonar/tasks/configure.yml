@@ -4,7 +4,6 @@
     dest: /usr/local/sonar/conf/sonar.properties
     regexp: "{{ item.regexp }}"
     line: "{{ item.line }}"
-  notify: restart sonar
   with_items:
     - regexp: "^sonar.jdbc.username"
       line: "sonar.jdbc.username={{ sonar_mysql_username }}"
@@ -17,4 +16,3 @@
     dest: /usr/local/sonar/conf/sonar.properties
     regexp: "^#sonar.web.context"
     line: "sonar.web.context=/sonar"
-  notify: restart sonar
