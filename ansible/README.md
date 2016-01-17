@@ -52,3 +52,8 @@ Afterwards execute the following to provision the newly created instances
 ```
 ./provision-ec2-instances.sh /path/to/sshkey.pem
 ```
+
+# Troubleshooting
+
+## Problem connecting to newly created instances
+The [Ansible EC2 Dynamic Inventory](http://docs.ansible.com/ansible/intro_dynamic_inventory.html#example-aws-ec2-external-inventory-script) caches results. Execute `./ec2-dynamic-inventory/ec2.py --refresh-cache` to refresh the cache.

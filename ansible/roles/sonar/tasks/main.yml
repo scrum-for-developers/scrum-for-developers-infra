@@ -30,6 +30,7 @@
     creates=/usr/local/sonar/COPYING
 
 - include: configure.yml
+- include: plugins.yml
 
 - name: Add sonar symlinks for service management.
   file:
