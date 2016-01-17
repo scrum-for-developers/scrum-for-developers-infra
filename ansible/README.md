@@ -43,6 +43,9 @@ aws_secret_access_key = your-aws-secret-key
 ```
 
 # Usage
+
+First, execute the script `install-galaxy-roles.sh` which installs necessary ansible roles from ansible galaxy into the `galaxy_roles` folder.
+
 Adapt `create-ec2-playbook.yml` to your needs (keyname, instances), and execute `create-ec2-instances.sh` to create the ec2 instances.
 
 Afterwards execute the following to provision the newly created instances
