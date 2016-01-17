@@ -2,22 +2,14 @@
 
 - hosts: tag_ScrumForDevelopers_ScrumForDevelopers
   roles:
-    - docker
+    - role: util
+    - role: java8
     - role: nginx
-      nginx_sites:
-        default:
-          - listen 80
-          - location / { try_files $uri $uri/ /index.html; }
-          - location /jenkins/ { proxy_pass http://localhost:8080/jenkins/; }
-          - location /artifactory/ { proxy_pass http://artifactory:8081/artifactory/; }
-          - location /sonar/ { proxy_pass http://sonar:9000/sonar/; }
-      nginx_configs:
-        proxy:
-          - proxy_set_header Host $host
-          - proxy_set_header X-Real-IP  $remote_addr
-          - proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for
-  tasks:  
-    - name: Clone scrum-developers-infra-repo
-      git: repo=https://github.com/scrum-for-developers/scrum-for-developers-infra dest={{ config_dir }} update=yes force=yes
-    - name: Create site-deploy directory
-      file: path={{ config_dir }}/site-deploy/site state=directory mode=777
+      nginx_port: 80
+      git_web_url: "{{ ec2_tag_SfdGitWebUrl }}"
+      index_title: "Hello {{ ec2_tag_SfdTeamTitle }} !"
+    - role: jenkins
+    - role: docker
+      docker_user: "ec2-user"
+    - role: maven
+    - role: sonar

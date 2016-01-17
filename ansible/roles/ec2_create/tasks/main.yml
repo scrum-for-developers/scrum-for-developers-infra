@@ -20,11 +20,13 @@
     region: eu-west-1
     exact_count: 1
     count_tag:
-      Name: "sfd-{{ item }}"
+      Name: "sfd-{{ item.name }}"
     instance_tags:
-      Name: "sfd-{{ item }}"
+      Name: "sfd-{{ item.name }}"
       ScrumForDevelopers: "ScrumForDevelopers"
-      Team: "{{ item }}"
+      SfdTeamTitle: "{{ item.team_title }}"
+      SfdGitUrl: "{{ item.git_url }}"
+      SfdGitWebUrl: "{{ item.git_web_url }}"
     image: ami-bff32ccc
     group: "{{ security_group }}"
     wait: yes

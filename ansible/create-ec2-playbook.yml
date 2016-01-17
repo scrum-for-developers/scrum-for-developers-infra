@@ -4,4 +4,9 @@
   connection: local
   gather_facts: no
   roles:
-    - ec2_create
+    - role: ec2_create
+      instances:
+        - name: infra-test
+          team_title: Test-Team
+          git_url: https://github.com/scrum-for-developers/worblehat.git
+          git_web_url: https://github.com/scrum-for-developers/worblehat

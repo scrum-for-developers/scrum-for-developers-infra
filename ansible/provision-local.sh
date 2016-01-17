@@ -2,7 +2,7 @@
 
 export ANSIBLE_FORCE_COLOR=1
 
-if [[ "OSTYPE" == "Darwin"* ]]
+if [ $(uname) == "Darwin" ]
 then
   INVENTORY=inventory-localhost-osx
 else

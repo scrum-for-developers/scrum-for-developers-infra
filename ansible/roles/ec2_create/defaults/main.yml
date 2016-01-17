@@ -1,0 +1,7 @@
+---
+security_group: "created-by-ansible"
+instances:
+  - name: infra-test
+    team_title: Test-Team
+    git_url: https://github.com/scrum-for-developers/worblehat.git
+    git_web_url: https://github.com/scrum-for-developers/worblehat
