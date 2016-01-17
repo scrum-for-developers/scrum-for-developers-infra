@@ -1,0 +1,7 @@
+---
+dependencies:
+  - role: geerlingguy.mysql
+    become: true
+  - role: geerlingguy.sonar
+    become: true
+    sonar_mysql_password: 123qwe

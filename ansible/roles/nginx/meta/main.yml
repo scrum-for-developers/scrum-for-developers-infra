@@ -1,0 +1,6 @@
+---
+dependencies:
+  - role: jdauphant.nginx
+    become: true
+    nginx_sites: "{{ my_nginx_sites }}"
+    nginx_config: "{{ my_nginx_config }}"

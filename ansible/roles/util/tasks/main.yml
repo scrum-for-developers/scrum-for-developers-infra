@@ -1,0 +1,4 @@
+- name: Install unzip
+  apt:
+    name: unzip
+  become: yes

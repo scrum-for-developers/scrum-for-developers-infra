@@ -1,0 +1,5 @@
+---
+security_group: "created-by-ansible"
+instances:
+  - instance-1
+  - instance-2

@@ -1,0 +1,31 @@
+- name: Create AWS security group
+  ec2_group:
+    name: "{{ security_group }}"
+    description: "{{ security_group }}"
+    region: "eu-west-1"
+    rules:
+        - proto: tcp
+          type: ssh
+          from_port: 22
+          to_port: 22
+          cidr_ip: 0.0.0.0/0
+    rules_egress:
+        - proto: all
+          type: all
+          cidr_ip: 0.0.0.0/0
+- name: Create EC2 instances
+  ec2:
+    instance_type: t2.micro
+    key_name: datalab
+    region: eu-west-1
+    exact_count: 1
+    count_tag:
+      Name: "sfd-{{ item }}"
+    instance_tags:
+      Name: "sfd-{{ item }}"
+      ScrumForDevelopers: "ScrumForDevelopers"
+      Team: "{{ item }}"
+    image: ami-bff32ccc
+    group: "{{ security_group }}"
+    wait: yes
+  with_items: "{{ instances }}"

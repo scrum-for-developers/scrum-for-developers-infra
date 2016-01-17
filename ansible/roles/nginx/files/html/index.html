@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="codecentric AG">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>Scrum for developers development environment</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <!-- Custom styles for this template -->
+  <link href="css/theme.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body role="document">
+
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Scrum for Developers</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </nav>
+
+  <div class="container" role="main">
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Hello, world!</h1>
+        <p>This is the development environment for the worblehat library application.
+          Worblehat is an awesome demo application that is used by <a href="http://www.codecentric.de">codecentric</a>
+          for the scrum for developers training.</p>
+        <p>
+          <a class="btn btn-primary btn-lg" href="PROJECT_URL" role="button">View code &raquo;</a>
+          <a class="btn btn-primary btn-lg" href="../worblehat-test" role="button">View app (TEST) &raquo;</a>
+          <a class="btn btn-primary btn-lg" href="../worblehat-prod" role="button">View app (PROD) &raquo;</a>
+          <a class="btn btn-primary btn-lg" href="../worblehat-site" role="button">View documentation &raquo;</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Build server</h2>
+          <p><a href="http://jenkins-ci.org">Jenkins</a> is used as continious integration server for the project. </p>
+          <p><a class="btn btn-default" href="../jenkins" role="button">Visit Jenkins &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Quality analysis</h2>
+          <p><a href="http://sonarqube.org">SonarQube</a> is used for measuring the code quality of the project. </p>
+          <p><a class="btn btn-default" href="../sonar" role="button">Visit SonarQube &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Artifact repository</h2>
+          <p><a href="http://www.jfrog.com/artifactory/">Artifactory</a> is used as artifact repository and proxy for the <a href="http://search.maven.org/">maven central</a> repository.</p>
+          <p><a class="btn btn-default" href="../artifactory" role="button">Visit Artifactory &raquo;</a></p>
+        </div>
+      </div>
+
+    <hr>
+    <footer>
+      &copy; codecentric AG 2015
+    </footer>
+  </div> <!-- /container -->
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</body>
+</html>

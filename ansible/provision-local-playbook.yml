@@ -1,0 +1,15 @@
+---
+
+- hosts: local
+  connection: local
+  vars:
+    nginx_port: 8000
+    docker_user: "vagrant"
+  roles:
+    - role: util
+    - role: java8
+    - role: nginx
+    - role: jenkins
+    - role: docker
+    - role: maven
+    - role: sonar

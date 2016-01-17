@@ -1,0 +1,6 @@
+- name: Create nginx root directory
+  file: path="{{ nginx_root }}" state=directory owner=root group=root mode=0777
+- name: Copy site html
+  copy: src=html/ dest="{{ nginx_root }}"
+- name: Create worblehat-site directory
+  file: path="{{ worblehat_site }}" state=directory mode=777

@@ -1,0 +1,12 @@
+- name: Download maven
+  become: true
+  unarchive: src="{{maven_download_url}}" dest=/usr/local/ copy=no
+- name: Link executable mvn
+  become: true
+  file: src=/usr/local/apache-maven-3.3.3/bin/mvn dest=/usr/bin/mvn state=link
+- name: Link executable mvnDebug
+  become: true
+  file: src=/usr/local/apache-maven-3.3.3/bin/mvnDebug dest=/usr/bin/mvnDebug state=link
+- name: Link folder
+  become: true
+  file: src=/usr/local/apache-maven-3.3.3 dest=/usr/share/maven state=link

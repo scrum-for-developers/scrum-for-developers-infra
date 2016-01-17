@@ -1,0 +1,32 @@
+---
+dependencies:
+- role: geerlingguy.jenkins
+  become: true
+  jenkins_url_prefix: "/jenkins"
+  jenkins_plugins:
+    - artifactory
+    - batch-task
+    - build-name-setter
+    - build-pipeline-plugin
+    - chucknorris
+    - clone-workspace-scm
+    - copyartifact
+    - delivery-pipeline-plugin
+    - deploy
+    - embeddable-build-status
+    - git-client
+    - github-api
+    - github
+    - git
+    - gitlab-hook
+    - html-audio-notifier
+    - jenkinswalldisplay
+    - jquery
+    - join
+    - locks-and-latches
+    - mercurial
+    - promoted-builds
+    - ruby-runtime
+    - scm-api
+    - token-macro
+    - parameterized-trigger

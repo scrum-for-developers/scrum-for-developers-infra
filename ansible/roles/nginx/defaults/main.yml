@@ -1,0 +1,17 @@
+nginx_root: "/scrumfordevelopers/ngins_root"
+worblehat_site: "{{ nginx_root }}/worblehat-site"
+my_nginx_sites:
+  default:
+    - listen {{ nginx_port}}
+    - root "{{ nginx_root }}"
+    - location / { index index.html index.htm; }
+    - location /jenkins/ { proxy_pass http://localhost:8080/jenkins/; }
+    - location /artifactory/ { proxy_pass http://localhost:8090/artifactory/; }
+    - location /sonar/ { proxy_pass http://localhost:9000/sonar/; }
+    - location /worblehat-test/ { proxy_pass http://localhost:8081/worblehat-test/; }
+    - location /worblehat-prod/ { proxy_pass http://localhost:8082/worblehat-prod/; }
+my_nginx_configs:
+  proxy:
+    - proxy_set_header Host $host:$proxy_port
+    - proxy_set_header X-Real-IP  $remote_addr
+    - proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for

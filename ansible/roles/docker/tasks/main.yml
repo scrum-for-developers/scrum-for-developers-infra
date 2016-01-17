@@ -1,0 +1,11 @@
+- name: Clone scrum-developers-infra-repo
+  git: repo=https://github.com/scrum-for-developers/scrum-for-developers-infra dest={{ infra_dir }} update=yes force=yes
+- name: Install docker-compose
+  become: true
+  pip: name=docker-compose
+- name: Make docker-compose executable
+  become: true
+  file: path=/usr/local/bin/docker-compose mode=755
+- name: Add provisioning user to docker group
+  become: true
+  user: name="{{ docker_user }}" groups=docker append=yes
