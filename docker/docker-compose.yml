@@ -1,5 +1,5 @@
 jenkins:
-  build: docker/jenkins
+  build: jenkins
   links:
   - artifactory
   - sonar
@@ -31,7 +31,7 @@ sonarmysql:
   expose:
   - 3306
 sonar:
-  build: docker/sonar
+  build: sonar
   links:
   - sonarmysql:db
 worblehatdb:
@@ -42,7 +42,7 @@ worblehatdb:
   - MYSQL_PASSWORD=worblehat
   - MYSQL_DATABASE=worblehat
 worblehatweb:
-  build: docker/worblehat-host
+  build: worblehat-host
   links:
   - worblehatdb
   environment:
@@ -57,7 +57,7 @@ prodworblehatdb:
   - MYSQL_PASSWORD=worblehat
   - MYSQL_DATABASE=worblehat
 prodworblehatweb:
-  build: docker/worblehat-host
+  build: worblehat-host
   links:
   - prodworblehatdb:worblehatdb
   environment:
@@ -65,7 +65,7 @@ prodworblehatweb:
   expose:
   - 22
 nginx:
-  build: docker/nginx
+  build: nginx
   ports:
   - "80:80"
   links:

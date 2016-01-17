@@ -17,9 +17,9 @@ The environment consists of:
 
  * [Install docker](https://docs.docker.com/installation/)
  * [Install docker-compose](https://docs.docker.com/compose/install/)
- * Run ```docker-compose up```
- * Point your browser to ht<span>tp://</span>*DOCKER_HOST_IP*
- 
+ * Run ```cd docker; docker-compose up```
+ * Point your browser to <span>http://</span>*DOCKER_HOST_IP*
+
 ## Troubleshooting
 
 ### Docker container can't access mounted volumes
@@ -33,7 +33,7 @@ cp: cannot create regular file '/home/jenkins/site-deploy/site/integration.html'
 ```
 
 *Explanation:* The jenkins home directory and the site-deploy directory (which is used by the quality-job) are
-mounted as a [docker volume](https://docs.docker.com/userguide/dockervolumes/#volume). The required 
+mounted as a [docker volume](https://docs.docker.com/userguide/dockervolumes/#volume). The required
 directories under `mounted_directories` must be readable/writable by the docker user.
 
 *Solution:* The simplest solution is to grant write access to anybody for the `mounted_directories`
