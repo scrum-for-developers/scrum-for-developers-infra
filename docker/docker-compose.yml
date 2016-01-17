@@ -12,7 +12,7 @@ worblehatdb:
   ports:
   - "3307:3306"
 worblehatweb:
-  build: docker/worblehat-host
+  build: worblehat-host
   links:
   - worblehatdb
   environment:
@@ -30,7 +30,7 @@ prodworblehatdb:
   ports:
   - "3308:3306"
 prodworblehatweb:
-  build: docker/worblehat-host
+  build: worblehat-host
   links:
   - prodworblehatdb:worblehatdb
   environment:
