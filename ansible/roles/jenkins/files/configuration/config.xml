@@ -72,7 +72,7 @@
           </default>
           <int>4</int>
           <string>SITE_DEPLOY_PATH</string>
-          <string>/home/vagrant/nginx_root/worblehat-site</string>
+          <string>/scrumfordevelopers/nginx_root/worblehat-site</string>
           <string>SONAR_DB_HOST</string>
           <string>localhost</string>
           <string>SONAR_URL</string>

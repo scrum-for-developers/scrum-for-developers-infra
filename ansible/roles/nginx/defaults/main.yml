@@ -1,5 +1,7 @@
 nginx_root: "/scrumfordevelopers/ngins_root"
 worblehat_site: "{{ nginx_root }}/worblehat-site"
+git_web_url: https://github.com/scrum-for-developers/worblehat
+index_title: "Hello Team Test!"
 my_nginx_sites:
   default:
     - listen {{ nginx_port}}

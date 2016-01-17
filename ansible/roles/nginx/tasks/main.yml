@@ -2,5 +2,7 @@
   file: path="{{ nginx_root }}" state=directory owner=root group=root mode=0777
 - name: Copy site html
   copy: src=html/ dest="{{ nginx_root }}"
+- name: Copy index html
+  template: src=index.html.j2 dest={{nginx_root}}/index.html
 - name: Create worblehat-site directory
   file: path="{{ worblehat_site }}" state=directory mode=777
