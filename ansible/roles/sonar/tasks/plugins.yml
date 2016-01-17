@@ -1,0 +1,3 @@
+- name: Copy sonar plugins
+  copy: src=plugins/ dest=/usr/local/sonar/extensions/downloads/
+  notify: restart sonar

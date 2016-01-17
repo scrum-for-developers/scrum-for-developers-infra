@@ -5,5 +5,4 @@ ansible-galaxy install -p galaxy_roles \
   jdauphant.nginx \
   geerlingguy.java \
   geerlingguy.jenkins \
-  geerlingguy.sonar \
   geerlingguy.mysql
