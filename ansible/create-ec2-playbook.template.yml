@@ -5,7 +5,10 @@
   gather_facts: no
   roles:
     - role: ec2_create
+      ec2_security_group: "scrumfordevelopers"
       ec2_key_name: "scrumfordevelopers"
+      ec2_region: "eu-central-1"
+      ec2_ami_id: "ami-87564feb"  #Ubuntu 14.04 (Note that the id depends on the region!)
       instances:
         - name: infra-test
           team_title: Test-Team

@@ -1,8 +1,8 @@
-- name: Create EC2 instances
+- name: Create EC2 instance
   ec2:
     instance_type: m4.large
     key_name: "{{ ec2_key_name }}"
-    region: eu-central-1
+    region: "{{ ec2_region }}"
     volumes:
       - device_name: /dev/sda1
         volume_type: gp2
@@ -17,22 +17,22 @@
       SfdTeamTitle: "{{ team_title }}"
       SfdGitUrl: "{{ git_url }}"
       SfdGitWebUrl: "{{ git_web_url }}"
-    image: ami-87564feb #Ubuntu 14.04
-    group: "{{ security_group }}"
+    image: "{{ ec2_ami_id }}"
+    group: "{{ ec2_security_group }}"
     wait: yes
   register: ec2
-- name: Debug created instances
+- name: Debug created instance
   debug: var=ec2
-- name: Assign elastic ips
+- name: Assign elastic ip
   ec2_eip:
-    region: eu-central-1
+    region: "{{ ec2_region }}"
     device_id: "{{ ec2.instance_ids[0] }}"
   register: eip
 - name: Debug elastic ip
   debug: var=eip
 - name: Save elastic ip as tag
   ec2_tag:
-    region: eu-central-1
+    region: "{{ ec2_region }}"
     resource: "{{ ec2.instance_ids[0] }}"
     tags:
       SfdElasticIp: "{{ eip.public_ip }}"

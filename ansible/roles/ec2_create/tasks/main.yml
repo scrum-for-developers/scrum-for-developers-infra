@@ -1,20 +1,5 @@
-- name: Create AWS security group
-  ec2_group:
-    name: "{{ security_group }}"
-    description: "{{ security_group }}"
-    region: "eu-central-1"
-    rules:
-        - proto: tcp
-          from_port: 22
-          to_port: 22
-          cidr_ip: 0.0.0.0/0
-        - proto: tcp
-          from_port: 80
-          to_port: 80
-          cidr_ip: 0.0.0.0/0
-    rules_egress:
-        - proto: all
-          cidr_ip: 0.0.0.0/0
+- include: create_security_group.yml
+
 - include: create_instance.yml
   vars:
     instance_name: "{{ item.name }}"
