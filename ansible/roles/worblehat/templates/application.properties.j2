@@ -10,3 +10,5 @@ liquibase.change-log=classpath:master.xml
 spring.jpa.hibernate.ddl-auto=validate
 
 server.port={{ worblehat_port }}
+
+server.context-path=/worblehat-{{ worblehat_stage }}

@@ -29,13 +29,13 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>/opt/worblehat-test/worblehat stop</command>
+      <command>/etc/init.d/worblehat-test stop</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>liquibase:update -Pjenkins</targets>
       <mavenName>(Default)</mavenName>
       <pom>worblehat-domain/pom.xml</pom>
-      <properties>psd.dbserver.url=jdbc:mysql://localhost:3307/worblehat
+      <properties>psd.dbserver.url=jdbc:mysql://localhost:3306/worblehat_test
 psd.dbserver.username=worblehat
 psd.dbserver.password=worblehat</properties>
       <usePrivateRepository>false</usePrivateRepository>
@@ -43,9 +43,8 @@ psd.dbserver.password=worblehat</properties>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>cp ${WORKSPACE}/worblehat-web/target/*.jar /opt/worblehat-test/worblehat
-chmod a+x /opt/worblehat-test/worblehat
-/opt/worblehat-test/worblehat start
+      <command>cp ${WORKSPACE}/worblehat-web/target/*.jar /opt/worblehat-test/worblehat.jar
+/etc/init.d/worblehat-test start
 </command>
     </hudson.tasks.Shell>
   </builders>
