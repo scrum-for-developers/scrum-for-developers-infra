@@ -3,6 +3,11 @@
     name: unzip
     update_cache: yes
   become: yes
+- name: Install sshpass
+  apt:
+    name: sshpass
+    update_cache: yes
+  become: yes
 - name: Create scrumfordevelopers directory
   become: true
   file: path="{{ scrumfordevelopers_dir }}" state=directory mode=777
