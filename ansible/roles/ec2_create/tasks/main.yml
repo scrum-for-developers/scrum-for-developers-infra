@@ -2,7 +2,7 @@
   ec2_group:
     name: "{{ security_group }}"
     description: "{{ security_group }}"
-    region: "eu-west-1"
+    region: "eu-central-1"
     rules:
         - proto: tcp
           from_port: 22

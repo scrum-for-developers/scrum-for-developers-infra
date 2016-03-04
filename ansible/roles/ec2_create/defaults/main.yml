@@ -1,6 +1,6 @@
 ---
-security_group: "created-by-ansible"
-ec2_key_name: "scrum-for-developers"
+security_group: "scrumfordevelopers"
+ec2_key_name: "scrumfordevelopers"
 instances:
   - name: infra-test
     team_title: Test-Team
