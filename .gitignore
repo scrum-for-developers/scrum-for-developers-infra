@@ -1,1 +1,2 @@
 .vagrant
+ansible/create-ec2-playbook.yml
