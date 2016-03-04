@@ -21,3 +21,4 @@
     - role: maven
     - role: sonar
       become: true
+    - role: worblehat

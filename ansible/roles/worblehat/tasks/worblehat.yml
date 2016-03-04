@@ -1,0 +1,7 @@
+- name: Create worblehat directory
+  become: true
+  file: path="/opt/worblehat-{{ worblehat_stage }}" state=directory owner=root group=root mode=0777
+- name: Copy woblehat application.conf
+  template: src=application.properties.j2 dest="/opt/worblehat-{{ worblehat_stage }}/application.properties"
+- name: Copy worblehat dummy executable
+  copy: src=worblehat dest="/opt/worblehat-{{ worblehat_stage}}/worblehat" mode=0777

@@ -1,0 +1,30 @@
+- name: Create worblehat test directory
+  become: true
+  file: path="/opt/worblehat-test" state=directory owner=root group=root mode=0777
+
+- include: worblehat.yml
+  worblehat_stage: "test"
+  worblehat_port: "8081"
+  worblehat_db: "worblehat_test"
+
+- name: Create a database for worblehat-test
+  mysql_db:
+    name: "worblehat_test"
+    state: present
+
+- include: worblehat.yml
+  worblehat_stage: "prod"
+  worblehat_port: "8082"
+  worblehat_db: "prod"
+
+- name: Create a database for worblehat-test
+  mysql_db:
+    name: "worblehat_prod"
+    state: present
+
+- name: Create a database user for worblehat
+  mysql_user:
+    name: "worblehat"
+    host: "localhost"
+    priv: "*.*:ALL"
+    password: "worblehat"

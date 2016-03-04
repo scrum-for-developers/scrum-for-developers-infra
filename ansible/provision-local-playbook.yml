@@ -3,6 +3,8 @@
 - hosts: local
   connection: local
   vars:
+    git_web_url: "git-web-url"
+    index_title: "Hello TEAM!!!!"
     nginx_port: 8000
     docker_user: "vagrant"
   roles:
@@ -16,3 +18,4 @@
     - role: maven
     - role: sonar
       become: true
+    - role: worblehat

@@ -29,9 +29,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>cp ${WORKSPACE}/worblehat-web/target/*.jar /tmp/worblehat.jar
-sshpass -e ssh -p 2201 root@localhost /etc/init.d/worblehat stop
-</command>
+      <command>/opt/worblehat-test/worblehat stop</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>liquibase:update -Pjenkins</targets>
@@ -45,8 +43,9 @@ psd.dbserver.password=worblehat</properties>
       <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
-      <command>sshpass -e scp -P 2201 /tmp/worblehat.jar root@localhost:/opt/worblehat/worblehat.jar
-sshpass -e ssh -p 2201 root@localhost /etc/init.d/worblehat start
+      <command>cp ${WORKSPACE}/worblehat-web/target/*.jar /opt/worblehat-test/worblehat
+chmod a+x /opt/worblehat-test/worblehat
+/opt/worblehat-test/worblehat start
 </command>
     </hudson.tasks.Shell>
   </builders>
