@@ -29,7 +29,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Shell>
-      <command>/etc/init.d/worblehat-test stop</command>
+      <command>sudo /etc/init.d/worblehat-test stop</command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
       <targets>liquibase:update -Pjenkins</targets>
@@ -44,7 +44,7 @@ psd.dbserver.password=worblehat</properties>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
       <command>cp ${WORKSPACE}/worblehat-web/target/*.jar /opt/worblehat-test/worblehat.jar
-/etc/init.d/worblehat-test start
+sudo /etc/init.d/worblehat-test start
 </command>
     </hudson.tasks.Shell>
   </builders>
