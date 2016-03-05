@@ -1,10 +1,18 @@
 - name: Copy configuration
   become: true
   copy: src=configuration/ dest=/var/lib/jenkins/ owner=jenkins group=jenkins
-  notify: restart jenkins
 - name: Create .m2 folder
   become: true
   file: path="/var/lib/jenkins/.m2" state=directory owner=jenkins group=jenkins
 - name: Copy settings.xml
   become: true
   copy: src=settings.xml dest="/var/lib/jenkins/.m2" owner=jenkins group=jenkins
+- include: job.yml
+  job_name: "{{ item }}"
+  with_items:
+    - worblehat-010-build
+    - worblehat-020-quality
+    - worblehat-030-deploy-to-test
+    - worblehat-040-acceptance-test
+    - worblehat-050-deploy-to-production
+  notify: restart jenkins

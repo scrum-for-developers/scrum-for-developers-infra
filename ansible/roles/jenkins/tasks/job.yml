@@ -1,0 +1,6 @@
+- name: Create job directory
+  become: true
+  file: path="/var/lib/jenkins/jobs/{{ job_name }}" state=directory owner=jenkins group=jenkins mode=0755
+- name: Copy job configuration
+  become: true
+  template: src="jobs/{{ job_name }}/config.xml.j2" dest="/var/lib/jenkins/jobs/{{ job_name }}/config.xml" owner=jenkins group=jenkins mode=0644

@@ -3,8 +3,9 @@
 - hosts: local
   connection: local
   vars:
-    git_web_url: "git-web-url"
-    index_title: "Hello TEAM!!!!"
+    git_url: "https://github.com/scrum-for-developers/worblehat.git"
+    git_web_url: "https://github.com/scrum-for-developers/worblehat"
+    index_title: "Hello VAGRANT!!!!"
     nginx_port: 8000
     docker_user: "vagrant"
   roles:
