@@ -9,6 +9,7 @@
   become: true
   file: src="/opt/worblehat-{{ worblehat_stage }}/worblehat.jar" dest="/etc/init.d/worblehat-{{ worblehat_stage }}" mode=0777 state=link
 - name: "Allow jenkins to sudo worblehat"
+  become: yes
   lineinfile:
     dest: "/etc/sudoers"
     line: "jenkins ALL = NOPASSWD: /etc/init.d/worblehat-{{ worblehat_stage }}"

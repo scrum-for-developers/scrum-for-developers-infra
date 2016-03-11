@@ -20,6 +20,7 @@
     - role: jenkins
     - role: docker
     - role: maven
+      maven_mirror: http://archive.apache.org/dist/maven/binaries/
     - role: sonar
       become: true
     - role: worblehat
