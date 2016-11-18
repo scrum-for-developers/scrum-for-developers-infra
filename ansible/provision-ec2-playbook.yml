@@ -1,6 +1,7 @@
 ---
 
 - hosts: tag_ScrumForDevelopers_ScrumForDevelopers
+  gather_facts: no
   vars:
       nginx_port: 80
       git_web_url: "{{ ec2_tag_SfdGitWebUrl }}"
@@ -11,6 +12,10 @@
   pre_tasks:
     - name: Display all variables/facts known for a host
       debug: var=hostvars[inventory_hostname]
+    - name: 'install python2'
+      raw: sudo apt-get -y install python-simplejson
+    - name: Gathering facts
+      setup:
   roles:
     - role: util
     - role: java8

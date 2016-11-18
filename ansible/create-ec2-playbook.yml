@@ -6,6 +6,8 @@
   roles:
     - role: ec2_create
       ec2_key_name: "scrumfordevelopers"
+      ec2_region: "eu-central-1"
+      ec2_ami_id: "ami-8504fdea"  #Ubuntu 16.04 (Note that the id depends on the region!)
       instances:
         - name: infra-test
           team_title: Test-Team
