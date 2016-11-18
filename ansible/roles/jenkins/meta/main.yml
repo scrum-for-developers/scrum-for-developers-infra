@@ -3,6 +3,8 @@ dependencies:
 - role: geerlingguy.jenkins
   become: true
   jenkins_url_prefix: "/jenkins"
+  jenkins_version: "2.32"
+  jenkins_admin_password_file: "var/lib/jenkins/secrets/initialAdminPassword"
   jenkins_plugins:
     - artifactory
     - batch-task
