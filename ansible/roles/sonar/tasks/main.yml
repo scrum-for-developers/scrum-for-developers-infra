@@ -42,7 +42,7 @@
     - /etc/init.d/sonar
 
 - name: Ensure Sonar is running and set to start on boot.
-  service: name=sonar state=started enabled=yes
-
+  systemd: name=sonar state=started enabled=yes
+    
 - name: Make sure Sonar is responding on the configured port.
   wait_for: port=9000 delay=3 timeout=300
