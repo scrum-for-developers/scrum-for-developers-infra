@@ -9,6 +9,8 @@ fi
 PRIVATE_KEY=$1
 echo "Using private key $PRIVATE_KEY"
 
+ec2-dynamic-inventory/ec2.py --refresh-cache
+
 ansible-playbook -v \
   -i ec2-dynamic-inventory/ec2.py \
   -u ubuntu \
