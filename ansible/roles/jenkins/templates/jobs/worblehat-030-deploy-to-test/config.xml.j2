@@ -44,6 +44,7 @@ psd.dbserver.password=worblehat</properties>
     </hudson.tasks.Maven>
     <hudson.tasks.Shell>
       <command>cp ${WORKSPACE}/worblehat-web/target/*.jar /opt/worblehat-test/worblehat.jar
+sudo rm /tmp/spring.log
 sudo /etc/init.d/worblehat-test start
 </command>
     </hudson.tasks.Shell>

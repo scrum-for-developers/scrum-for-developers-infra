@@ -1,3 +1,4 @@
 ---
 - name: restart sonar
-  service: name=sonar state=restarted
+  become: true
+  systemd: name=sonar state=restarted

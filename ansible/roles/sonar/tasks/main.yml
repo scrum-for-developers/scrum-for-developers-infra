@@ -45,9 +45,15 @@
   become: true
 
 - name: Make init script executable
+  become: true
   file: path=/etc/init.d/sonar mode=0755
   
+- name: create service for sonar
+  raw: systemctl enable sonar
+  become: true
+  
 - name: Ensure Sonar is running and set to start on boot.
+  become: true
   systemd: name=sonar state=started enabled=yes
     
 - name: Make sure Sonar is responding on the configured port.
