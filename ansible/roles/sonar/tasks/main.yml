@@ -39,8 +39,14 @@
     state: link
   with_items:
     - /usr/bin/sonar
-    - /etc/init.d/sonar
 
+- name: Copy sonar init script
+  copy: src=init.d/ dest=/etc/init.d
+  become: true
+
+- name: Make init script executable
+  file: path=/etc/init.d/sonar mode=0755
+  
 - name: Ensure Sonar is running and set to start on boot.
   systemd: name=sonar state=started enabled=yes
     
