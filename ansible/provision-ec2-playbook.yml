@@ -12,6 +12,8 @@
   pre_tasks:
     - name: Display all variables/facts known for a host
       debug: var=hostvars[inventory_hostname]
+    - name: update repositories
+      raw: sudo apt-get update
     - name: 'install python2'
       raw: sudo apt-get -y install python-simplejson
     - name: Gathering facts
