@@ -1,0 +1,15 @@
+---
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - role: ec2_create
+      ec2_key_name: "scrumfordevelopers"
+      ec2_region: "eu-central-1"
+      ec2_ami_id: "ami-4c448023"  #Ubuntu 16.04 (Note that the id depends on the region!)
+      instances:
+        - name: Sandbox
+          team_title: Sandbox
+          git_url: https://github.com/scrum-for-developers/worblehat-sandbox.git
+          git_web_url: https://github.com/scrum-for-developers/worblehat-sandbox

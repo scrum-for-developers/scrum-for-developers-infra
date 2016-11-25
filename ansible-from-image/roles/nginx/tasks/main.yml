@@ -1,0 +1,4 @@
+- name: Copy site html
+  copy: src=html/ dest="{{ nginx_root }}"
+- name: Copy index html
+  template: src=index.html.j2 dest={{nginx_root}}/index.html

@@ -1,0 +1,17 @@
+---
+
+- hosts: tag_ScrumForDevelopers_ScrumForDevelopers
+  gather_facts: no
+  vars:
+      nginx_port: 80
+      git_web_url: "{{ ec2_tag_SfdGitWebUrl }}"
+      git_url: "{{ ec2_tag_SfdGitUrl }}"
+      index_title: "Hello {{ ec2_tag_SfdTeamTitle }} !"
+      docker_user: "ubuntu"
+      this_ip: "{{ ec2_tag_SfdElasticIp }}"
+  pre_tasks:
+    - name: Display all variables/facts known for a host
+      debug: var=hostvars[inventory_hostname]
+  roles:
+    - role: nginx
+    - role: jenkins

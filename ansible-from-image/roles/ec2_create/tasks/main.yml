@@ -1,0 +1,9 @@
+- include: create_security_group.yml
+
+- include: create_instance.yml
+  vars:
+    instance_name: "{{ item.name }}"
+    team_title: "{{ item.team_title }}"
+    git_url: "{{ item.git_url }}"
+    git_web_url: "{{ item.git_web_url }}"
+  with_items: "{{ instances }}"

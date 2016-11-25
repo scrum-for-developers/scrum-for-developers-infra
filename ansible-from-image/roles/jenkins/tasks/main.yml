@@ -1,0 +1,15 @@
+- name: Copy settings.xml
+  become: true
+  copy: src=settings.xml dest="/var/lib/jenkins/.m2" owner=jenkins group=jenkins
+- name: Clean jenkins job directory
+  file: path="/var/lib/jenkins/jobs/" state=absent
+  become: true
+- include: job.yml
+  job_name: "{{ item }}"
+  with_items:
+    - worblehat-010-build
+    - worblehat-020-quality
+    - worblehat-030-deploy-to-test
+    - worblehat-040-acceptance-test
+    - worblehat-050-deploy-to-production
+  notify: restart jenkins
