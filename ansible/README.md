@@ -25,8 +25,6 @@ Install via
 pip install boto
 ```
 
-noch ein python ding. andreas fragen
-
 ## AWS Credentials
 
 For the ansible ec2 module to work, you need to make your ec2 cedentials available.
