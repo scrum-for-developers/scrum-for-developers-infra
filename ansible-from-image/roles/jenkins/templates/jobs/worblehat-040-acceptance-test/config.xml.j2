@@ -22,7 +22,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.Maven>
-      <targets>verify -Pjenkins</targets>
+      <targets>verify -Pjenkins -Dapplication.url=http://{{ ec2_ip_address }}/worblehat-test</targets>
       <mavenName>(Default)</mavenName>
       <pom>worblehat-acceptancetests/pom.xml</pom>
       <usePrivateRepository>false</usePrivateRepository>
