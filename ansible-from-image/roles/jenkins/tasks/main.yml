@@ -14,3 +14,4 @@
     - worblehat-050-deploy-to-production
 - name: restart jenkins
   service: name=jenkins state=restarted
+  become: true
