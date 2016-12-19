@@ -12,4 +12,5 @@
     - worblehat-030-deploy-to-test
     - worblehat-040-acceptance-test
     - worblehat-050-deploy-to-production
-  notify: restart jenkins
+- name: restart jenkins
+  service: name=jenkins state=restarted
