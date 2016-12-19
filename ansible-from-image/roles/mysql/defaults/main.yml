@@ -1,0 +1,3 @@
+nginx_root: "/scrumfordevelopers/nginx_root"
+git_web_url: https://github.com/scrum-for-developers/worblehat  # Overwritten by provision-ec2-playbook.yml
+index_title: "Hello Team Test!"                                 # Overwritten by provision-ec2-playbook.yml

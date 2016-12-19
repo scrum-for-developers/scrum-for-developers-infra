@@ -15,3 +15,4 @@
   roles:
     - role: nginx
     - role: jenkins
+    - role: mysql

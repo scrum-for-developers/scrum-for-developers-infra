@@ -1,0 +1,9 @@
+- name: Copy my.cnf to home so ansible can access the database
+  copy: src=.my.cnf dest="/home/ubuntu/" owner=ubuntu group=ubuntu
+- name: Grant mysql access to all hosts
+  mysql_user:
+    name: worblehat
+    password: worblehat
+    priv: 'worblehat_test:ALL'
+    priv: 'worblehat_prod:ALL'
+    host: '%'
