@@ -1,0 +1,7 @@
+- include: worblehat.yml
+  worblehat_stage: "test"
+  worblehat_port: "8081"
+
+- include: worblehat.yml
+  worblehat_stage: "prod"
+  worblehat_port: "8082"

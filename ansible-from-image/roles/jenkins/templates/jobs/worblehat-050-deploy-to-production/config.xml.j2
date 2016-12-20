@@ -33,6 +33,14 @@
 </command>
     </hudson.tasks.Shell>
     <hudson.tasks.Maven>
+      <targets>clean package -Pproduction</targets>
+      <mavenName>(Default)</mavenName>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+      <injectBuildVariables>false</injectBuildVariables>
+    </hudson.tasks.Maven>
+    <hudson.tasks.Maven>
       <targets>liquibase:update </targets>
       <mavenName>(Default)</mavenName>
       <pom>worblehat-domain/pom.xml</pom>

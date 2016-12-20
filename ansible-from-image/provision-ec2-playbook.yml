@@ -16,3 +16,4 @@
     - role: nginx
     - role: jenkins
     - role: mysql
+    - role: worblehat

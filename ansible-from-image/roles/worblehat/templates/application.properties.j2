@@ -1,0 +1,14 @@
+# Database Config
+spring.datasource.url=jdbc:mysql://localhost:3306/worblehat_{{ worblehat_stage }}
+spring.datasource.username=worblehat
+spring.datasource.password=worblehat
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+
+info.stage={{ worblehat_stage }}
+logging.file=/tmp/worblehat-{{ worblehat_stage }}.log
+liquibase.change-log=classpath:master.xml
+spring.jpa.hibernate.ddl-auto=validate
+
+server.port={{ worblehat_port }}
+
+server.context-path=/worblehat-{{ worblehat_stage }}
