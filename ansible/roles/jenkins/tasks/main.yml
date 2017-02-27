@@ -6,7 +6,7 @@
   file: path="/var/lib/jenkins/.m2" state=directory owner=jenkins group=jenkins
 - name: Copy settings.xml
   become: true
-  copy: src=settings.xml dest="/var/lib/jenkins/.m2" owner=jenkins group=jenkins
+  copy: src=configuration/settings.xml dest="/var/lib/jenkins/.m2" owner=jenkins group=jenkins
 - include: job.yml
   job_name: "{{ item }}"
   with_items:
