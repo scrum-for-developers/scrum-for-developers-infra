@@ -44,9 +44,11 @@ aws_secret_access_key = your-aws-secret-key
 
 ## Create a AWS SSH Key Pair
 
-1. Go to your AWS Console -> EC2 -> Key Pairs.
-2. Create a new key pair and assign a name (e.g. "scrumfordevelopers"). This name is references in `create-ec2-playbook.yml`. Save the private key file (e.g. `scrumfordevelopers.pem`). This file is neede later to execute `provision-ec2-instances.sh`.
-3. **Change access rights of the private key *.pem to 600**. This is necessary, because otherwise ssh won't work.
+1. Go to your AWS Console -> EC2
+2. Check your region to be eu-central-1/Frankfurt.
+3. Go to Key Pairs.
+4. Create a new key pair and assign a name (e.g. "scrumfordevelopers"). This name is references in `create-ec2-playbook.yml`. Save the private key file (e.g. `scrumfordevelopers.pem`). This file is neede later to execute `provision-ec2-instances.sh`.
+5. **Change access rights of the private key *.pem to 600**. This is necessary, because otherwise ssh won't work.
 
 # Usage
 
@@ -99,3 +101,7 @@ If you want to use another region, you also have to change the ami_id!
 
 ## Problem connecting to newly created instances
 The [Ansible EC2 Dynamic Inventory](http://docs.ansible.com/ansible/intro_dynamic_inventory.html#example-aws-ec2-external-inventory-script) caches results. Execute `./ec2-dynamic-inventory/ec2.py --refresh-cache` to refresh the cache.
+
+## Jenkins is not showing copied jobs
+Have you tried it with turning off and on again?
+Type the following in your browser http://[putYourIpHere]/jenkins/restart and accept the restart with `Yes`
