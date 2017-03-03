@@ -63,6 +63,7 @@ Afterwards execute the following to provision the newly created instances
 Ansible creates all necessary Jenkins Jobs, but they are not yet configured correct. The following is missing:
 * If your git-repository needs authentication, you have to provide the credentials manually.
 * The configuration for the job *040-worblehat-acceptance-test* is not complete (e.g. saucelabs-account in ~/.m2/settings.xml is missing).
+You can get that information from one of the former trainers (Andreas Houben, Andreas Ebbert-Karoum, Michael Lex, Benedikt Ritter)
 
 # Troubleshooting
 
