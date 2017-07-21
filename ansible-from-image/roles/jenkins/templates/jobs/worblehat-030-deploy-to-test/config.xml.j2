@@ -55,15 +55,6 @@ sudo /etc/init.d/worblehat-test start
       <archiveMethod>TAR</archiveMethod>
       <overrideDefaultExcludes>false</overrideDefaultExcludes>
     </hudson.plugins.cloneworkspace.CloneWorkspacePublisher>
-    <hudson.tasks.BuildTrigger>
-      <childProjects>worblehat-040-acceptance-test</childProjects>
-      <threshold>
-        <name>SUCCESS</name>
-        <ordinal>0</ordinal>
-        <color>BLUE</color>
-        <completeBuild>true</completeBuild>
-      </threshold>
-    </hudson.tasks.BuildTrigger>
   </publishers>
   <buildWrappers>
     <hudson.plugins.locksandlatches.LockWrapper plugin="locks-and-latches@0.6">
