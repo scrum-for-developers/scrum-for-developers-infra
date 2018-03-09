@@ -17,7 +17,7 @@
   template: src="jenkins.model.JenkinsLocationConfiguration.xml.j2" dest="/var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml" owner=jenkins group=jenkins mode=0644
 - name: configure html audio plugin
   become: true
-  tempalte: src="jenkins.plugins.htmlaudio.app.HtmlAudioNotifierPlugin.xml.j2" dest="jenkins.plugins.htmlaudio.app.HtmlAudioNotifierPlugin.xml" owner=jenkins group=jenkins mode=0644
+  template: src="jenkins.plugins.htmlaudio.app.HtmlAudioNotifierPlugin.xml.j2" dest="/var/lib/jenkins/jenkins.plugins.htmlaudio.app.HtmlAudioNotifierPlugin.xml" owner=jenkins group=jenkins mode=0644
 - name: restart jenkins
   service: name=jenkins state=restarted
   become: true
