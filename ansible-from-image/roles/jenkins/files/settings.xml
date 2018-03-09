@@ -17,9 +17,19 @@
   </mirrors>
 
   <profiles>
+            <profile>
+            <id>jenkins</id>
+                <activation>
+      <activeByDefault>true</activeByDefault>
+    </activation>
+            <properties>
+                <psd.environment>http://localhost/worblehat-test</psd.environment>
+            </properties>
+        </profile>
   </profiles>
   
   <activeProfiles>
+    <activeProfile>jenkins</activeProfile>
   </activeProfiles>
   
 </settings>

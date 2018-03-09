@@ -12,6 +12,9 @@
     - worblehat-030-deploy-to-test
     - worblehat-040-acceptance-test
     - worblehat-050-deploy-to-production
+- name: set jenkins URL
+  become: true
+  template: src="jenkins.model.JenkinsLocationConfiguration.xml.j2" dest="/var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml" owner=jenkins group=jenkins mode=0644
 - name: restart jenkins
   service: name=jenkins state=restarted
   become: true
