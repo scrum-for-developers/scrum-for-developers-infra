@@ -7,7 +7,6 @@
       git_web_url: "{{ ec2_tag_SfdGitWebUrl }}"
       git_url: "{{ ec2_tag_SfdGitUrl }}"
       index_title: "Hello {{ ec2_tag_SfdTeamTitle }} !"
-      docker_user: "ubuntu"
       this_ip: "{{ ec2_tag_SfdElasticIp }}"
   pre_tasks:
     - name: Display all variables/facts known for a host
@@ -25,7 +24,6 @@
       become: true
     - role: nginx
     - role: jenkins
-    - role: docker
     - role: maven
       maven_mirror: http://archive.apache.org/dist/maven/binaries/
     - role: sonar

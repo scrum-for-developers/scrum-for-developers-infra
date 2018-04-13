@@ -63,16 +63,6 @@ Afterwards execute the following to provision the newly created instances
 
 # What is not yet automated?
 
-## docker-compose up
-Ansible installs docker and clones the scrum-for-developers-infra Repository to `/scrumfordevelopers/infra`. **But it does not start docker-compose!**.
-
-So you have to log in to the created ec2-instances via ssh yourself and start docker-compose:
-```
-ssh -i /path/to/your/keyfile.pem ubuntu@INSTANCEIP
-cd /scrumfordevelopers/infra/docker
-docker-compose up &
-```
-
 ## Jenkins job configuration
 
 Ansible creates all necessary Jenkins Jobs, but they are not yet configured correct. The following is missing:

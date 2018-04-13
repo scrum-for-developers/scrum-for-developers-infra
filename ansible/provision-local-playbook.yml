@@ -7,7 +7,6 @@
     git_web_url: "https://github.com/scrum-for-developers/worblehat"
     index_title: "Hello VAGRANT!!!!"
     nginx_port: 8000
-    docker_user: "vagrant"
   roles:
     - role: util
     - role: java8
@@ -15,7 +14,6 @@
       become: true
     - role: nginx
     - role: jenkins
-    - role: docker
     - role: maven
     - role: sonar
       become: true

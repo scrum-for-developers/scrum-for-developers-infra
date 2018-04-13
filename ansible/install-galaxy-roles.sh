@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ansible-galaxy install -p galaxy_roles \
-  angstwad.docker_ubuntu,v1.1.1 \
   jdauphant.nginx,v2.5 \
   geerlingguy.java,1.3.0 \
   geerlingguy.jenkins,2.6.0 \

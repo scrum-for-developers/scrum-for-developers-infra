@@ -1,4 +1,0 @@
-artifactory:
-  image: mattgruter/artifactory:3.4.2
-  ports:
-    - "8090:8080"
