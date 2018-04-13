@@ -3,7 +3,7 @@ dependencies:
 - role: geerlingguy.jenkins
   become: true
   jenkins_url_prefix: "/jenkins"
-  jenkins_version: "2.33"
+  jenkins_version: "2.116"
   jenkins_plugins:
     - artifactory
     - batch-task
@@ -24,10 +24,34 @@ dependencies:
     - jenkinswalldisplay
     - jquery
     - join
-    - locks-and-latches
     - mercurial
     - promoted-builds
     - ruby-runtime
     - scm-api
     - token-macro
     - parameterized-trigger
+    # Job DSL
+    - job-dsl
+    - script-security
+    - structs
+    # Git
+    - workflow-scm-step
+    - credentials
+    - matrix-project
+    - mailer
+    - ssh-credentials
+    - workflow-step-api
+    - apache-httpcomponents-client-4-api
+    - jsch
+    - display-url-api
+    - junit
+    - workflow-api
+    # Pipeline DSL
+    - workflow-multibranch
+    - workflow-cps
+    - workflow-support
+    - branch-api
+    - cloudbees-folder
+    - workflow-job
+    - ace-editor
+    - jquery-detached
