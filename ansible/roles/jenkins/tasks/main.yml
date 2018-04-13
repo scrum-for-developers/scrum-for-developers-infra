@@ -8,11 +8,5 @@
   become: true
   copy: src=configuration/settings.xml dest="/var/lib/jenkins/.m2" owner=jenkins group=jenkins
 - include: job.yml
-  job_name: "{{ item }}"
-  with_items:
-    - worblehat-010-build
-    - worblehat-020-quality
-    - worblehat-030-deploy-to-test
-    - worblehat-040-acceptance-test
-    - worblehat-050-deploy-to-production
+  job_name: worblehat-pipelines
   notify: restart jenkins
