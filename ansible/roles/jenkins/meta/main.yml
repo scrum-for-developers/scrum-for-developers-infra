@@ -24,7 +24,6 @@ dependencies:
     - jenkinswalldisplay
     - jquery
     - join
-    - mercurial
     - promoted-builds
     - ruby-runtime
     - scm-api
@@ -47,11 +46,11 @@ dependencies:
     - junit
     - workflow-api
     # Pipeline DSL
-    - workflow-multibranch
-    - workflow-cps
-    - workflow-support
+    - ace-editor
     - branch-api
     - cloudbees-folder
-    - workflow-job
-    - ace-editor
     - jquery-detached
+    - workflow-cps
+    - workflow-job
+    - workflow-multibranch
+    - workflow-support
