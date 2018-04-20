@@ -7,7 +7,7 @@ my_nginx_sites:
     - listen {{ nginx_port}}
     - root "{{ nginx_root }}"
     - location / { index index.html index.htm; }
-    - location /jenkins/ { proxy_pass http://localhost:8080/jenkins/; }
+    - location /jenkins/ { proxy_pass http://localhost:8080/jenkins/blue/organizations/jenkins/worblehat-pipelines/branches/; }
     - location /artifactory/ { proxy_pass http://localhost:8090/artifactory/; }
     - location /sonar/ { proxy_pass http://localhost:9000/sonar/; }
     - location /worblehat-test/ { proxy_pass http://localhost:8081/worblehat-test/; }
