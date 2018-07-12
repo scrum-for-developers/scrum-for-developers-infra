@@ -12,3 +12,8 @@ spring.jpa.hibernate.ddl-auto=validate
 server.port={{ worblehat_port }}
 
 server.context-path=/worblehat-{{ worblehat_stage }}
+
+# in case application is upgraded to Spring Boot 2.x
+server.servlet.context-path=/worblehat-{{ worblehat_stage }}
+spring.liquibase.change-log=classpath:master.xml
+
