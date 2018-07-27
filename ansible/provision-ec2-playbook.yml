@@ -23,6 +23,7 @@
     - role: geerlingguy.mysql
       become: true
     - role: nginx
+    - role: artifactory
     - role: jenkins
     - role: maven
       maven_mirror: http://archive.apache.org/dist/maven/binaries/
