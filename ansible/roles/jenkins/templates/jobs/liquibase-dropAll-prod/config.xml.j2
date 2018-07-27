@@ -1,0 +1,17 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.23">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.54">
+    <script>node {
+ git url: &apos;{{ git_url }}&apos;
+
+ sh &apos;mvn -f worblehat-domain/pom.xml liquibase:dropAll -Dpsd.dbserver.url=jdbc:mysql://localhost:3306/worblehat_prod -Dpsd.dbserver.username=worblehat -Dpsd.dbserver.password=worblehat&apos;
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
