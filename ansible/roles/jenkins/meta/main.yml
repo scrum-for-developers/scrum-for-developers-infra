@@ -3,7 +3,7 @@ dependencies:
 - role: geerlingguy.jenkins
   become: true
   jenkins_url_prefix: "/jenkins"
-  jenkins_version: "2.117"
+  jenkins_version: "2.134"
   jenkins_plugins:
     - artifactory
     - batch-task
