@@ -24,6 +24,7 @@ dependencies:
     - jenkinswalldisplay
     - jquery
     - join
+    - lockable-resources
     - promoted-builds
     - ruby-runtime
     - scm-api
