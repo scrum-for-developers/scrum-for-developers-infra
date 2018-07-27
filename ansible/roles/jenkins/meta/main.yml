@@ -55,6 +55,7 @@ dependencies:
     - workflow-job
     - workflow-multibranch
     - workflow-support
+    - workflow-aggregator
     # Blue Ocean
     - jenkins-design-language
     - blueocean-core-js
