@@ -43,4 +43,12 @@ chmod -R a+w mounted_directories
 
 ## Provisioning via Ansible
 
-TODO
+### Manual changes after the provisioning
+1. Generate a "personal access token" (https://git.fh-aachen.de/profile/personal_access_tokens)
+2. Add new Credentials in jenkins
+    * Navigate to /jenkins/credentials/store/system/domain/_/newCredentials
+    * Use the token and your username as credentials
+3. Change the repository URL
+    * Navigate to the pipeline configuration (/jenkins/job/worblehat-pipelines/configure)
+    * Change the "Project Repository" in the "Git" section and use the previously added credentials
+4. Test the connection with a simple push to the master or rerun the last execution
