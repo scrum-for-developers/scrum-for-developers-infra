@@ -1,20 +1,18 @@
 # Prerequesites
 
-## Ansible 2.2.0.0 or greater
-**Some features won't work with 1.x, so make sure, that you have the correct version**
+## Ansible 2.2.0.0 
+Some features won't work with 1.x, so make sure, that you have the correct version.
+Ansible also made API changes in version 2.5 so greater versions won't work as well.
 
-Check with
+It's probably best to use exactly version **2.2.0.0**.
+
+Check you version with
 ```
 ansible --version
 ```
-
-Install on OSX
+Install ansible 2.2.0.0 with:
 ```
-# via pip
-pip install ansible --upgrade
-
-# or via brew
-brew install ansible
+pip install ansible==2.2.0.0
 ```
 
 ## Boto
