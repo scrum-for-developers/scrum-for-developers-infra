@@ -1,4 +1,0 @@
-[local]
-# Explicitly set path to python interpreter
-# See https://github.com/ansible/ansible/issues/5734
-localhost ansible_python_interpreter=/usr/local/bin/python

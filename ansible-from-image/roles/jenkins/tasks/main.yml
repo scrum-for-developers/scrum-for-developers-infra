@@ -1,23 +1,22 @@
+- name: Copy configuration
+  become: true
+  copy: src=configuration/ dest=/var/lib/jenkins/ owner=jenkins group=jenkins
+- name: Create .m2 folder
+  become: true
+  file: path="/var/lib/jenkins/.m2" state=directory owner=jenkins group=jenkins
 - name: Copy settings.xml
   become: true
-  copy: src=settings.xml dest="/var/lib/jenkins/.m2" owner=jenkins group=jenkins
-- name: Clean jenkins job directory
-  file: path="/var/lib/jenkins/jobs/" state=absent
+  copy: src=configuration/settings.xml dest="/var/lib/jenkins/.m2" owner=jenkins group=jenkins
+  # CSP needs to be disabled in order to make jbehave Reports look nice
+- name: Disable Content Security Policy
   become: true
+  lineinfile:
+    path: /etc/default/jenkins
+    line: 'JAVA_ARGS="${JAVA_ARGS} -Dhudson.model.DirectoryBrowserSupport.CSP=\"\" "'
 - include: job.yml
   job_name: "{{ item }}"
   with_items:
-    - worblehat-010-build
-    - worblehat-020-quality
-    - worblehat-030-deploy-to-test
-    - worblehat-040-acceptance-test
-    - worblehat-050-deploy-to-production
-- name: set jenkins URL
-  become: true
-  template: src="jenkins.model.JenkinsLocationConfiguration.xml.j2" dest="/var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml" owner=jenkins group=jenkins mode=0644
-- name: configure html audio plugin
-  become: true
-  template: src="jenkins.plugins.htmlaudio.app.HtmlAudioNotifierPlugin.xml.j2" dest="/var/lib/jenkins/jenkins.plugins.htmlaudio.app.HtmlAudioNotifierPlugin.xml" owner=jenkins group=jenkins mode=0644
-- name: restart jenkins
-  service: name=jenkins state=restarted
-  become: true
+    - worblehat-pipelines
+    - liquibase-dropAll-prod
+    - liquibase-dropAll-test
+  notify: restart jenkins

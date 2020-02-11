@@ -1,0 +1,26 @@
+- name: Add Artifactory Repository
+  apt_repository:
+    repo: deb https://jfrog.bintray.com/artifactory-debs xenial main
+  become: true
+- name: Add Artifactory apt key
+  apt_key:
+    url:  https://bintray.com/user/downloadSubjectPublicKey?username=jfrog
+  become: true
+- name: Install Artifactory
+  apt:
+    name: jfrog-artifactory-oss
+    # see: https://github.com/ansible/ansible/issues/25091
+    allow_unauthenticated: true
+    update_cache: yes
+  become: yes
+- name: Change Artifactory port
+  replace:
+    path: /opt/jfrog/artifactory/tomcat/conf/server.xml
+    regexp: '8081'
+    replace: '8090'
+  become: true
+- name: Start Artifactory service
+  service:
+    name: artifactory
+    state: started
+  become: true

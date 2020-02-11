@@ -1,7 +1,0 @@
-#! /bin/bash
-
-# Dummy script for the initial deployment. Just needs to exit when called from
-# jenkins with /etc/init.d/worblehat stop
-
-echo Executed dummy script with $1
-exit 0
