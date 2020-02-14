@@ -4,6 +4,6 @@
   mysql_user:
     name: worblehat
     password: worblehat
-    priv: 'worblehat_test:ALL'
-    priv: 'worblehat_prod:ALL'
+    priv: 'worblehat_test.*:ALL'
+    priv: 'worblehat_prod.*:ALL'
     host: '%'
