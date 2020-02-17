@@ -5,10 +5,15 @@ spring.datasource.password=worblehat
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
 
 info.stage={{ worblehat_stage }}
-logging.file=/tmp/worblehat-test.log
+logging.file=/tmp/worblehat-{{ worblehat_stage }}.log
 liquibase.change-log=classpath:master.xml
 spring.jpa.hibernate.ddl-auto=validate
 
 server.port={{ worblehat_port }}
 
 server.context-path=/worblehat-{{ worblehat_stage }}
+
+# in case application is upgraded to Spring Boot 2.x
+server.servlet.context-path=/worblehat-{{ worblehat_stage }}
+spring.liquibase.change-log=classpath:master.xml
+
