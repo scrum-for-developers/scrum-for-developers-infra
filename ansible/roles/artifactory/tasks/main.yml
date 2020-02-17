@@ -1,10 +1,10 @@
-- name: Add Artifactory Repository
-  apt_repository:
-    repo: deb https://jfrog.bintray.com/artifactory-debs xenial main
-  become: true
 - name: Add Artifactory apt key
   apt_key:
     url:  https://bintray.com/user/downloadSubjectPublicKey?username=jfrog
+  become: true
+- name: Add Artifactory Repository
+  apt_repository:
+    repo: deb https://jfrog.bintray.com/artifactory-debs bionic main
   become: true
 - name: Install Artifactory
   apt:

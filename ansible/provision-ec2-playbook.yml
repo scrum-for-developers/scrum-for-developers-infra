@@ -19,9 +19,12 @@
       setup:
   roles:
     - role: util
-    - role: java8
+    - role: java11
+      become: true
     - role: geerlingguy.mysql
       become: true
+    - role: geerlingguy.postgresql
+      become: yes
     - role: nginx
     - role: artifactory
     - role: jenkins

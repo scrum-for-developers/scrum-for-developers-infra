@@ -1,4 +1,13 @@
 ---
+#----- PostgreSQL 9.3 or greater
+# By default the schema named "public" is used. It can be overridden with the parameter "currentSchema".
+#sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube?currentSchema=my_schema
+
+- name: Set user to run sonar as
+  lineinfile:
+    dest: /usr/local/sonar/bin/linux-x86-64/sonar.sh
+    regexp: "^#RUN_AS_USER"
+    line: "RUN_AS_USER=sonar"
 - name: Configure SonarQube JDBC settings for MySQL.
   lineinfile:
     dest: /usr/local/sonar/conf/sonar.properties
@@ -6,13 +15,19 @@
     line: "{{ item.line }}"
   with_items:
     - regexp: "^sonar.jdbc.username"
-      line: "sonar.jdbc.username={{ sonar_mysql_username }}"
+      line: "sonar.jdbc.username={{ sonar_db_username }}"
     - regexp: "^sonar.jdbc.password"
-      line: "sonar.jdbc.password={{ sonar_mysql_password }}"
+      line: "sonar.jdbc.password={{ sonar_db_password }}"
     - regexp: "^sonar.jdbc.url"
-      line: "sonar.jdbc.url=jdbc:mysql://{{ sonar_mysql_host }}:{{ sonar_mysql_port }}/{{ sonar_mysql_database }}?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs=maxPerformance"
+      line: "sonar.jdbc.url=jdbc:postgresql://{{ sonar_db_host }}/{{ sonar_db }}"
 - name: Configure sonar webcontext
   lineinfile:
     dest: /usr/local/sonar/conf/sonar.properties
     regexp: "^#sonar.web.context"
     line: "sonar.web.context=/sonar"
+
+# increase vm for elasticsearch
+- name: Increase currently available vm - especially for elasticsearch
+  sysctl:
+    name: vm.max_map_count
+    value: '262144'

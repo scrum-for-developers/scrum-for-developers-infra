@@ -1,0 +1,5 @@
+- name: install openjdk 11
+  apt:
+    name: openjdk-11-jdk-headless
+    update_cache: true
+    state: present

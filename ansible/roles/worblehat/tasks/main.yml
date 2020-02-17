@@ -1,7 +1,7 @@
-- include: worblehat.yml
-  worblehat_stage: "test"
-  worblehat_port: "8081"
-  worblehat_db: "worblehat_test"
+- include_tasks: worblehat.yml
+  vars: 
+    worblehat_stage: "test"
+    worblehat_port: "8081"
 
 - name: Create a database for worblehat-test
   mysql_db:
@@ -10,10 +10,10 @@
     login_user: root
     login_password: root
 
-- include: worblehat.yml
-  worblehat_stage: "prod"
-  worblehat_port: "8082"
-  worblehat_db: "prod"
+- include_tasks: worblehat.yml
+  vars:
+    worblehat_stage: "prod"
+    worblehat_port: "8082"
 
 - name: Create a database for worblehat-prod
   mysql_db:

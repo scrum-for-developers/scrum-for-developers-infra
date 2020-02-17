@@ -13,10 +13,19 @@
   lineinfile:
     path: /etc/default/jenkins
     line: 'JAVA_ARGS="${JAVA_ARGS} -Dhudson.model.DirectoryBrowserSupport.CSP=\"\" "'
-- include: job.yml
-  job_name: "{{ item }}"
+- name: configure jenkins jobs
+  include_tasks: job.yml
+  vars: 
+    job_name: "{{ item }}"
   with_items:
     - worblehat-pipelines
     - liquibase-dropAll-prod
     - liquibase-dropAll-test
-  notify: restart jenkins
+- name: Add jenkins user to admin group #needed for some sudo operations for deployment
+  become: true
+  user:
+    name: jenkins
+    group: admin
+- name: restart jenkins    
+  become: true
+  service: name=jenkins state=restarted
