@@ -21,11 +21,6 @@
     - worblehat-pipelines
     - liquibase-dropAll-prod
     - liquibase-dropAll-test
-- name: Add jenkins user to admin group #needed for some sudo operations for deployment
-  become: true
-  user:
-    name: jenkins
-    group: admin
-- name: restart jenkins    
+- name: restart jenkins
   become: true
   service: name=jenkins state=restarted
