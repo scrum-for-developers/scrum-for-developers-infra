@@ -16,9 +16,15 @@
 - name: Change Artifactory port
   replace:
     path: /opt/jfrog/artifactory/tomcat/conf/server.xml
-    regexp: '8081'
-    replace: '8090'
+    regexp: "8081"
+    replace: "{{ artifactory_port }}"
   become: true
+- name: Initialize artifactory
+  become: yes
+  template: 
+    src: artifactory.config.import.yml.j2
+    dest: /var/opt/jfrog/artifactory/etc/artifactory.config.import.yml
+ 
 - name: Start Artifactory service
   service:
     name: artifactory
