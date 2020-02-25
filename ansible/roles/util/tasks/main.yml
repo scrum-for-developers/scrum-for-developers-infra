@@ -8,6 +8,20 @@
     name: sshpass
     update_cache: yes
   become: yes
+- name: Set ssh timeout intervals
+  become: yes
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+  with_items:
+    # time after which sshd requests an alive signal from the client on an inactive connection
+    - { regexp: "^#ClientAliveInterval", line: "ClientAliveInterval 30" }
+    # max amount of failed alive signals before connection is closed
+    - { regexp: "^#ClientAliveCountMax", line: "ClientAliveCountMax 8" }
+- name: Restart sshd
+  become: true
+  service: name=sshd state=restarted
 - name: Create scrumfordevelopers directory
   become: true
   file: path="{{ scrumfordevelopers_dir }}" state=directory mode=777
