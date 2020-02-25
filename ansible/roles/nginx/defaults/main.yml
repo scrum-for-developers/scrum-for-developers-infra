@@ -6,6 +6,8 @@ my_nginx_sites:
   default:
     - listen {{ nginx_port}}
     - root "{{ nginx_root }}"
+    - chunked_transfer_encoding on
+    - client_max_body_size 0
     - location / { index index.html index.htm; }
     - location /jenkins/ { proxy_pass http://localhost:8080/jenkins/; }
     - location /artifactory/ { proxy_pass http://localhost:8081/artifactory/; }
