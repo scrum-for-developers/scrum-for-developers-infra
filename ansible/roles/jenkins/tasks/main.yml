@@ -6,7 +6,19 @@
   file: path="/var/lib/jenkins/.m2" state=directory owner=jenkins group=jenkins
 - name: Copy settings.xml
   become: true
-  copy: src=configuration/settings.xml dest="/var/lib/jenkins/.m2" owner=jenkins group=jenkins
+  template:
+    owner: jenkins
+    group: jenkins
+    src: settings.xml.j2
+    dest: /var/lib/jenkins/.m2/settings.xml
+- name: Set Jenkins URL
+  become: yes
+  template: 
+    owner: jenkins
+    group: jenkins
+    src: jenkins.model.JenkinsLocationConfiguration.xml.j2
+    dest: /var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml.yml
+ 
   # CSP needs to be disabled in order to make jbehave Reports look nice
 - name: Disable Content Security Policy
   become: true

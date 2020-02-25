@@ -21,4 +21,6 @@
     - worblehat-pipelines
     - liquibase-dropAll-prod
     - liquibase-dropAll-test
-  #notify: restart jenkins
+- name: restart jenkins    
+  become: true
+  service: name=jenkins state=restarted

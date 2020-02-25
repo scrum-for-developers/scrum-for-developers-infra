@@ -11,19 +11,27 @@
     name: jfrog-artifactory-oss
     # see: https://github.com/ansible/ansible/issues/25091
     allow_unauthenticated: true
-    update_cache: yes
   become: yes
 - name: Change Artifactory port
-  replace:
-    path: /opt/jfrog/artifactory/tomcat/conf/server.xml
-    regexp: "8081"
-    replace: "{{ artifactory_port }}"
-  become: true
-- name: Initialize artifactory
   become: yes
   template: 
+    src: system.yaml.j2
+    dest: /opt/jfrog/artifactory/var/etc/system.yaml
+    owner: artifactory
+    group: artifactory
+  become: true
+- name: Create artifactory config directory
+  become: true
+  file: 
+    path: /opt/jfrog/artifactory/var/etc/artifactory/
+    owner: artifactory
+    group: artifactory
+    state: directory  
+- name: Initialize artifactory
+  become: true
+  template: 
     src: artifactory.config.import.yml.j2
-    dest: /var/opt/jfrog/artifactory/etc/artifactory.config.import.yml
+    dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.yml
  
 - name: Start Artifactory service
   service:

@@ -8,10 +8,11 @@ my_nginx_sites:
     - root "{{ nginx_root }}"
     - location / { index index.html index.htm; }
     - location /jenkins/ { proxy_pass http://localhost:8080/jenkins/; }
-    - location /artifactory/ { proxy_pass http://localhost:8090/artifactory/; }
+    - location /artifactory/ { proxy_pass http://localhost:8081/artifactory/; }
+    - location /ui/ { proxy_pass http://localhost:8082/ui/; }
     - location /sonar/ { proxy_pass http://localhost:9000/sonar/; }
-    - location /worblehat-test/ { proxy_pass http://localhost:8081/worblehat-test/; }
-    - location /worblehat-prod/ { proxy_pass http://localhost:8082/worblehat-prod/; }
+    - location /worblehat-test/ { proxy_pass http://localhost:9000/worblehat-test/; }
+    - location /worblehat-prod/ { proxy_pass http://localhost:9001/worblehat-prod/; }
 my_nginx_configs:
   proxy:
     - proxy_set_header Host $host:$proxy_port

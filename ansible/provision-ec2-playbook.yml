@@ -14,16 +14,23 @@
     - name: Display all variables/facts known for a host
       debug: var=hostvars[inventory_hostname]
 
-    - name: "install python2"
-      apt:
-        name: python-simplejson
-
     - name: upgrade system if necessary
       become: true
       apt:
         update_cache: yes
         upgrade: safe
       register: apt_updates
+
+    - name: "install python2"
+      become: true
+      apt:
+        name: python-simplejson
+
+      # https://github.com/geerlingguy/ansible-role-mysql/issues/344#issuecomment-564129470
+    - name: Set discovered Ansible Python interpreter.
+      set_fact:
+        ansible_python_interpreter: "{{ ansible_facts.python.executable }}"
+      when: ansible_python_interpreter is not defined
 
     - name: reboot if kernal was updated
       become: true
