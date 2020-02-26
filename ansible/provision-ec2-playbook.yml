@@ -41,6 +41,8 @@
     - role: util
     - role: java11
       become: true
+    - role: geerlingguy.docker
+      become: true
     - role: geerlingguy.mysql
       become: true
     - role: geerlingguy.postgresql

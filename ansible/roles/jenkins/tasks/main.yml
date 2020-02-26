@@ -36,3 +36,9 @@
 - name: restart jenkins
   become: true
   service: name=jenkins state=restarted
+- name: Add jenkins user to docker group
+  become: true
+  user:
+    name: jenkins
+    groups: docker
+    append: yes

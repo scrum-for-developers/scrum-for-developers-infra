@@ -1,7 +1,7 @@
 - include_tasks: worblehat.yml
   vars: 
     worblehat_stage: "test"
-    worblehat_port: "9000"
+    worblehat_port: "9100"
 
 - name: Create a database for worblehat-test
   mysql_db:
@@ -13,7 +13,7 @@
 - include_tasks: worblehat.yml
   vars:
     worblehat_stage: "prod"
-    worblehat_port: "9001"
+    worblehat_port: "9101"
 
 - name: Create a database for worblehat-prod
   mysql_db:

@@ -9,7 +9,7 @@
       ec2_region: "eu-central-1"
       ec2_ami_id: "ami-0b418580298265d5c" # Ubuntu Server 18.04 LTS (HVM), SSD Volume Type
       instances:
-        - name: infra-test-ubuntu18.04
-          team_title: Test-Team Ubuntu 18.04
+        - name: infra-test
+          team_title: Test-Team
           git_url: https://github.com/scrum-for-developers/worblehat.git
           git_web_url: https://github.com/scrum-for-developers/worblehat
