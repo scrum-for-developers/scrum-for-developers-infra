@@ -21,18 +21,24 @@
     group: "{{ ec2_security_group }}"
     wait: yes
   register: ec2
+
 - name: Debug created instance
   debug: var=ec2
+
 - name: Assign elastic ip
   ec2_eip:
     region: "{{ ec2_region }}"
     device_id: "{{ ec2.instance_ids[0] }}"
   register: eip
+  when: ec2.changed
+
 - name: Debug elastic ip
   debug: var=eip
+
 - name: Save elastic ip as tag
   ec2_tag:
     region: "{{ ec2_region }}"
     resource: "{{ ec2.instance_ids[0] }}"
     tags:
       SfdElasticIp: "{{ eip.public_ip }}"
+  when: eip.changed
