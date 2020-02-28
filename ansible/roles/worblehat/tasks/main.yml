@@ -8,11 +8,19 @@
     src: spring-boot-admin/spring-boot-admin-sample-servlet.jar
     dest: /opt/spring-boot-admin/spring-boot-admin-sample-servlet.jar
     mode: 0777
+- name: Copy spring boot admin service
+  copy:
+    src: spring-boot-admin/spring-boot-admin.service
+    dest: /opt/spring-boot-admin/spring-boot-admin.service
+    mode: 0777
+
+
+
 - name: Copy spring-boot-admin application.conf
   template: src=spring-boot-admin/application.properties.j2 dest="/opt/spring-boot-admin/application.properties"
 - name: Link Spring Boot Admin Server to /etc/init.d
   become: true
-  file: src="/opt/spring-boot-admin/spring-boot-admin-sample-servlet.jar" dest="/etc/init.d/spring-boot-admin" mode=0777 state=link
+  file: src="/opt/spring-boot-admin/spring-boot-admin.service" dest="/etc/systemd/system/spring-boot-admin.service" mode=0777 state=link
 - name: Start Spring Boot Admin
   become: true
   service: name=spring-boot-admin state=restarted

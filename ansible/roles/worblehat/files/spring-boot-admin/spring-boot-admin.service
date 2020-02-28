@@ -1,0 +1,10 @@
+[Unit]
+Description=Spring Boot Admin Server
+After=syslog.target
+ 
+[Service]
+User=root
+ExecStart=/opt/spring-boot-admin/spring-boot-admin-sample-servlet.jar SuccessExitStatus=0 
+ 
+[Install] 
+WantedBy=multi-user.target
