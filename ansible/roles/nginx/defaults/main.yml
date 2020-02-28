@@ -13,6 +13,7 @@ my_nginx_sites:
     - location /artifactory/ { proxy_pass http://localhost:8081/artifactory/; }
     - location /ui/ { proxy_pass http://localhost:8082/ui/; }
     - location /sonar/ { proxy_pass http://localhost:9000/sonar/; }
+    - location /admin/ { proxy_pass http://localhost:9200/; }
     - location /worblehat-test/ { proxy_pass http://localhost:9100/worblehat-test/; }
     - location /worblehat-prod/ { proxy_pass http://localhost:9101/worblehat-prod/; }
 my_nginx_configs:
