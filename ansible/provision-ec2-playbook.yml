@@ -1,5 +1,5 @@
 ---
-- hosts: tag_ScrumForDevelopers_ScrumForDevelopers
+- hosts: tag_ScrumForDevelopersImage_ScrumForDevelopersImage
   gather_facts: no
   vars:
     nginx_port: 80
@@ -12,7 +12,9 @@
   pre_tasks:
     - name: Gathering facts
       setup:
-
+      vars: 
+        ansible_python_interpreter: python3
+  
     - name: Display all variables/facts known for a host
       debug: var=hostvars[inventory_hostname]
 
@@ -22,6 +24,8 @@
         update_cache: yes
         upgrade: safe
       register: apt_updates
+      vars: 
+        ansible_python_interpreter: python3
 
     - name: install python-psycopg2
       become: true
@@ -31,7 +35,9 @@
         - python-pymysql
         - python3-pymysql
         state: present
-
+      vars: 
+        ansible_python_interpreter: python3
+  
 
     - name: reboot if kernal was updated
       become: true
