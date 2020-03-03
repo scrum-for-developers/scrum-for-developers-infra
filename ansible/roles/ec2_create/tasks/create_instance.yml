@@ -13,7 +13,7 @@
       Name: "sfd-{{ instance_name }}"
     instance_tags:
       Name: "sfd-{{ instance_name }}"
-      ScrumForDevelopers: "ScrumForDevelopers"
+      ScrumForDevelopersImage: "ScrumForDevelopersImage"
       SfdTeamTitle: "{{ team_title }}"
       SfdGitUrl: "{{ git_url }}"
       SfdGitWebUrl: "{{ git_web_url }}"
