@@ -3,3 +3,4 @@ ansible/galaxy_roles
 .DS_STORE
 .vagrant
 ansible/create-ec2-playbook.yml
+ansible-from-image/create-ec2-playbook.yml
