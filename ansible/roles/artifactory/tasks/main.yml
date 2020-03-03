@@ -27,12 +27,21 @@
     owner: artifactory
     group: artifactory
     state: directory  
-- name: Initialize artifactory
-  become: true
+- name: Create repositories and configure artifactory
+  become: yes
   template: 
-    src: artifactory.config.import.yml.j2
-    dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.yml
- 
+    src: artifactory.config.import.xml.j2
+    dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.xml
+    owner: artifactory
+    group: artifactory
+  become: true
+
+- name: Remove disabled init.d startup script
+  become: true
+  file:
+    path: /etc/init.d/artifactory.disabled
+    state: absent
+
 - name: Start Artifactory service
   service:
     name: artifactory
