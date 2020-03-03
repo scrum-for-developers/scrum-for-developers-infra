@@ -1,18 +1,20 @@
 - name: Copy configuration
   become: true
   copy: src=configuration/ dest=/var/lib/jenkins/ owner=jenkins group=jenkins
-- name: Create .m2 folder
-  become: true
-  file: path="/var/lib/jenkins/.m2" state=directory owner=jenkins group=jenkins
 - name: Copy settings.xml
   become: true
-  copy: src=configuration/settings.xml dest="/var/lib/jenkins/.m2" owner=jenkins group=jenkins
-  # CSP needs to be disabled in order to make jbehave Reports look nice
-- name: Disable Content Security Policy
-  become: true
-  lineinfile:
-    path: /etc/default/jenkins
-    line: 'JAVA_ARGS="${JAVA_ARGS} -Dhudson.model.DirectoryBrowserSupport.CSP=\"\" "'
+  template:
+    owner: jenkins
+    group: jenkins
+    src: settings.xml.j2
+    dest: /var/lib/jenkins/.m2/settings.xml
+- name: Set Jenkins URL
+  become: yes
+  template: 
+    owner: jenkins
+    group: jenkins
+    src: jenkins.model.JenkinsLocationConfiguration.xml.j2
+    dest: /var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml
 - name: configure jenkins jobs
   include_tasks: job.yml
   vars: 
@@ -21,6 +23,6 @@
     - worblehat-pipelines
     - liquibase-dropAll-prod
     - liquibase-dropAll-test
-- name: restart jenkins    
+- name: restart jenkins
   become: true
   service: name=jenkins state=restarted

@@ -17,3 +17,7 @@ server.context-path=/worblehat-{{ worblehat_stage }}
 server.servlet.context-path=/worblehat-{{ worblehat_stage }}
 spring.liquibase.change-log=classpath:master.xml
 
+# Spring Boot Admin config
+spring.boot.admin.client.url=http://localhost:9200  
+spring.boot.admin.client.instance.service-base-url=http://{{ this_ip }}
+management.endpoints.web.exposure.include=*  

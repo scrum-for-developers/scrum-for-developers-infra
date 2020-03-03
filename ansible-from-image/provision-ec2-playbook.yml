@@ -9,11 +9,26 @@
       index_title: "Hello {{ ec2_tag_SfdTeamTitle }} !"
       docker_user: "ubuntu"
       this_ip: "{{ ec2_tag_SfdElasticIp }}"
+      ansible_python_interpreter: python3
+
   pre_tasks:
     - name: Display all variables/facts known for a host
       debug: var=hostvars[inventory_hostname]
+
+    - name: upgrade system if necessary
+      become: true
+      apt:
+        update_cache: yes
+        upgrade: safe
+      register: apt_updates
+
+    - name: reboot if kernal was updated
+      become: true
+      reboot: 
+      when: apt_updates.stdout_lines|select('regex', '^Setting up linux-image-\d+\.\d+\.\d+-\d+-aws \(.*\) \.\.\.$') is any
+
   roles:
     - role: nginx
+    - role: artifactory
     - role: jenkins
-    - role: mysql
     - role: worblehat

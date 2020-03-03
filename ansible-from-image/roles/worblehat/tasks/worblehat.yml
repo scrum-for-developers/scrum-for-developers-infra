@@ -1,2 +1,2 @@
 - name: Copy woblehat application.conf
-  template: src=application.properties.j2 dest="/opt/worblehat-{{ worblehat_stage }}/application.properties"
+  template: src=worblehat/application.properties.j2 dest="/opt/worblehat-{{ worblehat_stage }}/application.properties"

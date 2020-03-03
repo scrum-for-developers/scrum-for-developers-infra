@@ -1,9 +1,26 @@
+- name: Copy spring-boot-admin application.conf
+  template: src=spring-boot-admin/application.properties.j2 dest="/opt/spring-boot-admin/application.properties"
+
+- name: Start Spring Boot Admin
+  become: true
+  service: name=spring-boot-admin state=restarted
+
 - include_tasks: worblehat.yml
   vars: 
     worblehat_stage: "test"
-    worblehat_port: "8081"
+    worblehat_port: "9100"
 
 - include_tasks: worblehat.yml
   vars:
     worblehat_stage: "prod"
-    worblehat_port: "8082"
+    worblehat_port: "9101"
+
+- name: Trigger master build in Jenkins
+  uri:
+    url: http://{{ this_ip }}/jenkins/job/worblehat-pipelines/job/master/build
+    method: GET
+    status_code: 201
+  register: _result
+  until: _result.status == 201
+  retries: 6 # 6 * 10 seconds = 1 Minute
+  delay: 10 # Every 10s

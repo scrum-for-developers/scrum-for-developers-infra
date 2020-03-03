@@ -1,0 +1,11 @@
+- name: Change Artifactory port
+  become: yes
+  template: 
+    src: artifactory.config.import.xml.j2
+    dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.xml
+    owner: artifactory
+    group: artifactory
+
+- name: Reboot to get Artifactory starting up properly
+  become: true
+  reboot: 
