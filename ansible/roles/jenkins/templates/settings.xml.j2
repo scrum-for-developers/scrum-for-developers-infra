@@ -12,13 +12,18 @@
       <password>password</password>
       <id>snapshots</id>
     </server>
+    <server>
+      <username>admin</username>
+      <password>password</password>
+      <id>mirror</id>
+    </server>
   </servers>
   <mirrors>
     <mirror>
       <mirrorOf>*</mirrorOf>
-      <name>libs-snapshot</name>
+      <name>repo</name>
       <url>http://{{ this_ip }}/artifactory/libs-snapshot</url>
-      <id>snapshots</id>
+      <id>mirror</id>
     </mirror>
   </mirrors>
   <profiles>
