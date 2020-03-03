@@ -17,7 +17,7 @@
     owner: jenkins
     group: jenkins
     src: jenkins.model.JenkinsLocationConfiguration.xml.j2
-    dest: /var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml.yml
+    dest: /var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml
  
   # CSP needs to be disabled in order to make jbehave Reports look nice
 - name: Disable Content Security Policy
