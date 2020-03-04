@@ -13,7 +13,7 @@
       Name: "sfd-{{ instance_name }}"
     instance_tags:
       Name: "sfd-{{ instance_name }}"
-      ScrumForDevelopersImage: "ScrumForDevelopersImage"
+      ScrumForDevelopers: "ScrumForDevelopers"
       SfdTeamTitle: "{{ team_title }}"
       SfdGitUrl: "{{ git_url }}"
       SfdGitWebUrl: "{{ git_web_url }}"
@@ -24,6 +24,16 @@
 
 - name: Debug created instance
   debug: var=ec2
+
+- name: Wait for SSH to come up
+  delegate_to: "{{ instance.public_dns_name }}"
+  wait_for_connection:
+    delay: 60
+    timeout: 320
+  loop: "{{ ec2.instances }}"
+  loop_control:
+    loop_var: instance
+#  when: ec2.changed
 
 - name: Assign elastic ip
   ec2_eip:
