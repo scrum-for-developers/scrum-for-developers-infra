@@ -22,5 +22,5 @@
     status_code: 201
   register: _result
   until: _result.status == 201
-  retries: 6 # 6 * 10 seconds = 1 Minute
+  retries: 12 # 12 * 10 seconds = 2 Minute
   delay: 10 # Every 10s

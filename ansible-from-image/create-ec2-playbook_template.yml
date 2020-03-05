@@ -5,7 +5,7 @@
   gather_facts: no
   roles:
     - role: ec2_create
-      ec2_ami_id: "ami-0d93b887c2092b25f"
+      ec2_ami_id: "ami-0f6ea57bdd24be250"
       instances:
         - name: worblehat
           team_title: worblehat

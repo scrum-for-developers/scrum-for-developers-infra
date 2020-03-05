@@ -1,12 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <hudson>
-  <disabledAdministrativeMonitors/>
-  <version>1.601</version>
+  <disabledAdministrativeMonitors>
+    <string>hudson.diagnosis.ReverseProxySetupMonitor</string>
+    <string>jenkins.security.ResourceDomainRecommendation</string>
+  </disabledAdministrativeMonitors>
+  <version>2.223</version>
   <numExecutors>5</numExecutors>
   <mode>NORMAL</mode>
   <useSecurity>true</useSecurity>
-  <authorizationStrategy class="hudson.security.AuthorizationStrategy$Unsecured"/>
-  <securityRealm class="hudson.security.SecurityRealm$None"/>
+  <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy">
+    <denyAnonymousReadAccess>false</denyAnonymousReadAccess>
+  </authorizationStrategy>
+  <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
+    <disableSignup>false</disableSignup>
+    <enableCaptcha>false</enableCaptcha>
+  </securityRealm>
   <disableRememberMe>false</disableRememberMe>
   <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy"/>
   <workspaceDir>${ITEM_ROOTDIR}/workspace</workspaceDir>
@@ -16,8 +24,8 @@
   </markupFormatter>
   <jdks>
     <jdk>
-      <name>JDK</name>
-      <home>/usr/lib/jvm/java-8-openjdk-amd64</home>
+      <name>java-11</name>
+      <home>/usr/lib/jvm/java-11-openjdk-amd64</home>
       <properties/>
     </jdk>
   </jdks>
@@ -35,28 +43,26 @@
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
     </hudson.model.AllView>
-    <se.diabol.jenkins.pipeline.DeliveryPipelineView plugin="delivery-pipeline-plugin@0.8.9">
+    <com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView plugin="build-monitor-plugin@1.12+build.201809061734">
       <owner class="hudson" reference="../../.."/>
-      <name>Pipeline</name>
+      <name>worblehat-buildmonitor</name>
       <filterExecutors>false</filterExecutors>
       <filterQueue>false</filterQueue>
       <properties class="hudson.model.View$PropertyList"/>
-      <componentSpecs>
-        <se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
-          <name>Worblehat</name>
-          <firstJob>worblehat-010-build</firstJob>
-        </se.diabol.jenkins.pipeline.DeliveryPipelineView_-ComponentSpec>
-      </componentSpecs>
-      <noOfPipelines>5</noOfPipelines>
-      <showAggregatedPipeline>false</showAggregatedPipeline>
-      <noOfColumns>1</noOfColumns>
-      <sorting>none</sorting>
-      <showAvatars>false</showAvatars>
-      <updateInterval>2</updateInterval>
-      <showChanges>true</showChanges>
-      <allowManualTriggers>true</allowManualTriggers>
-      <regexpFirstJobs/>
-    </se.diabol.jenkins.pipeline.DeliveryPipelineView>
+      <jobNames>
+        <comparator class="hudson.util.CaseInsensitiveComparator"/>
+      </jobNames>
+      <jobFilters/>
+      <columns/>
+      <includeRegex>worblehat-pipelines.*</includeRegex>
+      <recurse>true</recurse>
+      <title>Worblehat Buildmonitor</title>
+      <config>
+        <displayCommitters>false</displayCommitters>
+        <buildFailureAnalyzerDisplayedField>Name</buildFailureAnalyzerDisplayedField>
+        <order class="com.smartcodeltd.jenkinsci.plugins.buildmonitor.order.ByName"/>
+      </config>
+    </com.smartcodeltd.jenkinsci.plugins.buildmonitor.BuildMonitorView>
   </views>
   <primaryView>All</primaryView>
   <slaveAgentPort>50000</slaveAgentPort>
