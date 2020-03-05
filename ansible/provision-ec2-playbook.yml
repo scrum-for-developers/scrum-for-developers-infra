@@ -37,7 +37,6 @@
         state: present
       vars: 
         ansible_python_interpreter: python3
-  
 
     - name: reboot if kernal was updated
       become: true
@@ -56,9 +55,9 @@
       become: yes
     - role: nginx
     - role: artifactory
-    - role: jenkins
     - role: maven
       maven_mirror: http://archive.apache.org/dist/maven/binaries/
+    - role: jenkins
     - role: sonar
       become: true
       vars: 
