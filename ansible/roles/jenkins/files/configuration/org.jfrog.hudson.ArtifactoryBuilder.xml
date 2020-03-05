@@ -4,14 +4,14 @@
   <artifactoryServers>
     <org.jfrog.hudson.ArtifactoryServer>
       <url>http://localhost:8081/artifactory</url>
-      <id>1213362221@1425654692567</id>
+      <id>artifactory</id>
       <timeout>300</timeout>
       <bypassProxy>false</bypassProxy>
       <connectionRetry>3</connectionRetry>
       <deploymentThreads>3</deploymentThreads>
       <deployerCredentialsConfig>
         <username>admin</username>
-        <password>AP34L8kZtSi6wDX8hijDnbEyzLQ</password>
+        <password>password</password>
         <credentialsId></credentialsId>
         <overridingCredentials>false</overridingCredentials>
         <ignoreCredentialPluginDisabled>false</ignoreCredentialPluginDisabled>
