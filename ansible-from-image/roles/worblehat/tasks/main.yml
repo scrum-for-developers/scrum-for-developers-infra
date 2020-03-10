@@ -15,12 +15,27 @@
     worblehat_stage: "prod"
     worblehat_port: "9101"
 
-- name: Trigger master build in Jenkins
+- name: Trigger Multibranch Scan in worblehat repository
   uri:
-    url: http://{{ this_ip }}/jenkins/job/worblehat-pipelines/job/master/build
+    url: http://{{ this_ip }}/jenkins/git/notifyCommit?url={{ git_url }}
     method: GET
-    status_code: 201
+    status_code: 200
   register: _result
-  until: _result.status == 201
+  until: _result.status == 200
   retries: 12 # 12 * 10 seconds = 2 Minute
   delay: 10 # Every 10s
+
+- name:
+  debug:
+    msg: "Please ensure to MANUALLY approve PROD DEPLOYMENT to make the build succeed. http://{{ this_ip }}/jenkins/login?from=%2Fjenkins%2Fblue%2Forganizations%2Fjenkins%2Fworblehat-pipelines%2Fdetail%2Fmaster%2F1%2Fpipeline%2F"
+
+- name: wait until build has completed successfully
+  uri:
+    url: http://{{ this_ip }}/jenkins/job/worblehat-pipelines/job/master/api/json
+    method: GET
+    status_code: 200
+    body_format: json
+  register: result
+  until: (result.json.color is defined) and (result.json.color == "blue")
+  retries: 60
+  delay: 15

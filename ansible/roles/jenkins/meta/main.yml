@@ -11,6 +11,7 @@ dependencies:
     - build-monitor-plugin
     - embeddable-build-status
     - git
-    - lockable-resources # for locking dev and prod env while deployments
     - htmlpublisher
     - blueocean
+    - workflow-aggregator # Pipelines
+    - cucumber-reports

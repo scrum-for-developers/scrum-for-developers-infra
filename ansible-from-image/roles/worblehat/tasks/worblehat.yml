@@ -1,2 +1,7 @@
 - name: Copy woblehat application.conf
   template: src=worblehat/application.properties.j2 dest="/opt/worblehat-{{ worblehat_stage }}/application.properties"
+
+- name: Start worblehat-{{ worblehat_stage }}
+  service:
+    name: worblehat-{{ worblehat_stage }}
+    status: started
