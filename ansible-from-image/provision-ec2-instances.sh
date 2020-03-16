@@ -11,7 +11,7 @@ echo "Using private key $PRIVATE_KEY"
 
 ec2-dynamic-inventory/ec2.py --refresh-cache
 
-ansible-playbook -v \
+ansible-playbook -v --diff \
   -i ec2-dynamic-inventory/ec2.py \
   -u ubuntu \
   --private-key ${PRIVATE_KEY} \

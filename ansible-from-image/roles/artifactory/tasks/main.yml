@@ -1,4 +1,4 @@
-- name: Change Artifactory port
+- name: Change Artifactory base IP to current IP
   become: yes
   template: 
     src: artifactory.config.import.xml.j2

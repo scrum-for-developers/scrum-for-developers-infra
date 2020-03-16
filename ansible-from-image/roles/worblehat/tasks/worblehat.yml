@@ -2,6 +2,7 @@
   template: src=worblehat/application.properties.j2 dest="/opt/worblehat-{{ worblehat_stage }}/application.properties"
 
 - name: Start worblehat-{{ worblehat_stage }}
+  become: true
   service:
     name: worblehat-{{ worblehat_stage }}
-    status: started
+    state: restarted

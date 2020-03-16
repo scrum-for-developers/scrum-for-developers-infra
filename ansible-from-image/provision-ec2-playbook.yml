@@ -21,6 +21,8 @@
         update_cache: yes
         upgrade: safe
       register: apt_updates
+      vars: 
+        ansible_python_interpreter: python3
 
     - name: reboot if kernal was updated
       become: true
