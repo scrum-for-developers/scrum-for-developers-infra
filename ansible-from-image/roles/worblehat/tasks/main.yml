@@ -27,7 +27,7 @@
 
 - name:
   debug:
-    msg: "Please ensure to MANUALLY approve PROD DEPLOYMENT to make the build succeed. http://{{ this_ip }}/jenkins/login?from=%2Fjenkins%2Fblue%2Forganizations%2Fjenkins%2Fworblehat-pipelines%2Fdetail%2Fmaster%2F1%2Fpipeline%2F"
+    msg: "Please ensure to MANUALLY approve PROD DEPLOYMENT to make the build succeed. http://{{ this_ip }}/jenkins/login?from=%2Fjenkins%2Fblue%2Forganizations%2Fjenkins%2Fworblehat-pipelines%2Fdetail%2Fmaster%2F2%2Fpipeline%2F"
 
 - name: wait until build has completed successfully
   uri:
