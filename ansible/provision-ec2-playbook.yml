@@ -7,14 +7,14 @@
     git_url: "{{ ec2_tag_SfdGitUrl }}"
     index_title: "Hello {{ ec2_tag_SfdTeamTitle }} !"
     this_ip: "{{ ec2_tag_SfdElasticIp }}"
-    ansible_python_interpreter: python3
 
   pre_tasks:
     - name: Gathering facts
       setup:
-      vars: 
-        ansible_python_interpreter: python3
-  
+
+    - name: Set ansible_python_interpreter - required by some geerlingguy roles - to default python executable
+      set_fact: ansible_python_interpreter={{ hostvars[inventory_hostname].ansible_python.executable }}
+
     - name: Display all variables/facts known for a host
       debug: var=hostvars[inventory_hostname]
 
@@ -24,19 +24,13 @@
         update_cache: yes
         upgrade: safe
       register: apt_updates
-      vars: 
-        ansible_python_interpreter: python3
 
     - name: install python-psycopg2
       become: true
       apt:
         pkg:
-        - python-psycopg2
-        - python-pymysql
         - python3-pymysql
         state: present
-      vars: 
-        ansible_python_interpreter: python3
 
     - name: reboot if kernal was updated
       become: true
@@ -60,6 +54,4 @@
     - role: jenkins
     - role: sonar
       become: true
-      vars: 
-        ansible_python_interpreter: python2.7
     - role: worblehat

@@ -7,7 +7,7 @@
     - role: ec2_create
       ec2_key_name: "scrumfordevelopers"
       ec2_region: "eu-central-1"
-      ec2_ami_id: "ami-0b418580298265d5c" # Ubuntu Server 18.04 LTS (HVM), SSD Volume Type
+      ec2_ami_id: "ami-0c9beb525411868a1" # Canonical, Ubuntu, 20.04 LTS, amd64 focal image build on 2020-07-29
       instances:
         - name: infra-test
           team_title: Test-Team

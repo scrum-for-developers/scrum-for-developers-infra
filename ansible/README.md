@@ -11,7 +11,7 @@ ansible --version
 Install on OSX
 ```
 # via pip
-pip install ansible --upgrade
+pip[3] install ansible --upgrade
 
 # or via brew
 brew install ansible
