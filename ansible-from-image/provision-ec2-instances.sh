@@ -38,6 +38,7 @@ then
   exit 1
 fi
 
+AWS_PROFILE=s4d
 
 ec2-dynamic-inventory/ec2.py --refresh-cache
 

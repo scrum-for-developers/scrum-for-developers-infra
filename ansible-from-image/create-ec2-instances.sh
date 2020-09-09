@@ -9,9 +9,12 @@ else
   INVENTORY=inventory-localhost
 fi
 
+AWS_PROFILE=s4d
+
 if [ "$#" -ne 1 ]
 then
   echo "Usage $0 <private-key>"
+  echo "The private key is the one to login to the machine via ssh as user 'ubuntu'. Usually a *.pem file."
   exit 1
 fi
 
