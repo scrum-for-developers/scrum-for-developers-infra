@@ -25,6 +25,11 @@
     dest: /usr/local/sonar/conf/sonar.properties
     regexp: "^#sonar.web.context"
     line: "sonar.web.context=/sonar"
+- name: Allow anonymous access
+  lineinfile:
+    dest: /usr/local/sonar/conf/sonar.properties
+    regexp: "^sonar.forceAuthentication"
+    line: sonar.forceAuthentication=false
 
 # increase vm for elasticsearch
 - name: Increase currently available vm - especially for elasticsearch
