@@ -4,12 +4,12 @@
   gather_facts: no
   vars:
       nginx_port: 80
-      git_web_url: "{{ ec2_tag_SfdGitWebUrl }}"
-      git_url: "{{ ec2_tag_SfdGitUrl }}"
-      git_host: "{{ ec2_tag_SfdGitUrl | regex_search('[\\w\\-\\.]*\\.(de|com)') }}"
-      index_title: "Hello {{ ec2_tag_SfdTeamTitle }} !"
+      git_web_url: "{{ hostvars[inventory_hostname].tags.SfdGitWebUrl }}"
+      git_url: "{{ hostvars[inventory_hostname].tags.SfdGitUrl }}"
+      git_host: "{{ hostvars[inventory_hostname].tags.SfdGitUrl | regex_search('[\\w\\-\\.]*\\.(de|com)') }}"
+      index_title: "Hello {{ hostvars[inventory_hostname].tags.SfdTeamTitle }} !"
       docker_user: "ubuntu"
-      this_ip: "{{ ec2_tag_SfdElasticIp }}"
+      this_ip: "{{ hostvars[inventory_hostname].tags.SfdElasticIp }}"
       ansible_python_interpreter: python3
 
   pre_tasks:

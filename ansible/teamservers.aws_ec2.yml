@@ -1,0 +1,14 @@
+# https://docs.ansible.com/ansible/latest/collections/amazon/aws/aws_ec2_inventory.html
+# https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html#options
+plugin: amazon.aws.aws_ec2
+aws_profile: s4d
+regions:
+  - eu-central-1
+keyed_groups:
+  # add hosts to tag_Name_value groups for each aws_ec2 host's tags.Name variable
+  - key: tags.ScrumForDevelopersImage
+    prefix: tag_ScrumForDevelopersImage_
+    separator: ""
+filters: {
+  tag:ScrumForDevelopersImage: ScrumForDevelopersImage
+}

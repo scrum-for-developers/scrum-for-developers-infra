@@ -9,11 +9,9 @@ fi
 PRIVATE_KEY=$1
 echo "Using private key $PRIVATE_KEY"
 
-AWS_PROFILE=s4d
-ec2-dynamic-inventory/ec2.py --refresh-cache
 
 ansible-playbook -v --diff \
-  -i ec2-dynamic-inventory/ec2.py \
+  -i teamservers.aws_ec2.yml \
   -u ubuntu \
   --private-key ${PRIVATE_KEY} \
   provision-ec2-playbook.yml

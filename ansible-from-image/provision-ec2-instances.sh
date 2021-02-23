@@ -38,12 +38,8 @@ then
   exit 1
 fi
 
-AWS_PROFILE=s4d
-
-ec2-dynamic-inventory/ec2.py --refresh-cache
-
 ansible-playbook -v --diff --extra-vars "git_ssh_key_file=$GIT_KEY" \
-  -i ec2-dynamic-inventory/ec2.py \
+  -i teamservers.aws_ec2.yml \
   -u ubuntu \
   --private-key ${PRIVATE_KEY} -e git_ssh_key_file \
   provision-ec2-playbook.yml

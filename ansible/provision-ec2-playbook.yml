@@ -3,10 +3,10 @@
   gather_facts: no
   vars:
     nginx_port: 80
-    git_web_url: "{{ ec2_tag_SfdGitWebUrl }}"
-    git_url: "{{ ec2_tag_SfdGitUrl }}"
-    index_title: "Hello {{ ec2_tag_SfdTeamTitle }} !"
-    this_ip: "{{ ec2_tag_SfdElasticIp }}"
+    git_web_url: "{{ hostvars[inventory_hostname].tags.SfdGitWebUrl }}"
+    git_url: "{{ hostvars[inventory_hostname].tags.SfdGitUrl }}"
+    index_title: "Hello {{ hostvars[inventory_hostname].tags.SfdTeamTitle }} !"
+    this_ip: "{{ hostvars[inventory_hostname].tags.SfdElasticIp }}"
 
   pre_tasks:
     - name: Gathering facts
