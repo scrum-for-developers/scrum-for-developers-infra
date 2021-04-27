@@ -52,3 +52,18 @@ chmod -R a+w mounted_directories
     * Navigate to the pipeline configuration (/jenkins/job/worblehat-pipelines/configure)
     * Change the "Project Repository" in the "Git" section and use the previously added credentials
 4. Test the connection with a simple push to the master or rerun the last execution
+
+# Jenkins
+
+Restarting
+1. `sudo service jenkins restart`
+
+# SonarCube
+
+Connecting to Database:
+1. `sudo -u sonar psql --dbname=sonarqube -U sonar -W`
+2. Password: 123qwe
+
+Reset Admin password:
+See https://docs.sonarqube.org/7.4/instance-administration/security/
+1. `update users set crypted_password = '$2a$12$uCkkXmhW5ThVK8mpBvnXOOJRLd64LJeHTeCkSuB3lfaR2N0AYBaSi', salt=null, hash_method='BCRYPT' where login = 'admin';`
