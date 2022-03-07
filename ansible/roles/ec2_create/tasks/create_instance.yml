@@ -35,9 +35,13 @@
     loop_var: instance
 #  when: ec2.changed
 
+
 - name: Assign elastic ip
-  ec2_eip:
+  community.aws.ec2_eip:
     region: "{{ ec2_region }}"
+    reuse_existing_ip_allowed: yes
+    in_vpc: yes
+    release_on_disassociation: yes
     device_id: "{{ ec2.instance_ids[0] }}"
   register: eip
   when: ec2.changed
