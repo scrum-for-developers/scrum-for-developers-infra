@@ -1,6 +1,6 @@
 - name: Add Artifactory apt key
   apt_key:
-    url:  https://bintray.com/user/downloadSubjectPublicKey?username=jfrog
+    url:  https://api.bintray.com/orgs/jfrog/keys/gpg/public.key
   become: true
 - name: Add Artifactory Repository
   apt_repository:
