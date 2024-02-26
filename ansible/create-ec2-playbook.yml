@@ -1,5 +1,4 @@
 ---
-
 - hosts: localhost
   connection: local
   gather_facts: no
@@ -7,7 +6,7 @@
     - role: ec2_create
       ec2_key_name: "scrumfordevelopers"
       ec2_region: "eu-central-1"
-      ec2_ami_id: "ami-0c9beb525411868a1" # Canonical, Ubuntu, 20.04 LTS, amd64 focal image build on 2020-07-29
+      ec2_ami_id: "ami-04b4614474c70b684" # https://cloud-images.ubuntu.com/locator/ec2/ 22.04 LTS, amd64 20240223
       instances:
         - name: infra-test
           team_title: Test-Team

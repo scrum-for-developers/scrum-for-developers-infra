@@ -1,24 +1,24 @@
 - name: Create EC2 instance
-  ec2:
+  amazon.aws.ec2_instance:
+    name: "sfd-{{ instance_name }}"
     instance_type: m5.xlarge
     key_name: "{{ ec2_key_name }}"
     region: "{{ ec2_region }}"
-    volumes:
-      - device_name: /dev/sda1
-        volume_type: gp2
-        volume_size: 24
-        delete_on_termination: true
+    image_id: "{{ ec2_ami_id }}"
+    security_group: "{{ ec2_security_group }}"
     exact_count: 1
-    count_tag:
-      Name: "sfd-{{ instance_name }}"
-    instance_tags:
-      Name: "sfd-{{ instance_name }}"
+    filters:
+      "tag:Name": "sfd-{{ instance_name }}"
+    tags:
       ScrumForDevelopersImage: "ScrumForDevelopersImage"
       SfdTeamTitle: "{{ team_title }}"
       SfdGitUrl: "{{ git_url }}"
       SfdGitWebUrl: "{{ git_web_url }}"
-    image: "{{ ec2_ami_id }}"
-    group: "{{ ec2_security_group }}"
+    volumes:
+      - device_name: /dev/sda1
+        ebs:
+          volume_size: 24
+          delete_on_termination: true
     wait: yes
   register: ec2
 

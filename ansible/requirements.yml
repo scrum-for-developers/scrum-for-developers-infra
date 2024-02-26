@@ -1,0 +1,32 @@
+---
+roles:
+  - name: jdauphant.nginx
+    version: "v2.21.2"
+
+  - name: geerlingguy.jenkins
+    version: "5.1.0"
+
+  - name: geerlingguy.mysql
+    version: "4.3.4"
+
+  - name: geerlingguy.postgresql
+    version: "3.5.0"
+
+  - name: geerlingguy.docker
+    version: "7.1.0"
+
+  - name: geerlingguy.java
+    version: "2.3.3"
+
+collections:
+  - name: amazon.aws
+    version: "7.3.0"
+
+  - name: ansible.netcommon
+    version: "6.0.0"
+  
+  - name: ansible.utils
+    version: "3.1.0"  
+
+  - name: community.aws
+    version: "7.1.0"
