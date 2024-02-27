@@ -25,13 +25,6 @@
         upgrade: safe
       register: apt_updates
 
-    - name: install python-psycopg2
-      become: true
-      apt:
-        pkg:
-        - python3-pymysql
-        state: present
-
     - name: reboot if kernal was updated
       become: true
       reboot: 
@@ -39,19 +32,23 @@
 
   roles:
     - role: util
-    - role: java11
+    - role: geerlingguy.java
       become: true
+      java_packages: 
+        - openjdk-17-jdk-headless
     - role: geerlingguy.docker
       become: true
-    - role: geerlingguy.mysql
-      become: true
-    - role: geerlingguy.postgresql
-      become: yes
-    - role: nginx
-    - role: artifactory
-    - role: maven
-      maven_mirror: http://archive.apache.org/dist/maven/binaries/
-    - role: jenkins
-    - role: sonar
-      become: true
-    - role: worblehat
+
+
+#    - role: geerlingguy.mysql
+#      become: true
+#    - role: geerlingguy.postgresql
+#      become: yes
+#    - role: nginx
+#    - role: artifactory
+#    - role: maven
+#      maven_mirror: http://archive.apache.org/dist/maven/binaries/
+#    - role: jenkins
+#    - role: sonar
+#      become: true
+#    - role: worblehat

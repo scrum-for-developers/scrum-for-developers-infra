@@ -1,3 +1,0 @@
-- name: Add Java 8 apt repository
-  become: yes
-  apt_repository: repo='ppa:openjdk-r/ppa' state=present
