@@ -18,13 +18,23 @@
   apt:
     name: jfrog-artifactory-oss
 
+- name: Initialize artifactory
+  # https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-bootstrap-yaml-file
+  become: true
+  template: 
+    src: artifactory.config.import.yml.j2
+    dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.yml
+
 #- name: Change Artifactory port
+#  # https://www.jfrog.com/confluence/display/JFROG/Artifactory+System+YAML
+#  # https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-system-yaml
 #  become: yes
 #  template: 
 #    src: system.yaml.j2
 #    dest: /opt/jfrog/artifactory/var/etc/system.yaml
 #    owner: artifactory
 #    group: artifactory
+
 #- name: Create artifactory config directory
 #  become: true
 #  file: 
@@ -32,6 +42,7 @@
 #    owner: artifactory
 #    group: artifactory
 #    state: directory  
+
 #- name: Create repositories and configure artifactory
 #  become: yes
 #  template: 
@@ -45,9 +56,9 @@
 #  file:
 #    path: /etc/init.d/artifactory.disabled
 #    state: absent
-#
-#- name: Start Artifactory service
-#  service:
-#    name: artifactory
-#    state: started
-#  become: true
+
+- name: Start Artifactory service
+  become: true
+  service:
+    name: artifactory
+    state: started

@@ -19,54 +19,55 @@ version: 1
 ##
 ## To have any of these parameters automatically configured when you bootstrap an Artifactory instance using this file,
 ## simply uncomment the relevant sections below, and where required, provide values.
- 
+
 ##################################################################################
 # General Configurations #
 ##################################################################################
 GeneralConfiguration:
 ## License key to import in onboarding
 #    licenseKey : "Enter your license key"
- 
+
 ## Setup the Artifactory base URL
 ## For more information about the Artifactory base URL, please refer to
 ## https://www.jfrog.com/confluence/display/RTF/Configuring+Artifactory#ConfiguringArtifactory-GeneralSettings
 ## Uncomment the line below to set the Artifactory base URL
-    baseUrl : "http://{{ this_ip }}/artifactory"
- 
+        baseUrl : "http://{{ this_ip }}/artifactory/"
+
 ## Configure proxies for artifactory
 ## For more information on configuring a proxy in Artifactory, please refer to
 ## https://www.jfrog.com/confluence/display/RTF/Managing+Proxies
 ## Uncomment the lines below to setup a proxy
-#   proxies :
-#       - key : "proxy1"
-#       host : "https://proxy.mycomp.io"
-#       port : 443
-#       userName : "admin"
-#       password : "password"
-#       defaultProxy : true
-#       - key : "proxy2"
-#       ...
+#       proxies :
+#               - key : "proxy1"
+#               host : "https://proxy.mycomp.io"
+#               port : 443
+#               userName : "admin"
+#               password : "password"
+#               platformDefault : true
+#               services: "jfxr, jfrt" ## (Optional field. Comma separated string of services, options are: jfrt, jfmc, jfxr, jfds)
+#               - key : "proxy2"
+#               ...
 ##################################################################################
 # Onboarding Configurations #
 ##################################################################################
 OnboardingConfiguration:
 ## Uncomment the package types for which you want to create default repositories
-    repoTypes :
-#       - bower
-#       - cocoapods
-#       - conan
-#       - debian
-#       - docker
-#       - gems
-#       - gradle
-#       - ivy
-        - maven
-#       - npm
-#       - nuget
-#       - opkg
-#       - composer
-#       - pypi
-#       - sbt
-#       - vagrant
-#       - rpm
-#       - gitlfs
+        repoTypes :
+#               - bower
+#               - cocoapods
+#               - conan
+#               - debian
+#               - docker
+#               - gems
+#               - gradle
+#               - ivy
+                - maven
+#               - npm
+#               - nuget
+#               - opkg
+#               - composer
+#               - pypi
+#               - sbt
+#               - vagrant
+#               - rpm
+#               - gitlfs

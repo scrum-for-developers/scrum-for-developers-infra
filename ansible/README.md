@@ -86,6 +86,18 @@ Ansible creates all necessary Jenkins Jobs, but they are not yet configured corr
 * If your git-repository needs authentication, you have to provide the credentials manually.
 * The configuration for the job *040-worblehat-acceptance-test* is not complete (e.g. saucelabs-account in ~/.m2/settings.xml is missing).
 
+# Defaults
+
+## Passwords
+* artifactory: admin / password
+
+## Ports
+
+* [Artifactory](https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-network-ports): 8081, 8082
+
+## Routings
+
+
 # Troubleshooting
 
 ## SSH connection failed
