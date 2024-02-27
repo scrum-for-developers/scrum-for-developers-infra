@@ -25,6 +25,22 @@
     src: artifactory.config.import.yml.j2
     dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.yml
 
+
+- name: Create access config directory
+  become: true
+  file: 
+    path: /opt/jfrog/artifactory/var/etc/access/
+    owner: artifactory
+    group: artifactory
+    state: directory  
+
+- name: Initialize access
+  # https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-bootstrap-yaml-file
+  become: true
+  template: 
+    src: access.config.import.yml.j2
+    dest: /opt/jfrog/artifactory/var/etc/access/access.config.import.yml
+
 #- name: Change Artifactory port
 #  # https://www.jfrog.com/confluence/display/JFROG/Artifactory+System+YAML
 #  # https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-system-yaml
@@ -44,12 +60,12 @@
 #    state: directory  
 
 #- name: Create repositories and configure artifactory
-#  become: yes
-#  template: 
-#    src: artifactory.config.import.xml.j2
-#    dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.xml
-#    owner: artifactory
-#    group: artifactory
+#    become: yes
+#    template: 
+#        src: artifactory.config.import.xml.j2
+#        dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.xml
+#        owner: artifactory
+#        group: artifactory
 
 #- name: Remove disabled init.d startup script
 #  become: true

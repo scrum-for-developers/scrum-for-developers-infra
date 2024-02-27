@@ -3,6 +3,9 @@ dependencies:
 - role: geerlingguy.jenkins
   become: true
   jenkins_url_prefix: "/jenkins"
+  jenkins_http_port: 8080
+  jenkins_admin_username: admin
+  jenkins_admin_password: Hell0PSD!
   jenkins_package_state: latest
   jenkins_plugins_install_dependencies: true
   jenkins_plugins_state: latest

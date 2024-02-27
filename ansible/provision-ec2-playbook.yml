@@ -42,9 +42,8 @@
       become: true
     - role: nginx
     - role: artifactory
-#    - role: maven
-#      maven_mirror: http://archive.apache.org/dist/maven/binaries/
-#    - role: jenkins
+    - role: maven
+    - role: jenkins
 #    - role: sonar
 #      become: true
 #    - role: worblehat

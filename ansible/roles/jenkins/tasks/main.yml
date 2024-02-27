@@ -18,13 +18,6 @@
     group: jenkins
     src: jenkins.model.JenkinsLocationConfiguration.xml.j2
     dest: /var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml
- 
-  # CSP needs to be disabled in order to make jbehave Reports look nice
-- name: Disable Content Security Policy
-  become: true
-  lineinfile:
-    path: /etc/default/jenkins
-    line: 'JAVA_ARGS="${JAVA_ARGS} -Dhudson.model.DirectoryBrowserSupport.CSP=\"\" "'
 - name: configure jenkins jobs
   include_tasks: job.yml
   vars: 
@@ -42,3 +35,4 @@
 - name: restart jenkins
   become: true
   service: name=jenkins state=restarted
+    
