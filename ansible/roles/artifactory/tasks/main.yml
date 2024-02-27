@@ -1,47 +1,53 @@
 - name: Add Artifactory apt key
+  become: true
   apt_key:
-    url:  https://api.bintray.com/orgs/jfrog/keys/gpg/public.key
-  become: true
+    url:  https://releases.jfrog.io/artifactory/api/gpg/key/public
+
 - name: Add Artifactory Repository
-  apt_repository:
-    repo: deb https://jfrog.bintray.com/artifactory-debs bionic main
   become: true
+  apt_repository:
+    repo: deb https://releases.jfrog.io/artifactory/artifactory-debs xenial main
+
+- name: update apt cache
+  become: true
+  apt:
+    update_cache: yes
+
 - name: Install Artifactory
+  become: true
   apt:
     name: jfrog-artifactory-oss
-    # see: https://github.com/ansible/ansible/issues/25091
-    allow_unauthenticated: true
-  become: yes
-- name: Change Artifactory port
-  become: yes
-  template: 
-    src: system.yaml.j2
-    dest: /opt/jfrog/artifactory/var/etc/system.yaml
-    owner: artifactory
-    group: artifactory
-- name: Create artifactory config directory
-  become: true
-  file: 
-    path: /opt/jfrog/artifactory/var/etc/artifactory/
-    owner: artifactory
-    group: artifactory
-    state: directory  
-- name: Create repositories and configure artifactory
-  become: yes
-  template: 
-    src: artifactory.config.import.xml.j2
-    dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.xml
-    owner: artifactory
-    group: artifactory
 
-- name: Remove disabled init.d startup script
-  become: true
-  file:
-    path: /etc/init.d/artifactory.disabled
-    state: absent
+#- name: Change Artifactory port
+#  become: yes
+#  template: 
+#    src: system.yaml.j2
+#    dest: /opt/jfrog/artifactory/var/etc/system.yaml
+#    owner: artifactory
+#    group: artifactory
+#- name: Create artifactory config directory
+#  become: true
+#  file: 
+#    path: /opt/jfrog/artifactory/var/etc/artifactory/
+#    owner: artifactory
+#    group: artifactory
+#    state: directory  
+#- name: Create repositories and configure artifactory
+#  become: yes
+#  template: 
+#    src: artifactory.config.import.xml.j2
+#    dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.xml
+#    owner: artifactory
+#    group: artifactory
 
-- name: Start Artifactory service
-  service:
-    name: artifactory
-    state: started
-  become: true
+#- name: Remove disabled init.d startup script
+#  become: true
+#  file:
+#    path: /etc/init.d/artifactory.disabled
+#    state: absent
+#
+#- name: Start Artifactory service
+#  service:
+#    name: artifactory
+#    state: started
+#  become: true
