@@ -38,13 +38,10 @@
         - openjdk-17-jdk-headless
     - role: geerlingguy.docker
       become: true
+    - role: geerlingguy.mysql
+      become: true
+    - role: nginx
 
-
-#    - role: geerlingguy.mysql
-#      become: true
-#    - role: geerlingguy.postgresql
-#      become: yes
-#    - role: nginx
 #    - role: artifactory
 #    - role: maven
 #      maven_mirror: http://archive.apache.org/dist/maven/binaries/
