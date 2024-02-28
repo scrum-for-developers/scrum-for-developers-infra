@@ -1,0 +1,22 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<hudson.plugins.sonar.SonarGlobalConfiguration plugin="sonar@2.17.2">
+  <installations>
+    <hudson.plugins.sonar.SonarInstallation>
+      <name>sonarqube</name>
+      <serverUrl>http://{{ this_ip }}/sonar</serverUrl>
+      <credentialsId>sonarqube_token</credentialsId>
+      <webhookSecretId></webhookSecretId>
+      <mojoVersion></mojoVersion>
+      <additionalProperties></additionalProperties>
+      <additionalAnalysisProperties></additionalAnalysisProperties>
+      <triggers>
+        <skipScmCause>false</skipScmCause>
+        <skipUpstreamCause>false</skipUpstreamCause>
+        <envVar></envVar>
+      </triggers>
+    </hudson.plugins.sonar.SonarInstallation>
+  </installations>
+  <buildWrapperEnabled>true</buildWrapperEnabled>
+  <dataMigrated>true</dataMigrated>
+  <credentialsMigrated>true</credentialsMigrated>
+</hudson.plugins.sonar.SonarGlobalConfiguration>
