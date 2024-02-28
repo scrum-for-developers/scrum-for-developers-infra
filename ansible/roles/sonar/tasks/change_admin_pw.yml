@@ -1,0 +1,62 @@
+# from 
+# https://blog.soebes.io/posts/2023/01/2023-01-21-ansible-sonarqube-setup/    
+
+- name: Check SonarQube health with new password
+  ansible.builtin.uri:
+    url: "http://localhost:{{ sonarqube_port }}/sonar/api/system/health"
+    user: "{{ sonarqube_admin_login }}"
+    password: "{{ sonarqube_admin_newpassword }}"
+    method: GET
+    force_basic_auth: yes
+  register: response_new_password
+  failed_when: "response_new_password.status not in [200,401]"
+
+- name: Check SonarQube to be healthy.
+  ansible.builtin.uri:
+    url: "http://localhost:{{ sonarqube_port }}/sonar/api/system/health"
+    user: "{{ sonarqube_admin_login }}"
+    password: "{{ sonarqube_admin_password }}"
+    method: GET
+    force_basic_auth: yes
+  register: response
+  until:
+    - "response.status == 200"
+    - "'GREEN' == response.json.health"
+  retries: 20 # 20 * 5 seconds = 100 seconds.
+  delay: 5 # every 5 seconds
+  when: "401 == response_new_password.status"
+
+- name: Change Password of admin user.
+  ansible.builtin.uri:
+    url: "http://localhost:{{ sonarqube_port }}/sonar/api/users/change_password?login={{ sonarqube_admin_login }}&password={{ sonarqube_admin_newpassword }}&previousPassword={{ sonarqube_admin_password }}"
+    user: "{{ sonarqube_admin_login }}"
+    password: "{{ sonarqube_admin_password }}"
+    method: POST
+    force_basic_auth: yes
+  register: responsecpw
+  failed_when: responsecpw.status != 204
+  when: "401 == response_new_password.status"
+
+- name: Create CI User
+  ansible.builtin.uri:
+    url: "http://localhost:{{ sonarqube_port }}/sonar/api/users/create?local=true&login={{ sonarqube_ci_login }}&name={{ sonarqube_ci_name | urlencode }}&password={{ sonarqube_ci_password }}"
+    user: "{{ sonarqube_admin_login }}"
+    password: "{{ sonarqube_admin_newpassword }}"
+    method: POST
+    force_basic_auth: yes
+  register: ciresponse
+  failed_when: "ciresponse.status not in [200,400]"
+  changed_when: "ciresponse.status == 200"
+
+- name: Create CI User Token.
+  ansible.builtin.uri:
+    url: "http://localhost:{{ sonarqube_port }}/sonar/api/user_tokens/generate?login={{ sonarqube_ci_login }}&name={{ sonarqube_ci_token_purpose | urlencode }}"
+    user: "{{ sonarqube_ci_login }}"
+    password: "{{ sonarqube_ci_password }}"
+    method: POST
+    force_basic_auth: yes
+  register: ciresponsetoken
+  failed_when: "ciresponsetoken.status not in [200,400]"
+  changed_when: "ciresponsetoken.status == 200"
+- debug:
+    msg: "TOKEN: {{ ciresponsetoken.json }}"

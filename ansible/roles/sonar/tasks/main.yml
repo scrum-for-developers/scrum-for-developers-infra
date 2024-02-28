@@ -4,7 +4,6 @@
     name: sonar
     comment: user to run SonarQube
 
-
 - name: Download Sonar.
   get_url:
     url: "{{ sonar_download_url }}"
@@ -45,6 +44,6 @@
 - name: Ensure Sonar is running and set to start on boot.
   become: true
   systemd: name=sonar state=started enabled=yes
-    
-- name: Make sure Sonar is responding on the configured port.
-  wait_for: port=9000 delay=3 timeout=300
+
+- include_tasks: change_admin_pw.yml
+

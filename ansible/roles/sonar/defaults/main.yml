@@ -17,3 +17,12 @@ sonar_mysql_allowed_hosts:
   - 127.0.0.1
   - ::1
   - localhost
+
+sonarqube_port: 9000
+sonarqube_admin_login: admin
+sonarqube_admin_password: admin
+sonarqube_ci_login: jenkins
+sonarqube_ci_name: Jenkins
+sonarqube_ci_password: Hell0PSD!
+sonarqube_ci_token_purpose: jenkins
+sonarqube_admin_newpassword: Hell0PSD!

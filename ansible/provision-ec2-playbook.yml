@@ -55,4 +55,4 @@
     - role: jenkins
     - role: sonar
       become: true
-    - role: worblehat
+#    - role: worblehat
