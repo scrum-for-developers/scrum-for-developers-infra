@@ -4,21 +4,6 @@
     name: sonar
     comment: user to run SonarQube
 
-- name: Create a database for Sonar.
-  become: true
-  become_user: postgres
-  postgresql_db:
-    name: "{{ sonar_db }}"
-    state: present
-
-- name: Create a sonar user.
-  become: true
-  become_user: postgres
-  postgresql_user:
-    db: "{{ sonar_db }}"
-    name: "{{ sonar_db_username }}"
-    password: "{{ sonar_db_password }}"
-    priv: "ALL"
 
 - name: Download Sonar.
   get_url:
@@ -38,8 +23,8 @@
     mv /usr/local/{{ sonar_version_directory }} /usr/local/sonar
     creates=/usr/local/sonar/COPYING
 
-- include: configure.yml
-- include: plugins.yml
+- include_tasks: configure.yml
+- include_tasks: plugins.yml
 
 - name: Add sonar symlinks for service management.
   file:
@@ -50,17 +35,13 @@
     - /usr/bin/sonar
 
 - name: Copy sonar init script
-  copy: src=init.d/ dest=/etc/init.d
+  copy: src=system/ dest=/etc/systemd/system
   become: true
 
-- name: Make init script executable
-  become: true
-  file: path=/etc/init.d/sonar mode=0755
-  
 - name: create service for sonar
   raw: systemctl enable sonar
   become: true
-  
+
 - name: Ensure Sonar is running and set to start on boot.
   become: true
   systemd: name=sonar state=started enabled=yes

@@ -1,4 +1,7 @@
 ---
+
+#basically following https://medium.com/@humzaarshadkhan/sonarqube-installation-on-ubuntu-20-04-9c4f8e293870
+
 #----- PostgreSQL 9.3 or greater
 # By default the schema named "public" is used. It can be overridden with the parameter "currentSchema".
 #sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube?currentSchema=my_schema
@@ -8,7 +11,7 @@
     dest: /usr/local/sonar/bin/linux-x86-64/sonar.sh
     regexp: "^#RUN_AS_USER"
     line: "RUN_AS_USER=sonar"
-- name: Configure SonarQube JDBC settings for MySQL.
+- name: Configure SonarQube JDBC settings for PostgreSQL.
   lineinfile:
     dest: /usr/local/sonar/conf/sonar.properties
     regexp: "{{ item.regexp }}"

@@ -1,0 +1,16 @@
+[Unit]
+Description=SonarQube service
+After=syslog.target network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/sonar start
+ExecStop=/usr/bin/sonar stop
+User=sonar
+Group=sonar
+Restart=always
+LimitNOFILE=65536
+LimitNPROC=4096
+
+[Install]
+WantedBy=multi-user.target

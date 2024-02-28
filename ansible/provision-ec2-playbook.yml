@@ -39,11 +39,20 @@
     - role: geerlingguy.docker
       become: true
     - role: geerlingguy.mysql
+      # for artifactory & worblehat
       become: true
+    - role: geerlingguy.postgresql
+      # for sonar
+      become: true
+      postgresql_databases:
+        - name: "{{ sonar_db }}"
+      postgresql_users:
+        - name: "{{ sonar_db_username }}"
+          password: "{{ sonar_db_password }}"
     - role: nginx
     - role: artifactory
     - role: maven
     - role: jenkins
-#    - role: sonar
-#      become: true
-#    - role: worblehat
+    - role: sonar
+      become: true
+    - role: worblehat
