@@ -1,13 +1,16 @@
 #- name: Download Spring Boot Admin Server Servlet
 #  shell: mvn dependency:get -Dartifact=de.codecentric:spring-boot-admin-sample-servlet:2.2.2
+
 - name: Create spring-boot-admin directory
   become: true
   file: path="/opt/spring-boot-admin" state=directory owner=root group=root mode=0777
+
 - name: Copy spring boot admin servlet example
   copy:
-    src: spring-boot-admin/spring-boot-admin-sample-servlet.jar
+    src: spring-boot-admin/spring-boot-admin-sample-servlet-3.2.2.jar
     dest: /opt/spring-boot-admin/spring-boot-admin-sample-servlet.jar
     mode: 0777
+
 - name: Copy spring boot admin service
   copy:
     src: spring-boot-admin/spring-boot-admin.service
@@ -16,9 +19,11 @@
 
 - name: Copy spring-boot-admin application.conf
   template: src=spring-boot-admin/application.properties.j2 dest="/opt/spring-boot-admin/application.properties"
+
 - name: Link Spring Boot Admin Server to /etc/init.d
   become: true
   file: src="/opt/spring-boot-admin/spring-boot-admin.service" dest="/etc/systemd/system/spring-boot-admin.service" mode=0777 state=link
+
 - name: Start Spring Boot Admin
   become: true
   service: name=spring-boot-admin state=restarted
@@ -58,7 +63,7 @@
 
 - name: Trigger Multibranch Scan in worblehat repository
   uri:
-    url: http://{{ this_ip }}/jenkins/git/notifyCommit?url={{ git_url }}
+    url: http://{{ this_ip }}/jenkins/git/notifyCommit?url={{ git_url }}&token=2c69591b07a82fcb9710c0f84e2d7f50
     method: GET
     status_code: 200
   register: _result
