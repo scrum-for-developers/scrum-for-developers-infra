@@ -7,8 +7,10 @@
     image_id: "{{ ec2_ami_id }}"
     security_group: "{{ ec2_security_group }}"
     exact_count: 1
+    # https://docs.ansible.com/ansible/latest/collections/amazon/aws/ec2_instance_module.html#parameter-filters
     filters:
       "tag:Name": "sfd-{{ instance_name }}"
+      "instance-state-name": "running"
     tags:
       ScrumForDevelopersImage: "ScrumForDevelopersImage"
       SfdTeamTitle: "{{ team_title }}"
