@@ -91,17 +91,19 @@ Ansible creates all necessary Jenkins Jobs, but they are not yet configured corr
 ## Passwords
 * artifactory: admin / password
 * jenkins: admin / Hell0PSD!
+* sonar: admin / Hell0PSD!
 
 ## Ports
 
 * Jenkins: 8080
 * [Artifactory](https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-network-ports): 8081, 8082
-
+* SonarQube: 9000
 
 ## Installation
 
 /var/lib/jenkins
 /opt/jfrog/artifactory/var/etc
+/usr/local/sonar
 
 ## Routings
 

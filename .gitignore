@@ -4,3 +4,9 @@ ansible/galaxy_roles
 .vagrant
 ansible/create-ec2-playbook.yml
 ansible-from-image/create-ec2-playbook.yml
+.idea/.gitignore
+.idea/misc.xml
+.idea/modules.xml
+.idea/scrum-for-developers-infra.iml
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
