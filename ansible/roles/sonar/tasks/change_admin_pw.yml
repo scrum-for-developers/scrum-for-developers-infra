@@ -9,7 +9,17 @@
     method: GET
     force_basic_auth: yes
   register: response_new_password
+  retries: 100 # this might actually take a while
+  delay: 5 # every 5 seconds
+  until:
+#    - "response_new_password.status not in [-1, 403]"
+      # 200 -> password is correct
+      # 401 -> password is incorrect
+      # other status (-1, 403) might occur during startup of sonarqube
+    - response_new_password.status in [200, 401]
   failed_when: "response_new_password.status not in [200,401]"
+- debug:
+    msg: "response_new_password: {{ response_new_password }}"
 
 - name: Check SonarQube to be healthy.
   ansible.builtin.uri:
@@ -22,9 +32,11 @@
   until:
     - "response.status == 200"
     - "'GREEN' == response.json.health"
-  retries: 20 # 20 * 5 seconds = 100 seconds.
+  retries: 100 # this might actually take a while
   delay: 5 # every 5 seconds
   when: "401 == response_new_password.status"
+- debug:
+    msg: "response: {{ response }}"
 
 - name: Change Password of admin user.
   ansible.builtin.uri:

@@ -17,4 +17,5 @@
   become: true
   template: src="jenkins/org.quality.gates.jenkins.plugin.GlobalConfig.xml.j2" dest="/var/lib/jenkins/org.quality.gates.jenkins.plugin.GlobalConfig.xml" owner=jenkins group=jenkins mode=0644
   when: sonar_ci_token is defined
+  notify: restart jenkins
 

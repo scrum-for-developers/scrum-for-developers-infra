@@ -2,3 +2,7 @@
 - name: restart sonar
   become: true
   systemd: name=sonar state=restarted
+
+- name: restart jenkins
+  become: true
+  service: name=jenkins state=restarted

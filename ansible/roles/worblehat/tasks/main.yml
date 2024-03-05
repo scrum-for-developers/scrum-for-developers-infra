@@ -61,6 +61,13 @@
     login_user: root
     login_password: root
 
+- name: restart all necessary services
+  meta: flush_handlers    
+
+- name: Wait for everything to be ready again, before the build starts
+  ansible.builtin.wait_for:
+    timeout: 300
+
 - name: Trigger Multibranch Scan in worblehat repository
   uri:
     url: http://{{ this_ip }}/jenkins/git/notifyCommit?url={{ git_url }}&token=2c69591b07a82fcb9710c0f84e2d7f50
