@@ -29,9 +29,11 @@
 
 - name: Wait for SSH to come up
   delegate_to: "{{ instance.public_dns_name }}"
+  # https://docs.ansible.com/ansible/2.9/modules/wait_for_connection_module.html
   wait_for_connection:
-    delay: 60
-    timeout: 320
+    delay: 10    # initial waiting time
+    sleep: 60    # sleep between checks
+    timeout: 320 # maximum waiting time
   loop: "{{ ec2.instances }}"
   loop_control:
     loop_var: instance
