@@ -1,6 +1,7 @@
 ---
 dependencies:
 - role: geerlingguy.jenkins
+  # https://galaxy.ansible.com/ui/standalone/roles/geerlingguy/jenkins/documentation/
   become: true
   jenkins_url_prefix: "/jenkins"
   jenkins_http_port: 8080
@@ -9,6 +10,7 @@ dependencies:
   jenkins_package_state: latest
   jenkins_plugins_install_dependencies: true
   jenkins_plugins_state: latest
+  jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dhudson.model.DirectoryBrowserSupport.CSP=\"\""
   jenkins_plugins:
     - artifactory
     - build-monitor-plugin
@@ -21,3 +23,4 @@ dependencies:
     - sonar
     - sonar-quality-gates
     - lockable-resources
+    - pipeline-stage-view
