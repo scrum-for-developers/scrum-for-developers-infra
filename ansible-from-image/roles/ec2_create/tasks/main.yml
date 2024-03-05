@@ -1,6 +1,6 @@
-- include: create_security_group.yml
+- include_tasks: create_security_group.yml
 
-- include: create_instance.yml
+- include_tasks: create_instance.yml
   vars:
     instance_name: "{{ item.name }}"
     team_title: "{{ item.team_title }}"

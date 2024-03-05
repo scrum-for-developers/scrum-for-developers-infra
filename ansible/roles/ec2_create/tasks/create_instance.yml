@@ -37,7 +37,6 @@
   loop: "{{ ec2.instances }}"
   loop_control:
     loop_var: instance
-#  when: ec2.changed
 
 
 - name: Assign elastic ip

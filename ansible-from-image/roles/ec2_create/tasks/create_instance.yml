@@ -1,24 +1,26 @@
 - name: Create EC2 instance
-  ec2:
-    instance_type: m4.xlarge
+  amazon.aws.ec2_instance:
+    name: "sfd-{{ instance_name }}"
+    instance_type: m5.xlarge
     key_name: "{{ ec2_key_name }}"
     region: "{{ ec2_region }}"
-    volumes:
-      - device_name: /dev/sda1
-        volume_type: gp2
-        volume_size: 24
-        delete_on_termination: true
+    image_id: "{{ ec2_ami_id }}"
+    security_group: "{{ ec2_security_group }}"
     exact_count: 1
-    count_tag:
-      Name: "sfd-{{ instance_name }}"
-    instance_tags:
-      Name: "sfd-{{ instance_name }}"
+    # https://docs.ansible.com/ansible/latest/collections/amazon/aws/ec2_instance_module.html#parameter-filters
+    filters:
+      "tag:Name": "sfd-{{ instance_name }}"
+      "instance-state-name": "running"
+    tags:
       ScrumForDevelopers: "ScrumForDevelopers"
       SfdTeamTitle: "{{ team_title }}"
       SfdGitUrl: "{{ git_url }}"
       SfdGitWebUrl: "{{ git_web_url }}"
-    image: "{{ ec2_ami_id }}"
-    group: "{{ ec2_security_group }}"
+    volumes:
+      - device_name: /dev/sda1
+        ebs:
+          volume_size: 24
+          delete_on_termination: true
     wait: yes
   register: ec2
 
@@ -27,13 +29,15 @@
 
 - name: Wait for SSH to come up
   delegate_to: "{{ instance.public_dns_name }}"
+# https://docs.ansible.com/ansible/2.9/modules/wait_for_connection_module.html
   wait_for_connection:
-    delay: 60
-    timeout: 320
+    delay: 10    # initial waiting time
+    sleep: 60    # sleep between checks
+    timeout: 320 # maximum waiting time
   loop: "{{ ec2.instances }}"
   loop_control:
     loop_var: instance
-#  when: ec2.changed
+
 
 - name: Assign elastic ip
   community.aws.ec2_eip:
@@ -43,7 +47,7 @@
     release_on_disassociation: yes
     device_id: "{{ ec2.instance_ids[0] }}"
   register: eip
-#  when: ec2.changed
+  when: ec2.changed
 
 - name: Debug elastic ip
   debug: var=eip

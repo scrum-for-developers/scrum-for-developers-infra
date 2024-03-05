@@ -5,7 +5,7 @@
   gather_facts: no
   roles:
     - role: ec2_create
-      ec2_ami_id: "ami-090c2da29062d05ce"
+      ec2_ami_id: "ami-02875c25b5c232cbb" # APS-SD Worblehat Use-Case Ubuntu 22.04 LTS - 2024-03
       instances:
         - name: worblehat
           team_title: worblehat

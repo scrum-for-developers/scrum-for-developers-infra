@@ -1,15 +1,9 @@
 #!/bin/bash
 
 export ANSIBLE_FORCE_COLOR=1
-
-if [ $(uname) == "Darwin" ]
-then
-  INVENTORY=inventory-localhost-osx
-else
-  INVENTORY=inventory-localhost
-fi
-
-AWS_PROFILE=s4d
+export ANSIBLE_LOCALHOST_WARNING=False
+export ANSIBLE_INVENTORY_UNPARSED_WARNING=False
+export AWS_PROFILE=s4d
 
 if [ "$#" -ne 1 ]
 then
@@ -22,7 +16,6 @@ PRIVATE_KEY=$1
 echo "Using private key $PRIVATE_KEY"
 ansible-playbook \
   --connection=local \
-  --inventory-file=$INVENTORY \
-  -u ubuntu \
+    -u ubuntu \
   --private-key ${PRIVATE_KEY} \
   create-ec2-playbook.yml
