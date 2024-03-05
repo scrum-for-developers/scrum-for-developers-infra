@@ -17,18 +17,6 @@
   when: git_url | truncate(7) == "git@..."
   become: true
   become_user: jenkins
-  
-- name: Copy configuration
-  become: true
-  copy: src=configuration/ dest=/var/lib/jenkins/ owner=jenkins group=jenkins
-
-- name: Copy settings.xml
-  become: true
-  template:
-    owner: jenkins
-    group: jenkins
-    src: settings.xml.j2
-    dest: /var/lib/jenkins/.m2/settings.xml
 
 - name: Set Jenkins URL
   become: yes

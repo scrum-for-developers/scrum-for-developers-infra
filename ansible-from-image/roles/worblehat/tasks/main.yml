@@ -17,7 +17,7 @@
 
 - name: Trigger Multibranch Scan in worblehat repository
   uri:
-    url: http://{{ this_ip }}/jenkins/git/notifyCommit?url={{ git_url }}
+    url: http://{{ this_ip }}/jenkins/git/notifyCommit?url={{ git_url }}&token=2c69591b07a82fcb9710c0f84e2d7f50
     method: GET
     status_code: 200
   register: _result

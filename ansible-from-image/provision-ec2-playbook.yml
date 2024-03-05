@@ -16,19 +16,25 @@
     - name: Display all variables/facts known for a host
       debug: var=hostvars[inventory_hostname]
 
-    - name: upgrade system if necessary
+    - name: hotfix sonar
       become: true
-      apt:
-        update_cache: yes
-        upgrade: safe
-      register: apt_updates
-      vars: 
-        ansible_python_interpreter: python3
-
-    - name: reboot if kernal was updated
+      lineinfile:
+        dest: /usr/local/sonar/conf/sonar.properties
+        regexp: "^sonar.plugins.risk.consent"
+        line: sonar.plugins.risk.consent=ACCEPTED
+    - name: restart sonar
       become: true
-      reboot: 
-      when: apt_updates.stdout_lines|select('regex', '^Setting up linux-image-\d+\.\d+\.\d+-\d+-aws \(.*\) \.\.\.$') is any
+      systemd: name=sonar state=restarted
+    - name: Ensure the service is enabled and started
+      become: true
+      service:
+        name: "{{ item.service }}"
+        enabled: yes
+        state: started
+      with_items:
+        - service: "worblehat-test"
+        - service: "worblehat-prod"
+        - service: "spring-boot-admin"
 
   roles:
     - role: nginx
