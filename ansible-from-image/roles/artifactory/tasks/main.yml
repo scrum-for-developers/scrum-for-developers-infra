@@ -1,22 +1,23 @@
-#- name: Change Artifactory base IP to current IP
-#  # https://jfrog.com/help/r/jfrog-rest-apis/update-custom-url-base
-#  # curl -X PUT "http://localhost:8081/artifactory/api/syste/configuration/baseUrl" -d 'http://{{ this_ip }}/artifactory/' -uadmin:password -H "Content-type: text/plain"
-#  ansible.builtin.uri:
-#    url: "http://localhost:{{ artifactory_port }}/artifactory/api/system/configuration/baseUrl"
-#    body: "http://{{ this_ip }}/artifactory/"
-#    headers:
-#      Content-Type: text/plain 
-#    user: "admin"
-#    password: "password"
-#    method: PUT
-#    force_basic_auth: yes
-#  register: responseChangeBaseUrl
-#  until:
-#    - "responseChangeBaseUrl.status == 200"
-#  retries: 1 # this might actually take a while
-#  delay: 5 # every 5 seconds
-#- debug:
-#    msg: "responseChangeBaseUrl: {{ responseChangeBaseUrl }}"
+- name: Change Artifactory base IP to current IP
+  # https://jfrog.com/help/r/jfrog-rest-apis/update-custom-url-base
+  # curl -X PUT "http://localhost:8081/artifactory/api/system/configuration/baseUrl" -d 'http://{{ this_ip }}/artifactory/' -uadmin:password -H "Content-type: text/plain"
+  # curl -X PUT "http://localhost:8081/artifactory/api/system/configuration/baseUrl" -d "http://52.28.169.106/artifactory" -uadmin:password  -H "Content-type: text/plain"
+  ansible.builtin.uri:
+    url: "http://localhost:{{ artifactory_port }}/artifactory/api/system/configuration/baseUrl"
+    body: "http://{{ this_ip }}/artifactory"
+    headers:
+      Content-Type: text/plain 
+    user: "admin"
+    password: "password"
+    method: PUT
+    force_basic_auth: yes
+  register: responseChangeBaseUrl
+  until:
+    - "responseChangeBaseUrl.status == 200"
+  retries: 5 # this might actually take a while
+  delay: 5 # every 5 seconds
+- debug:
+    msg: "responseChangeBaseUrl: {{ responseChangeBaseUrl }}"
 
 - name: Reboot to get Artifactory starting up properly
   become: true

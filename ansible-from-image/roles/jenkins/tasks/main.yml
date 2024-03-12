@@ -2,21 +2,35 @@
 - name: add ssh key when git url is using ssh and not https
   block:
     - name: create ~/.ssh/
-      file: path="~/.ssh" state=directory owner=jenkins group=jenkins mode=0700
+      file: path="/var/lib/jenkins/.ssh" state=directory owner=jenkins group=jenkins mode=0700
 
     - name: add git host to known hosts
-      shell: ssh-keyscan -H {{ git_host }} >> ~/.ssh/known_hosts
+      shell: ssh-keyscan -H {{ git_host }} >> /var/lib/jenkins/.ssh/known_hosts
+
+    - name: Change file ownership, group and permissions
+      ansible.builtin.file:
+        path: /var/lib/jenkins/.ssh/known_hosts
+        owner: jenkins
+        group: jenkins
+        mode: '0600'
 
     - name: add private ssh key for cloning git repos
       copy: 
         src: "{{ git_ssh_key_file }}"
-        dest: ~/.ssh/id_rsa
+        dest: /var/lib/jenkins/.ssh/id_rsa
         owner: jenkins
         group: jenkins
         mode: 0600
   when: git_url | truncate(7) == "git@..."
   become: true
-  become_user: jenkins
+
+- name: Update settings.xml with new artifactory IPs
+  become: true
+  template:
+    owner: jenkins
+    group: jenkins
+    src: settings.xml.j2
+    dest: /var/lib/jenkins/.m2/settings.xml
 
 - name: Set Jenkins URL
   become: yes

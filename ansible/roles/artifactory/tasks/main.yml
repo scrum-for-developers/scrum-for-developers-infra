@@ -25,7 +25,6 @@
     src: artifactory.config.import.yml.j2
     dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.yml
 
-
 - name: Create access config directory
   become: true
   file: 
@@ -41,37 +40,17 @@
     src: access.config.import.yml.j2
     dest: /opt/jfrog/artifactory/var/etc/access/access.config.import.yml
 
-#- name: Change Artifactory port
-#  # https://www.jfrog.com/confluence/display/JFROG/Artifactory+System+YAML
-#  # https://jfrog.com/help/r/jfrog-installation-setup-documentation/artifactory-system-yaml
-#  become: yes
-#  template: 
-#    src: system.yaml.j2
-#    dest: /opt/jfrog/artifactory/var/etc/system.yaml
-#    owner: artifactory
-#    group: artifactory
+- name: Set admin default user
+  # https://jfrog.com/help/r/jfrog-platform-administration-documentation/recreate-the-default-admin-user
+  copy: 
+    src:   bootstrap.creds 
+    dest:  /opt/jfrog/artifactory/var/etc/access
+    group: artifactory
+    owner: artifactory
+    mode:  '0600'
+  become:  true
 
-#- name: Create artifactory config directory
-#  become: true
-#  file: 
-#    path: /opt/jfrog/artifactory/var/etc/artifactory/
-#    owner: artifactory
-#    group: artifactory
-#    state: directory  
-
-#- name: Create repositories and configure artifactory
-#    become: yes
-#    template: 
-#        src: artifactory.config.import.xml.j2
-#        dest: /opt/jfrog/artifactory/var/etc/artifactory/artifactory.config.import.xml
-#        owner: artifactory
-#        group: artifactory
-
-#- name: Remove disabled init.d startup script
-#  become: true
-#  file:
-#    path: /etc/init.d/artifactory.disabled
-#    state: absent
+# earlier, the port was set here via system.yaml, but it defaults to 8081 which is fine
 
 - name: Start Artifactory service
   become: true

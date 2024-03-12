@@ -6,6 +6,7 @@
       nginx_port: 80
       git_web_url: "{{ hostvars[inventory_hostname].tags.SfdGitWebUrl }}"
       git_url: "{{ hostvars[inventory_hostname].tags.SfdGitUrl }}"
+      # The provided regular expression is used to match strings that represent domain names with the top-level domain (TLD) being either "de" or "com." 
       git_host: "{{ hostvars[inventory_hostname].tags.SfdGitUrl | regex_search('[\\w\\-\\.]*\\.(de|com)') }}"
       index_title: "Hello {{ hostvars[inventory_hostname].tags.SfdTeamTitle }} !"
       docker_user: "ubuntu"

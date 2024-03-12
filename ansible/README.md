@@ -89,7 +89,7 @@ Ansible creates all necessary Jenkins Jobs, but they are not yet configured corr
 # Defaults
 
 ## Passwords
-* artifactory: admin / password
+* artifactory: admin / Hell0PSD!
 * jenkins: admin / Hell0PSD!
 * sonar: admin / Hell0PSD!
 
@@ -107,6 +107,11 @@ Ansible creates all necessary Jenkins Jobs, but they are not yet configured corr
 
 ## Routings
 
+## Services
+
+* service spring-boot-admin start
+* service worblehat-test start
+* service worblehat-prod start
 
 # Troubleshooting
 

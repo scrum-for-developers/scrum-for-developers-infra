@@ -16,7 +16,7 @@
         <!-- https://javadoc.jenkins-ci.org/hudson/util/Secret.html
         Secrets can correctly read-in plain text password, so this allows the existing String field to be updated to Secret. -->
           <username>admin</username>
-          <password>password</password>
+          <password>Hell0PSD!</password>
           <credentialsId></credentialsId>
           <overridingCredentials>false</overridingCredentials>
           <ignoreCredentialPluginDisabled>false</ignoreCredentialPluginDisabled>
@@ -34,7 +34,7 @@
     <!-- https://javadoc.jenkins-ci.org/hudson/util/Secret.html
     Secrets can correctly read-in plain text password, so this allows the existing String field to be updated to Secret. -->
       <username>admin</username>
-      <password>password</password>
+      <password>Hell0PSD!</password>
       <credentialsId></credentialsId>
       <overridingCredentials>false</overridingCredentials>
       <ignoreCredentialPluginDisabled>true</ignoreCredentialPluginDisabled>
